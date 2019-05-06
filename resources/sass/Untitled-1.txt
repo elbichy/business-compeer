@@ -1,0 +1,18 @@
+.businessSettingsTable {
+                border-left: 4px solid red;
+                table{
+                    border:2px solid red!important;
+                    tbody{
+                        border:2px solid blue!important;
+                        tr{
+                            border:2px solid green!important;
+                            td{
+                                border:2px solid orange!important;
+                                    width: 50%!important;
+                                    
+                                
+                            }
+                        }
+                    }
+                }
+            }

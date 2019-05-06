@@ -1,0 +1,936 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/icon?family=Material+Icons);@import url(https://fonts.googleapis.com/css?family=Alike|Anton|Barlow+Condensed:400,700,900|Berkshire+Swash|Cookie|Courgette|Crete+Round|Damion|Dancing+Script|EB+Garamond|Fjalla+One|Grand+Hotel|Great+Vibes|Harmattan|Heebo:400,700,900|Hind|Kaushan+Script|Libre+Baskerville|Maven+Pro:400,700|Niconne|Noto+Serif|Pacifico|Pridi:400,700|Raleway:400,700|Russo+One|Sacramento|Sanchez|Satisfy|Slabo+27px|Zilla+Slab:400,700);html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+      user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-transform: translate3d(0, -50px, 0);
+  transform: translate3d(0, -50px, 0);
+  transition: -webkit-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out, -webkit-transform 0.5s ease-out;
+}
+
+.pace.pace-active {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.pace .pace-progress {
+  display: block;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 10px;
+  background: #16c05a;
+  pointer-events: none;
+}
+
+.autocomplete-content img {
+  display: none;
+}
+
+.preloader-wrapper {
+  display: none;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: #22da75;
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: #098f45;
+}
+
+.switch label .lever {
+  content: "";
+  display: inline-block;
+  position: relative;
+  width: 36px;
+  height: 14px;
+  background-color: #22da75;
+  border-radius: 15px;
+  margin-right: 10px;
+  transition: background 0.3s ease;
+  vertical-align: middle;
+  margin: 0 16px;
+}
+
+.switch label .lever:after {
+  background-color: #098f45;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+nav {
+  background: #086b23;
+  background: linear-gradient(90deg, #0fb13b 0%, #086b23 100%);
+}
+
+nav .nav-wrapper .breadcrumbWrap {
+  margin-left: 310px;
+}
+
+nav .nav-wrapper .breadcrumbWrap .breadcrumb {
+  font-size: 14px;
+}
+
+nav .nav-wrapper form .input-field .select-wrapper {
+  margin: 0;
+}
+
+nav .nav-wrapper form .input-field .select-wrapper input {
+  border: none;
+  margin: 10px 0 0 0;
+  color: #fff;
+}
+
+nav .nav-wrapper form .input-field .select-wrapper .caret {
+  fill: #fff;
+}
+
+nav .logOutBtn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin-left: 12px;
+}
+
+nav .logOutBtn a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+nav .logOutBtn a:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+nav .logOutBtn a i {
+  margin-left: 0;
+}
+
+.sidenav.sidenav-fixed {
+  background: #086b23;
+  background: linear-gradient(60deg, #086b23 0%, #0fb13b 100%);
+}
+
+.sidenav.sidenav-fixed .collapsible-body li a {
+  padding: 0 23.5px 0 94px;
+}
+
+.sidenav .collapsible-body {
+  background: #086b23;
+}
+
+.sidenav .collapsible-body li a {
+  padding: 0 23.5px 0 94px;
+}
+
+.sidenav .collapsible-body ul > li.active {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.sidenav .collapsible-body ul > li.activeCollape {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.sidenav li > a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sidenav li.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sidenav li.activeCollape {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sidenav li > a {
+  color: #fff;
+}
+
+.sidenav li > a > i.material-icons {
+  color: #fff;
+}
+
+.sidenav .user-view .circle {
+  height: 120px;
+  width: 120px;
+}
+
+table tbody tr td .delete {
+  color: red;
+}
+
+table tbody tr td .recieptBtn {
+  color: green;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background: white;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper .contentWrap {
+  height: 100%;
+  margin: 0;
+  background-image: url("/storage/futuristic.png");
+  background-size: cover;
+  height: 100%;
+  padding: 0;
+}
+
+.wrapper .contentWrap .contentContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(90deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+}
+
+.wrapper .contentWrap .contentContainer header {
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.wrapper .contentWrap .contentContainer header nav {
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.wrapper .contentWrap .contentContainer header nav .btn.btn,
+.wrapper .contentWrap .contentContainer header nav .btn-large,
+.wrapper .contentWrap .contentContainer header nav .btn-small,
+.wrapper .contentWrap .contentContainer header nav .btn-flat {
+  border: 2px solid #fff;
+  border-radius: 4px;
+  height: auto !important;
+}
+
+.wrapper .contentWrap .contentContainer .logoArea {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 8px solid white;
+  display: flex;
+}
+
+.wrapper .contentWrap .contentContainer .logoArea img {
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.wrapper .contentWrap .contentContainer .businessName {
+  width: 80%;
+}
+
+.wrapper .contentWrap .contentContainer .businessName h3 {
+  font-weight: 700;
+  font-size: 50px;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.wrapper .contentWrap .contentContainer .subTitle {
+  padding: 20px 30px;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.wrapper .contentWrap .contentContainer .subTitle h6 {
+  margin: 0;
+  padding: 0;
+  font-family: "Libre Baskerville", serif;
+  font-size: 20px;
+  color: #941414;
+}
+
+.wrapper .contentWrap .contentContainer .MainsubTitle {
+  padding: 0px 30px 30px 30px;
+  border-radius: 3px;
+}
+
+.wrapper .contentWrap .contentContainer .MainsubTitle h6 {
+  margin: 0;
+  padding: 0;
+  font-family: "Courgette", cursive;
+  font-size: 20px;
+  color: #fff;
+}
+
+.wrapper .leftPane {
+  height: 100%;
+  margin: 0;
+  background-image: url("/storage/futuristic.png");
+  background-size: cover;
+  height: 100%;
+  padding: 0;
+}
+
+.wrapper .leftPane .leftContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(90deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+}
+
+.wrapper .leftPane .leftContainer .logoArea {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 8px solid white;
+  display: flex;
+}
+
+.wrapper .leftPane .leftContainer .logoArea img {
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.wrapper .leftPane .leftContainer .businessName {
+  width: 80%;
+}
+
+.wrapper .leftPane .leftContainer .businessName h3 {
+  font-weight: 700;
+  font-size: 50px;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.wrapper .leftPane .leftContainer .subTitle {
+  padding: 20px 30px;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.wrapper .leftPane .leftContainer .subTitle h6 {
+  margin: 0;
+  padding: 0;
+  font-family: "Libre Baskerville", serif;
+  font-size: 20px;
+  color: #941414;
+}
+
+.wrapper .leftPane .leftContainer .MainsubTitle {
+  padding: 0px 30px 30px 30px;
+  border-radius: 3px;
+}
+
+.wrapper .leftPane .leftContainer .MainsubTitle h6 {
+  margin: 0;
+  padding: 0;
+  font-family: "Courgette", cursive;
+  font-size: 20px;
+  color: #fff;
+}
+
+.wrapper .rightPane {
+  background-color: #fff;
+  background-image: url("/storage/bg2.jpg");
+  background-size: cover;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .rightPane .registerBackNav {
+  margin: 0;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .rightPane .registerBackNav a {
+  display: flex;
+}
+
+.wrapper .rightPane .registerBackNav a .removePrefix {
+  position: static;
+  width: auto;
+}
+
+.wrapper .rightPane .formBox {
+  width: 430px;
+  height: auto;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.wrapper .rightPane .formBox h4 {
+  width: 90%;
+  margin: 0;
+  margin-top: 25px;
+}
+
+.wrapper .rightPane .formBox .loginForm {
+  padding-top: 20px;
+  width: 90%;
+  margin: 0;
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.wrapper .rightPane .formBox .loginForm .row {
+  margin-bottom: 0px;
+}
+
+.wrapper .rightPane .formBox .loginForm .RegisterBtn {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 0px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .rightPane .formBox .loginForm .RegisterBtn .removePrefix {
+  position: static;
+  width: auto;
+}
+
+.wrapper .rightPane .formBox .regForm {
+  display: flex;
+  width: 90%;
+  margin: 0;
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.4);
+  padding-top: 20px;
+}
+
+.wrapper .rightPane .formBox .regForm .row {
+  margin-bottom: 0px;
+}
+
+.wrapper .rightPane .formBox .regForm .RegisterBtn {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 0px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .rightPane .formBox .regForm .RegisterBtn .removePrefix {
+  position: static;
+  width: auto;
+}
+
+.my-content-wrapper,
+.space-for-sidenav {
+  padding-left: 300px;
+}
+
+.my-content-wrapper .content-container {
+  height: auto;
+  padding: 5px 10px 0 10px;
+}
+
+.my-content-wrapper .content-container .stats {
+  background: rgba(255, 255, 255, 0.4);
+  margin-bottom: 20px;
+}
+
+.my-content-wrapper .content-container .stats .stats-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.my-content-wrapper .content-container .stats .info-box {
+  display: block;
+  min-height: 90px;
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+
+.my-content-wrapper .content-container .stats .info-box .info-box-icon {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 2px;
+  display: block;
+  float: left;
+  height: 90px;
+  width: 90px;
+  font-size: 45px;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-content-wrapper .content-container .stats .info-box .info-box-content {
+  padding: 5px 10px;
+  margin-left: 90px;
+}
+
+.my-content-wrapper .content-container .stats .info-box .info-box-content .progress-description,
+.my-content-wrapper .content-container .stats .info-box .info-box-content .info-box-text {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.my-content-wrapper .content-container .stats .info-box .info-box-content .info-box-text {
+  text-transform: uppercase;
+}
+
+.my-content-wrapper .content-container .stats .info-box .info-box-content .info-box-number {
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.my-content-wrapper .content-container .tableWrap {
+  padding: 20px;
+}
+
+.my-content-wrapper .content-container .tableWrap:first-child {
+  border-right: 2px solid #eee;
+}
+
+.my-content-wrapper .content-container .salesWrap {
+  position: relative;
+}
+
+.my-content-wrapper .content-container .salesWrap .addSaleBtn {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content {
+  padding: 10px 16px 60px 16px;
+}
+
+.my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content form .row {
+  margin-bottom: 0;
+}
+
+.my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content form .row:first-child {
+  margin-bottom: 25px;
+}
+
+.my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content button {
+  margin-right: 0.75rem;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesHeading {
+  padding-bottom: 20px;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesTable {
+  padding: 10px;
+  height: auto;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesTable .clearOutstanding {
+  cursor: pointer;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea {
+  height: 462px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept {
+  height: 100%;
+  width: 96%;
+  border: 2px solid #eee;
+  display: flex;
+  flex-direction: column;
+  border-bottom-right-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .printBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  color: #000;
+  font-size: 12px;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .printBtn:hover {
+  cursor: pointer;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .noReciept {
+  color: #ddd;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptTop .logoArea img {
+  width: 75px;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptTop .recieptTitle {
+  font-size: 12px;
+  margin: 0px;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptBottom table > tbody > tr > td {
+  padding: 6px 4px;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.my-content-wrapper .content-container .expenseWrap .expenseHeading {
+  padding-bottom: 20px;
+}
+
+.my-content-wrapper .content-container .expenseWrap .expenseForm {
+  padding: 10px 40px;
+}
+
+.my-content-wrapper .content-container .expenseWrap .expenseTable {
+  border-left: 2px solid #eee;
+}
+
+.my-content-wrapper .content-container .stockWrap .stockHeading {
+  padding-bottom: 20px;
+}
+
+.my-content-wrapper .content-container .stockWrap .stockForm {
+  padding: 10px 40px;
+}
+
+.my-content-wrapper .content-container .stockWrap .stockTable {
+  border-left: 2px solid #eee;
+}
+
+.my-content-wrapper .content-container .customersWrap .customersHeading {
+  padding-bottom: 20px;
+}
+
+.my-content-wrapper .content-container .customersWrap .customersForm {
+  padding: 10px 40px;
+}
+
+.my-content-wrapper .content-container .customersWrap .customersTable {
+  border-left: 0px solid #eee;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsHeading {
+  padding-bottom: 40px;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms {
+  border: 2px solid #eee;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms .tabs {
+  overflow: hidden;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms .tabs-content {
+  height: 400px !important;
+  overflow-y: auto;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms form {
+  margin-top: 20px;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms form .row:last-child {
+  margin-bottom: 0px;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms form .row .file-path-wrapper {
+  display: block;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td {
+  width: 25%;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td img {
+  width: 80px;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td:nth-child(odd) {
+  font-weight: 500;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td h6 {
+  text-align: center;
+}
+
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr:first-child td:first-child {
+  padding-top: 0px;
+}
+
+.my-content-wrapper .content-container .branchSettingsWrap .branchSettingsHeading {
+  padding-bottom: 40px;
+}
+
+.my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms {
+  border-right: 2px solid #eee;
+}
+
+.my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms form {
+  margin-top: 0px;
+  border: none;
+}
+
+.my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms form .row {
+  margin-bottom: 0px;
+}
+
+.my-content-wrapper .content-container .branchSettingsWrap .branchSettingsTable table {
+  width: 100%;
+}
+
+.my-content-wrapper .content-container .staffSettingsWrap .staffSettingsHeading {
+  padding-bottom: 40px;
+}
+
+.my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms {
+  border: 2px solid #eee;
+  padding: 10px 10px 0px 10px;
+}
+
+.my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form {
+  margin-top: 0px;
+}
+
+.my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form .row {
+  margin-bottom: 0px;
+}
+
+.my-content-wrapper .content-container .staffSettingsWrap .staffSettingsTable table {
+  width: 100%;
+}
+
+/*********************************************** OTHER SCREEN SIZES ********************************/
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+  html,
+  body {
+    height: auto;
+  }
+
+  nav .nav-wrapper .breadcrumbWrap {
+    margin-left: 10px;
+  }
+
+  nav .nav-wrapper .breadcrumbWrap .breadcrumb {
+    font-size: 14px;
+  }
+
+  nav .nav-wrapper form .input-field .select-wrapper {
+    margin: 0;
+  }
+
+  nav .nav-wrapper form .input-field .select-wrapper input {
+    border: none;
+    margin: 0;
+    color: #fff;
+  }
+
+  nav .nav-wrapper form .input-field .select-wrapper .caret {
+    fill: #fff;
+  }
+
+  .wrapper {
+    height: auto;
+  }
+
+  .wrapper .contentWrap {
+    height: 100%;
+    margin: 0;
+    background-image: url("/storage/futuristic.png");
+    background-size: cover;
+    height: 100%;
+    padding: 0;
+  }
+
+  .wrapper .contentWrap .contentContainer {
+    height: 100vh;
+  }
+
+  .wrapper .contentWrap .contentContainer header nav {
+    background: #086b23;
+    background: linear-gradient(90deg, #0fb13b 0%, #086b23 100%);
+  }
+
+  .wrapper .contentWrap .contentContainer .businessName {
+    width: 80%;
+  }
+
+  .wrapper .contentWrap .contentContainer .businessName h3 {
+    font-size: 36px;
+  }
+
+  .wrapper .contentWrap .contentContainer .MainsubTitle h6 {
+    font-size: 16px;
+  }
+
+  .wrapper .contentWrap .contentContainer .expenseWrap .expenseHeading {
+    padding-bottom: 20px;
+  }
+
+  .wrapper .contentWrap .contentContainer .expenseWrap .expenseForm {
+    padding: 10px 40px;
+  }
+
+  .wrapper .contentWrap .contentContainer .expenseWrap .expenseTable {
+    border-left: none;
+  }
+
+  .wrapper .leftPane {
+    height: 100vh;
+  }
+
+  .wrapper .leftPane .leftContainer {
+    width: 100%;
+    height: 100%;
+  }
+
+  .wrapper .leftPane .leftContainer .businessName h3 {
+    font-size: 30px;
+  }
+
+  .wrapper .leftPane .leftContainer .MainsubTitle {
+    padding: 0px 30px 30px 30px;
+    border-radius: 3px;
+  }
+
+  .wrapper .leftPane .leftContainer .MainsubTitle h6 {
+    margin: 0;
+    padding: 0;
+    font-family: "Libre Baskerville", serif;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .wrapper .rightPane {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #mobile-demo {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .stats-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .my-content-wrapper .content-container .tableWrap :first-child {
+    border-right: none;
+  }
+
+  .my-content-wrapper .content-container .expenseWrap .expenseTable {
+    border-left: none;
+  }
+
+  .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms .tabs-content {
+    height: 800px !important;
+  }
+
+  .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms form {
+    margin-top: 40px;
+  }
+
+  .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms form .row:last-child {
+    margin-bottom: 0px;
+  }
+
+  .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms form .row .file-path-wrapper {
+    display: none;
+  }
+
+  .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td {
+    width: 25% !important;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (max-width: 992px) {
+  .my-content-wrapper,
+  .space-for-sidenave {
+    padding-left: 0;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+

@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  background: white;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper .leftPane {
+  height: 100%;
+  margin: 0;
+  background-image: url("/storage/futuristic.png");
+  background-size: cover;
+  height: 100%;
+  padding: 0;
+}
+
+.wrapper .leftPane .leftContainer {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: rgba(255, 255, 255, 0.4);
+  background: -webkit-gradient(linear, left top, right top, from(rgba(8, 107, 35, 0.9)), to(rgba(15, 177, 59, 0.9)));
+  background: linear-gradient(90deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+}
+
+.wrapper .leftPane .leftContainer .logoArea {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 8px solid white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.wrapper .leftPane .leftContainer .logoArea img {
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.wrapper .leftPane .leftContainer .businessName {
+  width: 80%;
+}
+
+.wrapper .leftPane .leftContainer .businessName h3 {
+  font-weight: 700;
+  font-size: 50px;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.wrapper .leftPane .leftContainer .subTitle {
+  padding: 20px 30px;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.wrapper .leftPane .leftContainer .subTitle h6 {
+  margin: 0;
+  padding: 0;
+  font-family: serif;
+  font-size: 20px;
+  color: #941414;
+}
+
+.wrapper .rightPane {
+  background-color: #fff;
+  background-image: url("/storage/bg2.jpg");
+  background-size: cover;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .rightPane .registerBackNav {
+  margin: 0;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .rightPane .registerBackNav a {
+  display: none;
+}
+
+.wrapper .rightPane .registerBackNav a .removePrefix {
+  position: static;
+  width: auto;
+}
+
+.wrapper .rightPane .formBox {
+  width: 430px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .rightPane .formBox h4 {
+  width: 90%;
+  margin: 0;
+}
+
+.wrapper .rightPane .formBox .loginForm {
+  padding-top: 20px;
+  width: 90%;
+  margin: 0;
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.wrapper .rightPane .formBox .loginForm .row {
+  margin-bottom: 0px;
+}
+
+.wrapper .rightPane .formBox .loginForm .RegisterBtn {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 0px;
+  background-color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .rightPane .formBox .loginForm .RegisterBtn .removePrefix {
+  position: static;
+  width: auto;
+}
+
+.wrapper .rightPane .formBox .regForm {
+  display: none;
+  width: 90%;
+  margin: 0;
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.4);
+  padding-top: 20px;
+}
+
+.wrapper .rightPane .formBox .regForm .row {
+  margin-bottom: 0px;
+}
+
+.wrapper .rightPane .formBox .regForm .RegisterBtn {
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 0px;
+  background-color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .rightPane .formBox .regForm .RegisterBtn .removePrefix {
+  position: static;
+  width: auto;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  html,
+  body {
+    height: auto;
+  }
+  .wrapper {
+    height: auto;
+  }
+  .wrapper .leftPane {
+    height: 100vh;
+  }
+  .wrapper .leftPane .leftContainer {
+    width: 100%;
+    height: 100%;
+  }
+  .wrapper .leftPane .leftContainer .businessName h3 {
+    font-size: 30px;
+  }
+  .wrapper .leftPane .leftContainer .subTitle h6 {
+    font-size: 17px;
+  }
+  .wrapper .rightPane {
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/*# sourceMappingURL=app.css.map */
