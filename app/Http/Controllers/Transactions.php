@@ -139,8 +139,6 @@ class Transactions extends Controller
         }
     }
 
-
-
     // STORE STOCK RECORDS
     public function storeStock(Request $request){
 

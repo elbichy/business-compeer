@@ -97,90 +97,25 @@
                 </div>
                 <div class="businessSettingsTable col s12 m6 l6">
                     <table>
+                        <thead>
+                            <tr>
+                                <th>Business Name</th>
+                                <th>CAC</th>
+                                <th>Nature</th>
+                                <th>Website</th>
+                                <th></th>
+                            </tr>
+                        </thead>
                         <tbody>
+                            @foreach ($data['businessDetails'] as $business)
                             <tr>
-                                <td colspan="2">
-                                    @if (count($data['businessDetails']) == 1)
-                                        @foreach ($data['businessDetails'] as $business)
-                                            <img class="circle" src="{{asset('storage').'/site/'.$business->logo}}" class="left">
-                                        @endforeach    
-                                    @else
-                                        <img class="circle" src="{{asset('storage/logo.jpg')}}" class="left">
-                                    @endif
-                                </td>
+                                <td>{{ ucfirst($business->name) }}</td>
+                                <td>{{ $business->cac }}</td>
+                                <td>{{ $business->nature }}</td>
+                                <td>{{ $business->website }}</td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>Business Name:</td>
-                                <td>
-                                    @if (count($data['businessDetails']) == 1)
-                                        @foreach ($data['businessDetails'] as $business)
-                                            {{$business->name}}
-                                        @endforeach    
-                                    @else
-                                        Business Name here
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>CAC Number:</td>
-                                <td>
-                                    @if (count($data['businessDetails']) == 1)
-                                        @foreach ($data['businessDetails'] as $business)
-                                            {{$business->cac}}
-                                        @endforeach    
-                                    @else
-                                        CAC Number here
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Nature of business:</td>
-                                <td>
-                                    @if (count($data['businessDetails']) == 1)
-                                        @foreach ($data['businessDetails'] as $business)
-                                            {{$business->nature}}
-                                        @endforeach    
-                                    @else
-                                        Nature of Business here
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Website:</td>
-                                <td>
-                                    @if (count($data['businessDetails']) == 1)
-                                        @foreach ($data['businessDetails'] as $business)
-                                            {{$business->website}}
-                                        @endforeach    
-                                    @else
-                                        Website here
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Email:</td>
-                                <td>
-                                    @if (count($data['businessDetails']) == 1)
-                                        @foreach ($data['businessDetails'] as $business)
-                                            {{$business->email}}
-                                        @endforeach    
-                                    @else
-                                        Email here
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Phone:</td>
-                                <td>
-                                    @if (count($data['businessDetails']) == 1)
-                                        @foreach ($data['businessDetails'] as $business)
-                                            {{$business->phone}}
-                                        @endforeach    
-                                    @else
-                                        Phone here
-                                    @endif
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
