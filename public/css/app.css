@@ -704,27 +704,11 @@ table tbody tr td .recieptBtn {
 }
 
 .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms form .row .file-path-wrapper {
-  display: block;
+  display: none;
 }
 
-.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td {
-  width: 25%;
-}
-
-.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td img {
-  width: 80px;
-}
-
-.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td:nth-child(odd) {
-  font-weight: 500;
-}
-
-.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td h6 {
-  text-align: center;
-}
-
-.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr:first-child td:first-child {
-  padding-top: 0px;
+.my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table {
+  width: 100%;
 }
 
 .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsHeading {

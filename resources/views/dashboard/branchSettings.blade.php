@@ -103,7 +103,7 @@
                                 @endif
                                 <label for="closeHour">Closing Hour</label>
                             </div>
-                            <div class="input-field btnWrap col s4 m4 l4" style="display:flex; justify-content:center;">
+                            <div class="input-field btnWrap col s12 m4 l4" style="display:flex; justify-content:center;">
                                 <button id="branchSettingsBtn" class="right branchSubmitBtn btn waves-effect waves-light" type="submit">Submit
                                     <i class="material-icons right">send</i>
                                 </button>

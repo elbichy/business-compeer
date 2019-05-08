@@ -128,7 +128,7 @@
                                     <label for="change">Change (₦ if any)</label>
                                 </div>
                             </div>
-                            <div class="row right btnWrap" style="display:flex; justify-content:center;">
+                            <div class="row col s12 m3 l3 right btnWrap" style="display:flex; justify-content:center;">
                                 <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit
                                     <i class="material-icons right">send</i>
                                 </button>

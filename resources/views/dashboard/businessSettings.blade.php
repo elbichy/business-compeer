@@ -75,8 +75,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="file-field input-field col s6 m8 l8">
-                                    <div class="btn btn-small blue">
+                                <div class="file-field input-field col s12 m8 l8">
+                                    <div class="btn btn-small blue" style="width:100%;">
                                         <span>Upload logo</span>
                                         <input type="file" name="logo" id="logo" required>
                                     </div>
@@ -100,20 +100,22 @@
                         <thead>
                             <tr>
                                 <th>Business Name</th>
-                                <th>CAC</th>
-                                <th>Nature</th>
-                                <th>Website</th>
+                                <th>CAC Number</th>
+                                <th>Nature of business</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data['businessDetails'] as $business)
                             <tr>
-                                <td>{{ ucfirst($business->name) }}</td>
+                                <td><a href="#">{{ ucfirst($business->name) }}</a></td>
                                 <td>{{ $business->cac }}</td>
                                 <td>{{ $business->nature }}</td>
-                                <td>{{ $business->website }}</td>
-                                <td></td>
+                                <td>
+                                    <a class="delete deleteCustomer" href="#delete">
+                                        <i class="tiny material-icons">close</i>
+                                    </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

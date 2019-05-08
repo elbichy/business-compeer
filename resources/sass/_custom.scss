@@ -789,37 +789,16 @@ table {
                             margin-bottom: 0px;
                         }
                         .file-path-wrapper{
-                            display: block;
+                            display: none;
                         }
                     }
                 }
             }
 
             .businessSettingsTable {
+                // border-left:2px solid #eee;
                 table{
-                    tbody{
-                        tr{
-                            td{
-                                width: 25%;
-                                img{
-                                    width: 80px;
-                                }
-                                &:nth-child(odd){
-                                    font-weight: 500;
-                                }
-                                h6{
-                                    text-align: center;
-                                }
-                            }
-                            &:first-child{
-                                td{
-                                    &:first-child{
-                                        padding-top:0px;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    width:100%;
                 }
             }
         }
