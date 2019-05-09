@@ -56,7 +56,7 @@
                     </ul>
                     <ul class="right hide-on-small-only">
                         @if(Auth::check())
-                            {{Auth::user()->firstname.' '.Auth::user()->lastname}}
+                            <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                         @endif
                     </ul>
                 </div>
@@ -141,8 +141,8 @@
                     </li>
                 </ul>
                 <ul class="right white-text">
-                    @if(Auth::check())
-                        {{Auth::user()->firstname.' '.Auth::user()->lastname}}
+                    @if(auth()->check())
+                        <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     @endif
                 </ul>
             </li>

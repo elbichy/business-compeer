@@ -21,6 +21,9 @@ Route::post( 'switchBranch', 'ProcessBusiness@switchBranch');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
+Route::get('/Dashboard/userProfile/{id}', 'Profile@userProfile')->name('userProfile');
+Route::get('/Dashboard/myProfile', 'Profile@myProfile')->name('myProfile');
+
 Route::get('/Dashboard/sales', 'DashboardController@sales')->name('sales');
 Route::get( 'Dashboard/getReciept/{data}', 'Transactions@getReciept');
 Route::post( 'storeSales', 'Transactions@storeSales');
