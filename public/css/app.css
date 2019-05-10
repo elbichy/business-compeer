@@ -471,6 +471,76 @@ table tbody tr td .recieptBtn {
   padding: 5px 10px 0 10px;
 }
 
+.my-content-wrapper .content-container .profileWrap .focusArea {
+  min-height: 530px;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .picArea {
+  min-height: 350px;
+  background-color: #E64C3C;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .picArea img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .picArea p {
+  color: #fff;
+  font-size: 20px;
+  margin: 5px 0 !important;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .picArea .row {
+  width: 90% !important;
+  margin-bottom: 5px;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .picArea .row small {
+  color: #350d09;
+  font-size: 14px;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .picArea .fRow {
+  background-color: #C03B2B;
+  padding: 10px 0;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .picArea .fRow small {
+  color: #fff;
+  font-size: 14px;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .salesMadeArea {
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .salesMadeArea .salesMadeHeading {
+  margin: 0;
+  background: #eee;
+  width: 90% !important;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .salesMadeArea .salesMade {
+  margin: 0;
+  width: 90% !important;
+  padding: 10px 0;
+  text-align: center;
+}
+
 .my-content-wrapper .content-container .stats {
   background: rgba(255, 255, 255, 0.4);
   margin-bottom: 20px;

@@ -523,9 +523,9 @@ table {
 
             // border: 2px solid red;
             .focusArea{
-                height:530px;
+                min-height:530px;
                 .picArea{
-                    height:350px;
+                    min-height:350px;
                     background-color: #E64C3C;
                     margin-top:10px;
                     display: flex;
@@ -561,6 +561,26 @@ table {
                         }
                     }
                     
+                }
+                .salesMadeArea{
+                    min-height:170px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    .salesMadeHeading{
+                        margin:0;
+                        background: #eee;
+                        width: 90%!important;
+                        padding:10px 0;
+                        text-align: center;
+                    }
+                    .salesMade{
+                        margin:0;
+                        width: 90%!important;
+                        padding:10px 0;
+                        text-align: center;
+                    }
                 }
             }
             
@@ -905,6 +925,7 @@ table {
                 }
             }
         }
+        
     }
 }
 
