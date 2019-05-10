@@ -13,12 +13,22 @@
 use App\User;
 use App\Business;
 
+// Landing Page
 Route::get('/', 'PagesController@index');
 
+
+
+// Admin Routes
+Route::get('/admin/dashnoard', 'AdminDashboardController@index')->name('admin.dashboard');
+Route::get('/admin/login', 'AdminLoginController@showLoginForm')->name('admin.login.form');
+Route::post('/admin/login', 'AdminLoginController@login')->name('admin.login.submit');
+
+
+
+
+// User Routes
 Auth::routes();
-
 Route::post( 'switchBranch', 'ProcessBusiness@switchBranch');
-
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/Dashboard/userProfile/{id}', 'Profile@userProfile')->name('userProfile');
