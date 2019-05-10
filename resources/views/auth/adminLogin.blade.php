@@ -1,7 +1,7 @@
 @extends('layouts.userforms')
 
 @section('content')
-<h4 class="center">{{ __('Sign In') }}</h4>
+<h4 class="center">{{ __('Admin Sign In') }}</h4>
 <form class="col s12 loginForm" method="POST" action="{{ route('admin.login.submit') }}">
     @csrf
     <div class="row">
@@ -25,7 +25,15 @@
             @endif
             <label for="password">{{ __('Password') }}</label>
         </div>
-        <div class="input-field btnWrap col s12 center" style="display:flex; justify-content:center;">
+        <div class="input-field btnWrap col s12 m7 l7 center">
+            <p style="margin:0;">
+                <label>
+                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}/>
+                    <span>Remember Me</span>
+                </label>
+            </p>
+        </div>
+        <div class="input-field btnWrap col s12 m5 l5 center" style="display:flex; justify-content:center;">
             <button id="loginBtn" class="btn waves-effect waves-light loginButton" type="submit" name="loginButton">LOGIN
                 <i class="material-icons right">send</i>
             </button>

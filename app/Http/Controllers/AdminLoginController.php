@@ -11,12 +11,12 @@ use App\User;
 use App\Sale;
 use App\Stock;
 use Carbon\Carbon;
-class AdminDashboardController extends Controller
+class AdminLoginController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:admin');
     }
 
     public function showLoginForm()
@@ -26,7 +26,17 @@ class AdminDashboardController extends Controller
     
     public function login(Request $request)
     {
-        return $request->all();
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])){
+            return redirect()->route('admin.dashboard');
+        }
+        
+        return redirect()->back();
+        // return $request->all();
     }
 
 }

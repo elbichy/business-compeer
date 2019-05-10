@@ -23,7 +23,7 @@ class AdminDashboardController extends Controller
     public function index()
     {
         
-        return 'You are logged as Admin';
+        echo "You are logged as Admin!";
     }
 
 }
