@@ -518,6 +518,54 @@ table {
         height: auto;
         padding: 5px 10px 0 10px;
 
+        // PROFILE CONTENT START HERE
+        .profileWrap {
+
+            // border: 2px solid red;
+            .focusArea{
+                height:530px;
+                .picArea{
+                    height:350px;
+                    background-color: #E64C3C;
+                    margin-top:10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    align-items: center;
+                    padding-bottom: 10px;
+                    img{
+                        width:150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        // border:4px solid #fff;
+                    }
+                    p{
+                        color: #fff;
+                        font-size: 20px;
+                        margin:5px 0!important;
+                    }
+                    .row{
+                        width: 90%!important;
+                        margin-bottom: 5px;
+                        small{
+                            color: rgb(53, 13, 9);
+                            font-size: 14px;
+                        }
+                    }
+                    .fRow{
+                        background-color: #C03B2B;
+                        padding: 10px 0;
+                        small{
+                            color: #fff;
+                            font-size: 14px;
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
+
         // DASHBOARD CONTENT START
         .stats {
             background: rgba(255, 255, 255, 0.4);
