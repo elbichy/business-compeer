@@ -499,7 +499,7 @@ table tbody tr td .recieptBtn {
 }
 
 .my-content-wrapper .content-container .profileWrap .focusArea .picArea .row {
-  width: 90% !important;
+  width: 92% !important;
   margin-bottom: 5px;
 }
 
@@ -831,6 +831,25 @@ table tbody tr td .recieptBtn {
   html,
   body {
     height: auto;
+  }
+
+  nav {
+    background: transparent !important;
+    background: none !important;
+    background-attachment: none !important;
+  }
+
+  nav .nav-wrapper .sidenav-trigger {
+    width: 56px;
+    float: left;
+    position: relative;
+    z-index: 1;
+    height: 56px;
+    margin: 6px 6px;
+    display: flex;
+    justify-content: center;
+    background: #098f45;
+    border-radius: 50%;
   }
 
   nav .nav-wrapper .breadcrumbWrap {

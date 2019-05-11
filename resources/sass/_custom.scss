@@ -545,7 +545,7 @@ table {
                         margin:5px 0!important;
                     }
                     .row{
-                        width: 90%!important;
+                        width: 92%!important;
                         margin-bottom: 5px;
                         small{
                             color: rgb(53, 13, 9);
@@ -947,7 +947,22 @@ table {
     }
 
     nav {
+        background: transparent!important;
+        background: none!important;
+        background-attachment: none!important;
         .nav-wrapper {
+            .sidenav-trigger {
+                width: 56px;
+                float: left;
+                position: relative;
+                z-index: 1;
+                height: 56px;
+                margin: 6px 6px;
+                display: flex;
+                justify-content: center;
+                background: rgb(9, 143, 69);
+                border-radius: 50%;
+            }
             .breadcrumbWrap {
                 margin-left: 10px;
 
