@@ -16,7 +16,7 @@
             <div class="contentContainer">
                 {{-- NAV BAR GOES HERE --}}
                 <header style="width:100%;">
-                    <nav>
+                    <nav class="homeNav">
                         <div class="nav-wrapper">
                         <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                         <ul class="right hide-on-med-and-down">

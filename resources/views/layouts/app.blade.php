@@ -130,19 +130,19 @@
             
             {{-- OTHER MENU RIGHT FOR MOBILE DEVICES --}}
             <li class="hide-on-med-and-up col s12" style="border-top:2px solid darkgreen;">
-                <ul class="right">
+                <ul class="right col s8" style="display:flex; justify-content:center; align-items:center; width:20%;">
                     <li class="logOutBtn">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="material-icons right">power_settings_new</i>
+                            <i style="margin:0;" class="material-icons left">power_settings_new</i>
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </li>
                 </ul>
-                <ul class="right white-text">
+                <ul class="col s4 right white-text" style="display:flex; justify-content:center; align-items:center; width:80%;">
                     @if(auth()->check())
-                        <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
+                        <a class="white-text" href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     @endif
                 </ul>
             </li>

@@ -833,19 +833,19 @@ table tbody tr td .recieptBtn {
     height: auto;
   }
 
-  nav {
+  .homeNav {
     background: transparent !important;
     background: none !important;
     background-attachment: none !important;
   }
 
-  nav .nav-wrapper .sidenav-trigger {
+  .homeNav .sidenav-trigger {
     width: 56px;
     float: left;
     position: relative;
     z-index: 1;
     height: 56px;
-    margin: 6px 6px;
+    margin: 10px 10px;
     display: flex;
     justify-content: center;
     background: #098f45;
