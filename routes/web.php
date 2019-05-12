@@ -19,11 +19,11 @@ Route::get('/', 'PagesController@index');
 
 // User Routes
 Auth::routes();
-Route::post( 'switchBranch', 'ProcessBusiness@switchBranch');
+Route::post( 'switchBranch', 'ProcessBusinessSettings@switchBranch');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::get('/Dashboard/userProfile/{id}', 'Profile@userProfile')->name('userProfile');
-Route::get('/Dashboard/myProfile', 'Profile@myProfile')->name('myProfile');
+Route::get('/Dashboard/userProfile/{id}', 'DashboardController@userProfile')->name('userProfile');
+Route::get('/Dashboard/myProfile', 'DashboardController@myProfile')->name('myProfile');
 
 Route::get('/Dashboard/sales', 'DashboardController@sales')->name('sales');
 Route::get( 'Dashboard/getReciept/{data}', 'Transactions@getReciept');
@@ -43,13 +43,13 @@ Route::get('/Dashboard/statistics', 'DashboardController@statistics')->name('sta
 Route::get('/Dashboard/customers', 'DashboardController@customers')->name('customers');
 
 Route::get( '/Dashboard/businessSettings', 'DashboardController@businessSettings')->name('businessSettings');
-Route::post( 'storeBusinessSettings', 'ProcessBusiness@businessSettings');
+Route::post( 'storeBusinessSettings', 'ProcessBusinessSettings@businessSettings');
 
 Route::get( '/Dashboard/branchSettings', 'DashboardController@branchSettings')->name('branchSettings');
-Route::post( 'storeBranchSettings', 'ProcessBusiness@branchSettings');
+Route::post( 'storeBranchSettings', 'ProcessBusinessSettings@branchSettings');
 
 Route::get( '/Dashboard/staffSettings', 'DashboardController@staffSettings')->name('staffSettings');
-Route::post( 'storeStaffSettings', 'ProcessBusiness@staffSettings');
+Route::post( 'storeStaffSettings', 'ProcessBusinessSettings@staffSettings');
 
 
 

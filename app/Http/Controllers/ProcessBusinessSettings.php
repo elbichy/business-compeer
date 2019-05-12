@@ -9,8 +9,14 @@ use Illuminate\Support\Facades\Storage;
 use App\Business;
 use App\Branch;
 use App\User;
-class ProcessBusiness extends Controller
+class ProcessBusinessSettings extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     // PROCESS MAIN SETTINGS
     public function businessSettings(Request $request)
     {
@@ -52,7 +58,7 @@ class ProcessBusiness extends Controller
         $staff->save();
 
         if ($insert) {
-            return redirect('Dashboard/businessSettings')->with('status', 'Company added successfully!');
+            return redirect(route('branchSettings'))->with('status', 'Company added successfully! Now set up a branch');
         }
     }
 

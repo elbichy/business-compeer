@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use App\Business;
 use App\Branch;
 use App\User;
@@ -31,10 +32,12 @@ class DashboardController extends Controller
             $todaysSales = Branch::find(auth()->user()->branch_id)
                                     ->sales()
                                     ->whereDate('created_at', '=', Carbon::today()->toDateString())
+                                    ->orderBy('created_at', 'DESC')
                                     ->get();
             $todaysExpnses = Branch::find(auth()->user()->branch_id)
                                     ->expenses()
                                     ->whereDate('created_at', '=', Carbon::today()->toDateString())
+                                    ->orderBy('created_at', 'DESC')
                                     ->get();
             $todaysTransactions = [
                 'todaysSales'=>$todaysSales,
@@ -53,6 +56,35 @@ class DashboardController extends Controller
     }
 
 
+    // MY PROFILE PAGE
+    public function myProfile(){
+        
+        $data = [
+            'salesDetails' => User::find(auth()->user()->id)->sales()->orderBy('created_at', 'DESC')->get(),
+            'totalSales' => User::find(auth()->user()->id)->sales()->sum('amount'),
+            'totalSalesCount' => User::find(auth()->user()->id)->sales()->count(),
+            'profileDatails' => User::find(auth()->user()->id),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
+        // dd($data);
+        return view('dashboard.myProfile')->with('data', $data);
+    }
+    
+    
+    // USER PROFILE PAGE
+    public function UserProfile($id){
+        $data = [
+            'profileDatails' => User::find($id),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
+        // dd($data);
+        return view('dashboard.userProfile')->with('data', $data);
+    }
+
+
+
     // SALES PAGE
     public function sales()
     {
@@ -62,7 +94,7 @@ class DashboardController extends Controller
             return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
         }else{
             $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales,
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->get(),
                 'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks->toJson(),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
@@ -83,7 +115,7 @@ class DashboardController extends Controller
             return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
         }else{
             $data = [
-                'expensesDetails' => Branch::find(auth()->user()->branch_id)->expenses,
+                'expensesDetails' => Branch::find(auth()->user()->branch_id)->expenses()->orderBy('created_at', 'DESC')->get(),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
@@ -96,7 +128,7 @@ class DashboardController extends Controller
     // STOCK PAGE
     public function stock(Request $request)
     {
-        if (Auth::user()->role == 4) {
+        if (Gate::allows('isSalesRep')) {
             return redirect()->back()->with('accessError', 'You have no permission to access page');
         }
         
@@ -107,7 +139,7 @@ class DashboardController extends Controller
         }else{
             $data = [
                 'stockItem' => [],
-                'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks,
+                'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks()->orderBy('created_at', 'DESC')->get(),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
@@ -120,6 +152,9 @@ class DashboardController extends Controller
     // STATISTICS PAGE
     public function statistics()
     {
+        if (Gate::allows('isSalesRep')) {
+            return redirect()->back()->with('accessError', 'You have no permission to access page');
+        }
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
@@ -138,13 +173,16 @@ class DashboardController extends Controller
     // CUSTOMERS BASE PAGE
     public function customers()
     {
+        if (Gate::allows('isSalesRep')) {
+            return redirect()->back()->with('accessError', 'You have no permission to access page');
+        }
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
             return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
         }else{
             $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales,
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->get(),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
@@ -157,7 +195,7 @@ class DashboardController extends Controller
     // BUSINESS SETTINGS
     public function businessSettings(){
 
-        if (Auth::user()->role == 3 || Auth::user()->role == 4) {
+        if (Gate::allows('isSalesRep') || Gate::allows('isManager')) {
             return redirect()->back()->with('accessError', 'You have no permission to access page');
         }
 
@@ -180,7 +218,7 @@ class DashboardController extends Controller
     // BRANCH SETTINGS
     public function branchSettings(){
 
-        if (Auth::user()->role == 3 || Auth::user()->role == 4) {
+        if (Gate::allows('isSalesRep') || Gate::allows('isManager')) {
             return redirect()->back()->with('accessError', 'You have no permission to access page');
         }
 
@@ -201,7 +239,7 @@ class DashboardController extends Controller
     // STAFF SETTINGS
     public function staffSettings(){
 
-        if (Auth::user()->role == 3 || Auth::user()->role == 4) {
+        if (Gate::allows('isSalesRep') || Gate::allows('isManager')) {
             return redirect()->back()->with('accessError', 'You have no permission to access page');
         }
 
@@ -219,6 +257,7 @@ class DashboardController extends Controller
                                         ->leftJoin('businesses', 'users.business_id', '=', 'businesses.id')
                                         ->leftJoin('branches', 'users.branch_id', '=', 'branches.id')
                                         ->where('businesses.id', auth()->user()->business_id)
+                                        ->orderBy('created_at', 'DESC')
                                         ->get()
             ];
         }
