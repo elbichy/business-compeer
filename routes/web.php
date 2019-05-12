@@ -17,15 +17,6 @@ use App\Business;
 Route::get('/', 'PagesController@index');
 
 
-
-// Admin Routes
-Route::get('/admin/dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
-Route::get('/admin/login', 'AdminLoginController@showLoginForm')->name('admin.login.form');
-Route::post('/admin/login', 'AdminLoginController@login')->name('admin.login.submit');
-
-
-
-
 // User Routes
 Auth::routes();
 Route::post( 'switchBranch', 'ProcessBusiness@switchBranch');
