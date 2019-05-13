@@ -28,7 +28,12 @@ class User extends Authenticatable
         'currentAddress',
         'business_id',
         'branch_id',
-        'role'
+        'role',
+        'identityType',
+        'identityNumber',
+        'idCard',
+        'image',
+        'signature'
     ];
 
 
@@ -46,6 +51,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

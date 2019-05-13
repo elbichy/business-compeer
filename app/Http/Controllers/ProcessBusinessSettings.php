@@ -112,34 +112,46 @@ class ProcessBusinessSettings extends Controller
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
             'gender' => 'required',
-            'dob' => 'required',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:8',
             'phone' => 'required',
-            'soo' => 'required',
-            'lgoo' => 'required',
-            'currentAddress' => 'required|max:255',
             'business_id' => 'required',
             'branch_id' => 'required',
-            'role' => 'required'
+            'role' => 'required',
+            'identityType' => 'required',
+            'identityNumber' => 'required',
+            'idCard' => 'required',
+            'photo' => 'required',
+            'signature' => 'required'
         ]);
-
-        // return $request->all();
+        
+        if ($photo = $request->file('photo')) {
+            $photoFileName = $photo->getClientOriginalName();
+            $photo->storeAs('public/site/profile', $photoFileName);
+        }
+        if ($idCard = $request->file('idCard')) {
+            $idCardFileName = $idCard->getClientOriginalName();
+            $idCard->storeAs('public/site/idCards', $idCardFileName);
+        }
+        if ($signature = $request->file('signature')) {
+            $signatureFileName = $signature->getClientOriginalName();
+            $signature->storeAs('public/site/signatures', $signatureFileName);
+        }
 
         $insert = User::create([
             'firstname' => $request->firstname,
             'lastname' =>  $request->lastname,
             'gender' => $request->gender,
-            'dob' => $request->dob,
             'email' =>  $request->email,
-            'password' => Hash::make( $request->password),
+            'password' => Hash::make( $request->phone),
             'phone' => $request->phone,
-            'soo' => $request->soo,
-            'lgoo' => $request->lgoo,
-            'currentAddress' => $request->currentAddress,
             'business_id' => $request->business_id,
             'branch_id' => $request->branch_id,
             'role' => $request->role,
+            'identityType' => $request->identityType,
+            'identityNumber' => $request->identityNumber,
+            'idCard' => $idCardFileName,
+            'image' => $photoFileName,
+            'signature' => $signatureFileName,
         ]);
         if ($insert) {
             return redirect('Dashboard/staffSettings')->with('status', 'Staff added successfully!');

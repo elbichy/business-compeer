@@ -107,6 +107,16 @@ $(document).ready(function () {
                 'height': newHeight8
             });
         }
+        
+        var table9 = $('.detailsArea').height();
+        var newHeight9 = table9 - remainder + 35;
+        if(remainder > 0){
+            $('.detailsArea').css({
+                'overflow-y': 'scroll',
+                'overflow-x': 'hidden',
+                'height': newHeight9
+            });
+        }
     }
 
 

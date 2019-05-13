@@ -541,6 +541,14 @@ table tbody tr td .recieptBtn {
   text-align: center;
 }
 
+.my-content-wrapper .content-container .profileWrap .detailsArea {
+  padding: 20px;
+}
+
+.my-content-wrapper .content-container .profileWrap .detailsArea .file-path-wrapper {
+  display: none !important;
+}
+
 .my-content-wrapper .content-container .stats {
   background: rgba(255, 255, 255, 0.4);
   margin-bottom: 20px;
@@ -817,6 +825,10 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form .row {
   margin-bottom: 0px;
+}
+
+.my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form .file-path-wrapper {
+  display: none !important;
 }
 
 .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsTable table {

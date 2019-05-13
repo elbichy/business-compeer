@@ -583,6 +583,13 @@ table {
                     }
                 }
             }
+            .detailsArea{
+                // border:2px solid red;
+                padding:20px;
+                .file-path-wrapper{
+                    display: none!important;
+                }
+            }
             
         }
 
@@ -914,6 +921,9 @@ table {
                     margin-top:0px;
                     .row{
                         margin-bottom: 0px;
+                    }
+                    .file-path-wrapper{
+                        display: none!important;
                     }
                 }
             }
