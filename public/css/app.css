@@ -391,7 +391,7 @@ table tbody tr td .recieptBtn {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 10px 10px 50px 10px;
 }
 
 .wrapper .rightPane .formBox h4 {
@@ -412,24 +412,6 @@ table tbody tr td .recieptBtn {
   margin-bottom: 0px;
 }
 
-.wrapper .rightPane .formBox .loginForm .RegisterBtn {
-  margin: 0;
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
-  color: #fff;
-  border-radius: 0px;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.wrapper .rightPane .formBox .loginForm .RegisterBtn .removePrefix {
-  position: static;
-  width: auto;
-}
-
 .wrapper .rightPane .formBox .regForm {
   display: flex;
   width: 90%;
@@ -441,24 +423,6 @@ table tbody tr td .recieptBtn {
 
 .wrapper .rightPane .formBox .regForm .row {
   margin-bottom: 0px;
-}
-
-.wrapper .rightPane .formBox .regForm .RegisterBtn {
-  margin: 0;
-  width: 50px;
-  height: 50px;
-  font-size: 18px;
-  color: #fff;
-  border-radius: 0px;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.wrapper .rightPane .formBox .regForm .RegisterBtn .removePrefix {
-  position: static;
-  width: auto;
 }
 
 .my-content-wrapper,

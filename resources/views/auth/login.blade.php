@@ -42,9 +42,7 @@
             @include('components.submitPreloader')
         </div>
         <div class="input-field col s12" style="display: flex; justify-content: center;">
-            <a class="RegisterBtn" href="/register">
-                <i class="material-icons removePrefix prefix">person_add</i>
-            </a>
+            <span>Don't have an account yet? <a class="RegisterBtn" href="/register">Sign Up!</a></span>
         </div>
 
     </div>

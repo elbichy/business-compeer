@@ -58,15 +58,20 @@ class DashboardController extends Controller
 
     // MY PROFILE PAGE
     public function myProfile(){
-        
-        $data = [
-            'salesDetails' => User::find(auth()->user()->id)->sales()->orderBy('created_at', 'DESC')->get(),
-            'totalSales' => User::find(auth()->user()->id)->sales()->sum('amount'),
-            'totalSalesCount' => User::find(auth()->user()->id)->sales()->count(),
-            'profileDatails' => User::find(auth()->user()->id),
-            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-        ];
+        if(auth()->user()->business_id == 0){
+            return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+        }else{
+            $data = [
+                'salesDetails' => User::find(auth()->user()->id)->sales()->orderBy('created_at', 'DESC')->get(),
+                'totalSales' => User::find(auth()->user()->id)->sales()->sum('amount'),
+                'totalSalesCount' => User::find(auth()->user()->id)->sales()->count(),
+                'profileDatails' => User::find(auth()->user()->id),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
         // dd($data);
         return view('dashboard.myProfile')->with('data', $data);
     }
