@@ -62,7 +62,7 @@
                             <label for="firstname">Firstname</label>
                         </div>
                         <div class="input-field col s12 m8 l4">
-                            <input id="lastname" name="lastname" type="text" class="validate">
+                            <input id="lastname" name="lastname" type="text" class="validate" value="{{ $data['profileDatails']->lastname !== NULL ? $data['profileDatails']->lastname : '' }}">
                             @if ($errors->has('lastname'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('lastname') }}</strong>
