@@ -4,8 +4,9 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.collapsible').collapsible();
     $('.modal').modal({
-        dismissible: false
+        dismissible: true
     });
+    $('.materialboxed').materialbox();
     $('select').formSelect();
     $('#selectBranch').formSelect();
     $('.nav-wrapper .dropdown-content li').click(function(e){
@@ -38,7 +39,7 @@ $(document).ready(function () {
         var win = $(window).height();
         var remainder = doc - win;
         var table = $('.salesTable').height();
-        var newHeight = table - remainder;
+        var newHeight = table - remainder + 20;
         if(remainder > 0){
             $('.salesTable').css({
                 'overflow-y': 'scroll',

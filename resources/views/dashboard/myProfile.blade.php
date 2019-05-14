@@ -7,21 +7,23 @@
             <div class="focusArea col s12 m5 l5 z-depth-2">
                 <div class="picArea">
                     @if($data['profileDatails']->gender == 'male')
-                        <img src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site/profile').'/'.$data['profileDatails']->image : asset('storage/site/avaterMale.jpg')}}" alt="profile">
+                        <img class="materialboxed" src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site/profile').'/'.$data['profileDatails']->image : asset('storage/site/avaterMale.jpg')}}" alt="profile">
                     @elseif($data['profileDatails']->gender == 'female')
-                        <img src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site/profile').'/'.$data['profileDatails']->image : asset('storage/site/avaterFemale.jpg')}}" alt="profile">
+                        <img class="materialboxed" src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site/profile').'/'.$data['profileDatails']->image : asset('storage/site/avaterFemale.jpg')}}" alt="profile">
+                    @elseif($data['profileDatails']->gender == NULL)
+                        <img class="materialboxed" src="{{asset('storage/site/no-pic-no-gender.jpg')}}" alt="profile">
                     @endif
                     <p><strong>{{ $data['profileDatails']->firstname  }} {{ $data['profileDatails']->lastname  }}</strong></p>
                     <div class="row fRow">
                         <small class="col s12 m5 l5 center-align">
                             @if($data['profileDatails']->role == 4)
-                                Sales Representative
+                                <strong>Sales Representative</strong>
                             @elseif($data['profileDatails']->role == 3)
-                                Manager
+                                <strong>Manager</strong>
                             @elseif($data['profileDatails']->role == 2)
-                                Administrator
+                                <strong>Administrator</strong>
                             @elseif($data['profileDatails']->role == 1)
-                                Owner (C.E.O)
+                                <strong>Owner (C.E.O)</strong>
                             @endif
                         </small>
                         <small class="col s12 m7 l7 center-align">
@@ -104,7 +106,7 @@
                             <label for="email">E-Mail</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <input id="password" name="password" type="password" class="validate" value="{{ $data['profileDatails']->password !== NULL ? $data['profileDatails']->password : '' }}" required>
+                            <input id="password" name="password" type="password" class="validate">
                             @if ($errors->has('password'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -122,37 +124,18 @@
                             @endif
                             <label for="phone">Phone</label>
                         </div>
-                        <div class="input-field col s12 m4 l4">
-                            <select id="soo" name="soo" required>
-                                <option value="" disabled selected>Choose an option</option>
-                                <option value="abuja">Abuja</option>
-                                <option value="kano">Kano</option>
-                                <option value="katsina">Katsina</option>
-                            </select>
-                            @if ($errors->has('soo'))
+                        <div class="input-field col s12 m8 l8">
+                            <textarea id="permanentAddress" name="permanentAddress" class="validate materialize-textarea" required>{{ $data['profileDatails']->permanentAddress !== NULL ? $data['profileDatails']->permanentAddress : '' }}</textarea>
+                            @if ($errors->has('permanentAddress'))
                                 <span class="helper-text red-text" >
-                                    <strong>{{ $errors->first('soo') }}</strong>
+                                    <strong>{{ $errors->first('permanentAddress') }}</strong>
                                 </span>
                             @endif
-                            <label>State (origin)</label>
-                        </div>
-                        <div class="input-field col s12 m4 l4">
-                            <select id="lgoo" name="lgoo" required>
-                                <option value="" disabled selected>Choose an option</option>
-                                <option value="bichi" >Bichi</option>
-                                <option value="funtua">Funtua</option>
-                                <option value="abaji">Abaji</option>
-                            </select>
-                            @if ($errors->has('lgoo'))
-                                <span class="helper-text red-text" >
-                                    <strong>{{ $errors->first('lgoo') }}</strong>
-                                </span>
-                            @endif
-                            <label>LGA (origin)</label>
+                            <label for="permanentAddress">Address (origin)</label>
                         </div>
 
-                        <div class="input-field col s12 m8 l8">
-                            <input id="currentAddress" name="currentAddress" type="text" class="validate"  value="{{ $data['profileDatails']->currentAddress !== NULL ? $data['profileDatails']->currentAddress : '' }}" required>
+                        <div class="input-field col s12">
+                            <textarea id="currentAddress" name="currentAddress" class="validate materialize-textarea" required>{{ $data['profileDatails']->currentAddress !== NULL ? $data['profileDatails']->currentAddress : '' }}</textarea>
                             @if ($errors->has('currentAddress'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('currentAddress') }}</strong>
@@ -160,6 +143,7 @@
                             @endif
                             <label for="currentAddress">Address (current)</label>
                         </div>
+
                         <div class="input-field col s12 m4 l4">
                             <select id="business_id" name="business_id" disabled>
                                 <option value="" disabled selected>Choose an option</option>
@@ -176,7 +160,6 @@
                             @endif
                             <label>Company</label>
                         </div>
-
                         <div class="input-field col s12 m4 l4">
                             <select id="branch_id" name="branch_id" disabled>
                                 <option value="" disabled selected>Choose an option</option>
@@ -208,7 +191,8 @@
                             @endif
                             <label>Position</label>
                         </div>
-                        <div class="input-field col s12 m4 l4">
+
+                        <div class="input-field col s12 m3 l3">
                             <input id="identityType" name="identityType" type="text" class="validate"  value="{{ $data['profileDatails']->identityType !== NULL ? $data['profileDatails']->identityType : '' }}" required>
                             @if ($errors->has('identityType'))
                                 <span class="helper-text red-text" >
@@ -217,7 +201,6 @@
                             @endif
                             <label for="identityType">ID Type</label>
                         </div>
-
                         <div class="input-field col s12 m4 l4">
                             <input id="identityNumber" name="identityNumber" type="text" class="validate"  value="{{ $data['profileDatails']->identityNumber !== NULL ? $data['profileDatails']->identityNumber : '' }}" required>
                             @if ($errors->has('identityNumber'))
@@ -227,41 +210,44 @@
                             @endif
                             <label for="identityNumber">ID Number</label>
                         </div>
-                        <div class="file-field input-field col s12 m4 l4">
+                        <div class="file-field input-field col s12 m5 l5">
                             <div class="btn btn-small grey darken-1" style="width:100%;">
                                 <span>Upload ID Card</span>
-                                <input type="file" name="idCard" id="idCard" required>
+                                {!! $data['profileDatails']->idCard !=NULL ? '<i class="material-icons right">done_all</i>' : '' !!}
+                                <input type="file" name="idCard" id="idCard">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text">
                             </div>
                         </div>
-                        <div class="file-field input-field col s12 m4 l4">
+
+                        <div class="file-field input-field col s12 m6 l6">
                             <div class="btn btn-small grey darken-1" style="width:100%;">
                                 <span>Upload Photo</span>
-                                <input type="file" name="photo" id="photo" required>
+                                {!! $data['profileDatails']->image !=NULL ? '<i class="material-icons right">done_all</i>' : '' !!}
+                                <input type="file" name="photo" id="photo"}}>
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text">
                             </div>
                         </div>
-                        <div class="col s12" style="padding:0px;">
-                            <div class="file-field input-field col s12 m6 l6">
-                                <div class="btn btn-small grey darken-1" style="width:100%;">
-                                    <span>Upload your Signature</span>
-                                    <input type="file" name="signature" id="signature" required>
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text">
-                                </div>
+                        <div class="file-field input-field col s12 m6 l6">
+                            <div class="btn btn-small grey darken-1" style="width:100%;">
+                                <span>Upload your Signature</span>
+                                {!! $data['profileDatails']->signature !=NULL ? '<i class="material-icons right">done_all</i>' : '' !!}
+                                <input type="file" name="signature" id="signature">
                             </div>
-                            <div class="input-field btnWrap col s12 m6 l6" style="display:flex; justify-content:flex-end;">
-                                <button id="staffSettingsBtn" class="right branchSubmitBtn btn waves-effect waves-light" type="submit">Submit
-                                    <i class="material-icons right">send</i>
-                                </button>
-                                {{-- SPINNER --}}
-                                @include('components.submitPreloader')
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
                             </div>
+                        </div>
+
+                        <div class="input-field btnWrap col s12" style="display:flex; justify-content:flex-end;">
+                            <button id="staffSettingsBtn" class="right branchSubmitBtn btn waves-effect waves-light" type="submit">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                            {{-- SPINNER --}}
+                            @include('components.submitPreloader')
                         </div>
                     </div>
                 </form>

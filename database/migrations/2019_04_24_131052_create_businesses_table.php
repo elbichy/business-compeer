@@ -23,6 +23,7 @@ class CreateBusinessesTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('logo');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

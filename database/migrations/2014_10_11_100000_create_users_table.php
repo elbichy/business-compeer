@@ -27,11 +27,17 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->date('dob')->nullable();
             $table->string('phone')->nullable();
-            $table->string('soo')->nullable();
-            $table->string('lgoo')->nullable();
+            $table->string('permanentAddress')->nullable();
             $table->string('currentAddress')->nullable();
+            $table->string('identityType')->nullable();
+            $table->string('identityNumber')->nullable();
             $table->string('image')->nullable();
+            $table->string('idCard')->nullable();
+            $table->string('signature')->nullable();
             $table->timestamps();
+
+            
+            
         });
     }
 

@@ -510,6 +510,30 @@ table tbody tr td .recieptBtn {
   padding: 20px;
 }
 
+.my-content-wrapper .content-container .profileWrap .detailsArea .detailsWrap .label {
+  font-weight: bold;
+  background: #eee;
+  text-align: center;
+  padding: 6px;
+}
+
+.my-content-wrapper .content-container .profileWrap .detailsArea .detailsWrap .info {
+  text-align: center;
+  padding: 6px;
+  margin-bottom: 20px;
+}
+
+.my-content-wrapper .content-container .profileWrap .detailsArea .detailsWrap .info .material-placeholder {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-content-wrapper .content-container .profileWrap .detailsArea .detailsWrap .info img {
+  width: 60%;
+}
+
 .my-content-wrapper .content-container .profileWrap .detailsArea .file-path-wrapper {
   display: none !important;
 }

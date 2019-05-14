@@ -22,6 +22,7 @@ class CreateExpensesTable extends Migration
             $table->string('itemBought');
             $table->string('boughtFrom');
             $table->integer('cost');
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign('branch_id')
                     ->references('id')->on('branches')

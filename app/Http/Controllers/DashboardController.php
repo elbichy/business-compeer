@@ -78,67 +78,80 @@ class DashboardController extends Controller
     }
     // STORE AND UPDATE MY PROFILE
     public function updateMyProfile(Request $request){
+
         $val = $request->validate([
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
             'gender' => 'required',
             'dob' => 'required',
-            'password' => 'required',
             'phone' => 'required',
-            'soo' => 'required',
-            'lgoo' => 'required',
-            'currentAddress' => 'required',
+            'permanentAddress' => 'required',
             'identityType' => 'required',
-            'identityNumber' => 'required',
-            'idCard' => 'required',
-            'photo' => 'required',
-            'signature' => 'required'
+            'identityNumber' => 'required'
         ]);
-        
+
+        $user = User::find(auth()->user()->id);
+        $user->firstname = $request->firstname;
+        $user->lastname =  $request->lastname;
+        $user->gender = $request->gender;
+        $user->dob = $request->dob;
+        $user->phone = $request->phone;
+        $user->permanentAddress = $request->permanentAddress;
+        $user->currentAddress = $request->currentAddress;
+        $user->identityType = $request->identityType;
+        $user->identityNumber = $request->identityNumber;
+
+        if($request->password){
+            $user->password = Hash::make( $request->password);
+        }
         if ($photo = $request->file('photo')) {
-            $photoFileName = $photo->getClientOriginalName();
+            $photoFileName = 'avater-'.$request->firstname.$request->lastname.$request->dob.'.'.$photo->getClientOriginalExtension();
             $photo->storeAs('public/site/profile', $photoFileName);
+            $user->image = $photoFileName;
         }
         if ($idCard = $request->file('idCard')) {
-            $idCardFileName = $idCard->getClientOriginalName();
+            $idCardFileName = 'idCard-'.$request->firstname.$request->lastname.$request->dob.'.'.$idCard->getClientOriginalExtension();
             $idCard->storeAs('public/site/idCards', $idCardFileName);
+            $user->idCard = $idCardFileName;
         }
         if ($signature = $request->file('signature')) {
-            $signatureFileName = $signature->getClientOriginalName();
+            $signatureFileName = 'signature-'.$request->firstname.$request->lastname.$request->dob.'.'.$signature->getClientOriginalExtension();
             $signature->storeAs('public/site/signatures', $signatureFileName);
+            $user->signature = $signatureFileName;
         }
 
-        $insert = User::where('id', auth()->user()->id)
-                ->where('email', auth()->user()->email)
-                ->update([
-                    'firstname' => $request->firstname,
-                    'lastname' =>  $request->lastname,
-                    'gender' => $request->gender,
-                    'dob' => $request->dob,
-                    'password' => Hash::make( $request->password),
-                    'phone' => $request->phone,
-                    'soo' => $request->soo,
-                    'lgoo' => $request->lgoo,
-                    'currentAddress' => $request->currentAddress,
-                    'identityType' => $request->identityType,
-                    'identityNumber' => $request->identityNumber,
-                    'idCard' => $idCardFileName,
-                    'image' => $photoFileName,
-                    'signature' => $signatureFileName,
-                ]);
-
-        if ($insert) {
+        if ($user->save()) {
             return redirect()->back()->with('status', 'Details updated successfully!');
         }
     }
     
     // USER PROFILE PAGE
     public function UserProfile($id){
-        $data = [
-            'profileDatails' => User::find($id),
-            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-        ];
+
+        $userCompany = User::find($id)->business_id;
+        $adminsCompany =  User::find(auth()->user()->id)->business_id;
+        if($userCompany != $adminsCompany OR !Gate::allows('isOwner')){
+            return redirect()->back()->with('accessError', 'You have no access permission');
+        }
+
+        if(auth()->user()->business_id == 0){
+            return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+        }else{
+            $userBusinessId = User::find($id)->business_id;
+            $userBranchId = User::find($id)->branch_id;
+            $data = [
+                'salesDetails' => User::find($id)->sales()->orderBy('created_at', 'DESC')->get(),
+                'totalSales' => User::find($id)->sales()->sum('amount'),
+                'totalSalesCount' => User::find($id)->sales()->count(),
+                'profileDatails' => User::find($id),
+                'userBusinessDetails' => Business::find($userBusinessId),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'userBranchDetails' => Branch::find($userBranchId),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
         // dd($data);
         return view('dashboard.userProfile')->with('data', $data);
     }
@@ -154,7 +167,7 @@ class DashboardController extends Controller
             return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
         }else{
             $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->get(),
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(6),
                 'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks->toJson(),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
@@ -242,7 +255,7 @@ class DashboardController extends Controller
             return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
         }else{
             $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->get(),
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(7),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];

@@ -24,6 +24,7 @@ class CreateBranchesTable extends Migration
             $table->date('commissionDate');
             $table->string('openHour');
             $table->string('closeHour');
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign('business_id')
                     ->references('id')->on('businesses')

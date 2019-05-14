@@ -130,7 +130,7 @@
                                 <label for="identityNumber">ID Number</label>
                             </div>
                             <div class="file-field input-field col s12 m4 l4">
-                                <div class="btn btn-small blue" style="width:100%;">
+                                <div class="btn btn-small grey darken-1" style="width:100%;">
                                     <span>Upload ID Card</span>
                                     <input type="file" name="idCard" id="idCard" required>
                                 </div>
@@ -139,7 +139,7 @@
                                 </div>
                             </div>
                             <div class="file-field input-field col s12 m4 l4">
-                                <div class="btn btn-small blue" style="width:100%;">
+                                <div class="btn btn-small grey darken-1" style="width:100%;">
                                     <span>Upload Photo</span>
                                     <input type="file" name="photo" id="photo" required>
                                 </div>
@@ -150,7 +150,7 @@
 
                             <div class="col s12" style="padding:0px;">
                                 <div class="file-field input-field col s12 m6 l6">
-                                    <div class="btn btn-small blue" style="width:100%;">
+                                    <div class="btn btn-small grey darken-1" style="width:100%;">
                                         <span>Upload your Signature</span>
                                         <input type="file" name="signature" id="signature" required>
                                     </div>
@@ -197,7 +197,7 @@
                                             Sales Rep
                                         @endif
                                     </td>
-                                    <td><a href="#">View</a></td>
+                                    <td><a href="{{url('/Dashboard/userProfile').'/'.$staff->id}}">View</a></td>
                                     <td>
                                         <a class="edit editCustomer" href="#edit">
                                             <i class="tiny material-icons">edit</i>

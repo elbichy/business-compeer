@@ -28,6 +28,7 @@ class CreateSalesTable extends Migration
             $table->integer('amount');
             $table->integer('balance');
             $table->integer('change');
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign('branch_id')
                     ->references('id')->on('branches')

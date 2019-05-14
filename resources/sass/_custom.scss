@@ -549,6 +549,28 @@ table {
             .detailsArea{
                 // border:2px solid red;
                 padding:20px;
+                .detailsWrap{
+                    .label{
+                        font-weight: bold;
+                        background: #eee;
+                        text-align: center;
+                        padding: 6px;
+                    }
+                    .info{
+                        text-align: center;
+                        padding: 6px;
+                        margin-bottom:20px;
+                        .material-placeholder{
+                            display: flex;
+                            width: 100%;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        img{
+                            width:60%;
+                        }
+                    }
+                }
                 .file-path-wrapper{
                     display: none!important;
                 }

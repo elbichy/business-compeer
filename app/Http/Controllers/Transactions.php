@@ -21,7 +21,6 @@ class Transactions extends Controller
     public function storeSales(Request $request)
     {
         $val = $request->validate([
-            'firstname' => 'required',
             'phone' => 'numeric',
             'location' => 'required',
             'productOrService' => 'required',

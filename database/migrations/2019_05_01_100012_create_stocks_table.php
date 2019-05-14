@@ -24,6 +24,7 @@ class CreateStocksTable extends Migration
             $table->integer('bulkUnit');
             $table->integer('bulkUnitPrice');
             $table->string('availableUnits');
+            $table->softDeletes();
             $table->timestamps();
             $table->foreign('branch_id')
                     ->references('id')->on('branches')
