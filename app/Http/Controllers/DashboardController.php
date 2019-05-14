@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Business;
@@ -75,7 +76,61 @@ class DashboardController extends Controller
         // dd($data);
         return view('dashboard.myProfile')->with('data', $data);
     }
-    
+    // STORE AND UPDATE MY PROFILE
+    public function updateMyProfile(Request $request){
+        $val = $request->validate([
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
+            'gender' => 'required',
+            'dob' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+            'soo' => 'required',
+            'lgoo' => 'required',
+            'currentAddress' => 'required',
+            'identityType' => 'required',
+            'identityNumber' => 'required',
+            'idCard' => 'required',
+            'photo' => 'required',
+            'signature' => 'required'
+        ]);
+        
+        if ($photo = $request->file('photo')) {
+            $photoFileName = $photo->getClientOriginalName();
+            $photo->storeAs('public/site/profile', $photoFileName);
+        }
+        if ($idCard = $request->file('idCard')) {
+            $idCardFileName = $idCard->getClientOriginalName();
+            $idCard->storeAs('public/site/idCards', $idCardFileName);
+        }
+        if ($signature = $request->file('signature')) {
+            $signatureFileName = $signature->getClientOriginalName();
+            $signature->storeAs('public/site/signatures', $signatureFileName);
+        }
+
+        $insert = User::where('id', auth()->user()->id)
+                ->where('email', auth()->user()->email)
+                ->update([
+                    'firstname' => $request->firstname,
+                    'lastname' =>  $request->lastname,
+                    'gender' => $request->gender,
+                    'dob' => $request->dob,
+                    'password' => Hash::make( $request->password),
+                    'phone' => $request->phone,
+                    'soo' => $request->soo,
+                    'lgoo' => $request->lgoo,
+                    'currentAddress' => $request->currentAddress,
+                    'identityType' => $request->identityType,
+                    'identityNumber' => $request->identityNumber,
+                    'idCard' => $idCardFileName,
+                    'image' => $photoFileName,
+                    'signature' => $signatureFileName,
+                ]);
+
+        if ($insert) {
+            return redirect()->back()->with('status', 'Details updated successfully!');
+        }
+    }
     
     // USER PROFILE PAGE
     public function UserProfile($id){

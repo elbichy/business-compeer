@@ -49,11 +49,11 @@
                 </div>
             </div>
             <div class="detailsArea col s12 m7 l7">
-                <form action="{{url('storeStaffSettings')}}" method="post" name="staffSettingsForm" class="staffSettingsForm">
+                <form action="{{route('updateMyProfile')}}" method="post" name="updateStaffForm" class="updateStaffForm" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="input-field col s12 m8 l4">
-                            <input id="firstname" name="firstname" type="text" class="validate">
+                            <input id="firstname" name="firstname" type="text" class="validate" value="{{ $data['profileDatails']->firstname !== NULL ? $data['profileDatails']->firstname : '' }}">
                             @if ($errors->has('firstname'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('firstname') }}</strong>
@@ -62,7 +62,7 @@
                             <label for="firstname">Firstname</label>
                         </div>
                         <div class="input-field col s12 m8 l4">
-                            <input id="lastname" name="lastname" type="text" class="validate" value="{{ $data['profileDatails']->lastname !== NULL ? $data['profileDatails']->lastname : '' }}">
+                            <input id="lastname" name="lastname" required type="text" class="validate" value="{{ $data['profileDatails']->lastname !== NULL ? $data['profileDatails']->lastname : '' }}">
                             @if ($errors->has('lastname'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('lastname') }}</strong>
@@ -71,11 +71,11 @@
                             <label for="lastname">Lastname</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <select id="gender" name="gender">
+                            <select id="gender" name="gender" required>
                                 <option value="" disabled selected>Choose an option</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                <option value="male" {{ $data['profileDatails']->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                <option value="female" {{ $data['profileDatails']->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                <option value="other" {{ $data['profileDatails']->gender == 'other' ? 'selected' : '' }}>Other</option>
                             </select>
                             @if ($errors->has('gender'))
                                 <span class="helper-text red-text" >
@@ -86,7 +86,7 @@
                         </div>
 
                         <div class="input-field col s12 m4 l4">
-                            <input id="dob" name="dob" type="date" class="validate">
+                            <input id="dob" name="dob" type="date" class="validate" value="{{ $data['profileDatails']->dob !== NULL ? $data['profileDatails']->dob : '' }}" required>
                             @if ($errors->has('dob'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('dob') }}</strong>
@@ -95,7 +95,7 @@
                             <label for="dob">Date of Birth</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <input id="email" name="email" type="email" class="validate">
+                            <input id="email" name="email" type="email" class="validate" value="{{ $data['profileDatails']->email !== NULL ? $data['profileDatails']->email : '' }}" disabled>
                             @if ($errors->has('email'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -104,7 +104,7 @@
                             <label for="email">E-Mail</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <input id="password" name="password" type="password" class="validate">
+                            <input id="password" name="password" type="password" class="validate" value="{{ $data['profileDatails']->password !== NULL ? $data['profileDatails']->password : '' }}" required>
                             @if ($errors->has('password'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -114,7 +114,7 @@
                         </div>
 
                         <div class="input-field col s12 m4 l4">
-                            <input id="phone" name="phone" type="text" class="validate">
+                            <input id="phone" name="phone" type="text" class="validate" value="{{ $data['profileDatails']->phone !== NULL ? $data['profileDatails']->phone : '' }}" required>
                             @if ($errors->has('phone'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('phone') }}</strong>
@@ -123,7 +123,7 @@
                             <label for="phone">Phone</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <select id="soo" name="soo">
+                            <select id="soo" name="soo" required>
                                 <option value="" disabled selected>Choose an option</option>
                                 <option value="abuja">Abuja</option>
                                 <option value="kano">Kano</option>
@@ -137,9 +137,9 @@
                             <label>State (origin)</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <select id="lgoo" name="lgoo">
+                            <select id="lgoo" name="lgoo" required>
                                 <option value="" disabled selected>Choose an option</option>
-                                <option value="bichi">Bichi</option>
+                                <option value="bichi" >Bichi</option>
                                 <option value="funtua">Funtua</option>
                                 <option value="abaji">Abaji</option>
                             </select>
@@ -152,7 +152,7 @@
                         </div>
 
                         <div class="input-field col s12 m8 l8">
-                            <input id="currentAddress" name="currentAddress" type="text" class="validate">
+                            <input id="currentAddress" name="currentAddress" type="text" class="validate"  value="{{ $data['profileDatails']->currentAddress !== NULL ? $data['profileDatails']->currentAddress : '' }}" required>
                             @if ($errors->has('currentAddress'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('currentAddress') }}</strong>
@@ -161,11 +161,11 @@
                             <label for="currentAddress">Address (current)</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <select id="business_id" name="business_id">
+                            <select id="business_id" name="business_id" disabled>
                                 <option value="" disabled selected>Choose an option</option>
                                 @if(count($data['businessDetails'] ) > 0)
                                     @foreach ($data['businessDetails'] as $business)
-                                        <option value="{{$business->id}}">{{ucfirst($business->name)}}</option> 
+                                        <option value="{{$business->id}}" {{ $data['profileDatails']->business_id == $business->id ? 'selected' : '' }}>{{ucfirst($business->name)}}</option> 
                                     @endforeach
                                 @endif
                             </select>
@@ -178,11 +178,11 @@
                         </div>
 
                         <div class="input-field col s12 m4 l4">
-                            <select id="branch_id" name="branch_id">
+                            <select id="branch_id" name="branch_id" disabled>
                                 <option value="" disabled selected>Choose an option</option>
                                 @if(count($data['branchDetails'] ) > 0)
                                     @foreach ($data['branchDetails'] as $branch)
-                                        <option value="{{$branch->id}}">{{ucfirst($branch->name)}} Branch</option> 
+                                        <option value="{{$branch->id}}" {{ $data['profileDatails']->branch_id == $branch->id ? 'selected' : '' }}>{{ucfirst($branch->name)}} Branch</option> 
                                     @endforeach
                                 @endif
                             </select>
@@ -194,12 +194,12 @@
                             <label>Branch</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <select id="role" name="role">
+                            <select id="role" name="role" disabled>
                                 <option value="" disabled selected>Choose an option</option>
-                                <option value="1">Co-owner</option>
-                                <option value="2">Administrator</option>
-                                <option value="3">Manager</option>
-                                <option value="4">Sales Representative</option>
+                                <option value="1" {{ $data['profileDatails']->role == 1 ? 'selected' : '' }}>Co-owner</option>
+                                <option value="2" {{ $data['profileDatails']->role == 2 ? 'selected' : '' }}>Administrator</option>
+                                <option value="3" {{ $data['profileDatails']->role == 3 ? 'selected' : '' }}>Manager</option>
+                                <option value="4" {{ $data['profileDatails']->role == 4 ? 'selected' : '' }}>Sales Representative</option>
                             </select>
                             @if ($errors->has('role'))
                                 <span class="helper-text red-text" >
@@ -209,7 +209,7 @@
                             <label>Position</label>
                         </div>
                         <div class="input-field col s12 m4 l4">
-                            <input id="identityType" name="identityType" type="text" class="validate">
+                            <input id="identityType" name="identityType" type="text" class="validate"  value="{{ $data['profileDatails']->identityType !== NULL ? $data['profileDatails']->identityType : '' }}" required>
                             @if ($errors->has('identityType'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('identityType') }}</strong>
@@ -219,7 +219,7 @@
                         </div>
 
                         <div class="input-field col s12 m4 l4">
-                            <input id="identityNumber" name="identityNumber" type="text" class="validate">
+                            <input id="identityNumber" name="identityNumber" type="text" class="validate"  value="{{ $data['profileDatails']->identityNumber !== NULL ? $data['profileDatails']->identityNumber : '' }}" required>
                             @if ($errors->has('identityNumber'))
                                 <span class="helper-text red-text" >
                                     <strong>{{ $errors->first('identityNumber') }}</strong>

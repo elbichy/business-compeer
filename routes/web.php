@@ -24,6 +24,7 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/Dashboard/userProfile/{id}', 'DashboardController@userProfile')->name('userProfile');
 Route::get('/Dashboard/myProfile', 'DashboardController@myProfile')->name('myProfile');
+Route::post('/Dashboard/myProfile/updateMyProfile', 'DashboardController@updateMyProfile')->name('updateMyProfile');
 
 Route::get('/Dashboard/sales', 'DashboardController@sales')->name('sales');
 Route::get( 'Dashboard/getReciept/{data}', 'Transactions@getReciept');
