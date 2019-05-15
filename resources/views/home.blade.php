@@ -41,14 +41,14 @@
                 </header>
 
                 {{-- CONTENT START HERE --}}
-                <div class="logoArea z-depth-2">
-                    <img src="{{asset('storage/logoTrans.png')}}" alt="LOGO">
+                <div class="logoArea">
+                    <img src="{{asset('storage/compeer-LOGO-with-text.png')}}" alt="LOGO">
                 </div>
-                <div class="businessName center">
+                {{-- <div class="businessName center">
                     <h3>Bichy's Infotech Solutions</h3>
-                </div>
+                </div> --}}
                 <div class="MainsubTitle center white-text">
-                    <h6>Business Inventory & Transaction Records Platform</h6>
+                    <h6>Business Inventory & Analytics platform</h6>
                 </div>
             </div>
         </div>

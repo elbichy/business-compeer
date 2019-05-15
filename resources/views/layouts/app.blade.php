@@ -77,7 +77,7 @@
                             <a href="#user"><img class="circle" src="{{asset('storage').'/site/'.$business->logo}}"></a>
                         @endforeach    
                     @else
-                        <a href="#user"><img class="circle" src="{{asset('storage/logo.jpg')}}"></a>
+                        <a href="#user"><img class="circle" src="{{asset('storage/compeer-LOGO.png')}}"></a>
                     @endif
                     
 
