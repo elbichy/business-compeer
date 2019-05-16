@@ -48,6 +48,7 @@ Route::post( 'storeBusinessSettings', 'ProcessBusinessSettings@businessSettings'
 
 Route::get( '/Dashboard/branchSettings', 'DashboardController@branchSettings')->name('branchSettings');
 Route::post( 'storeBranchSettings', 'ProcessBusinessSettings@branchSettings');
+Route::delete('/Dashboard/deleteBranch/{id}', 'ProcessBusinessSettings@deleteBranch');
 
 Route::get( '/Dashboard/staffSettings', 'DashboardController@staffSettings')->name('staffSettings');
 Route::post( 'storeStaffSettings', 'ProcessBusinessSettings@staffSettings');

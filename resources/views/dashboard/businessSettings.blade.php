@@ -13,7 +13,7 @@
                             @csrf
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
-                                <input id="name" name="name" type="text" class="validate" value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->name : '' }}">
+                                <input id="name" name="name" type="text" class="validate" required value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->name : '' }}">
                                     @if ($errors->has('name'))
                                         <span class="helper-text red-text" >
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -22,7 +22,7 @@
                                     <label for="name">Business Name</label>
                                 </div>
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="cac" name="cac" type="number" class="validate" value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->cac : '' }}">
+                                    <input id="cac" name="cac" type="number" class="validate" required value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->cac : '' }}">
                                     @if ($errors->has('cac'))
                                         <span class="helper-text red-text" >
                                             <strong>{{ $errors->first('cac') }}</strong>
@@ -34,7 +34,7 @@
 
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="nature" name="nature" type="text" class="validate" value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->nature : '' }}">
+                                    <input id="nature" name="nature" type="text" class="validate" required value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->nature : '' }}">
                                     @if ($errors->has('nature'))
                                         <span class="helper-text red-text" >
                                             <strong>{{ $errors->first('nature') }}</strong>
@@ -43,7 +43,7 @@
                                     <label for="nature">Nature of Business</label>
                                 </div>
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="website" name="website" type="text" class="validate" value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->website : '' }}">
+                                    <input id="website" name="website" type="text" value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->website : '' }}">
                                     @if ($errors->has('website'))
                                         <span class="helper-text red-text" >
                                             <strong>{{ $errors->first('website') }}</strong>
@@ -64,7 +64,7 @@
                                     <label for="email">E-mail Address</label>
                                 </div>
                                 <div class="input-field col s12 m6 l6">
-                                    <input id="phone" name="phone" type="text" class="validate" value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->phone : '' }}">
+                                    <input id="phone" name="phone" type="text" value="{{ count($data['businessDetails']) > 0 ? $data['businessDetails'][0]->phone : '' }}">
                                     @if ($errors->has('phone'))
                                         <span class="helper-text red-text" >
                                             <strong>{{ $errors->first('phone') }}</strong>
@@ -78,7 +78,8 @@
                                 <div class="file-field input-field col s12 m8 l8">
                                     <div class="btn btn-small blue" style="width:100%;">
                                         <span>Upload logo</span>
-                                        <input type="file" name="logo" id="logo" required>
+                                        {!! count($data['businessDetails']) != 0 && $data['businessDetails'][0]->logo !=NULL ? '<i class="material-icons right">done_all</i>' : '' !!}
+                                        <input type="file" name="logo" id="logo">
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text">

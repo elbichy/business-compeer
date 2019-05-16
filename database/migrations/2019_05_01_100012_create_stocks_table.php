@@ -23,7 +23,7 @@ class CreateStocksTable extends Migration
             $table->integer('unitPrice');
             $table->integer('bulkUnit');
             $table->integer('bulkUnitPrice');
-            $table->string('availableUnits');
+            $table->string('availableUnits')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('branch_id')

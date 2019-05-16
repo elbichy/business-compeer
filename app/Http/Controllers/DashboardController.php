@@ -27,7 +27,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
 
             $todaysSales = Branch::find(auth()->user()->branch_id)
@@ -62,7 +62,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
                 'salesDetails' => User::find(auth()->user()->id)->sales()->orderBy('created_at', 'DESC')->get(),
@@ -137,7 +137,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $userBusinessId = User::find($id)->business_id;
             $userBranchId = User::find($id)->branch_id;
@@ -164,7 +164,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
                 'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(6),
@@ -185,7 +185,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
                 'expensesDetails' => Branch::find(auth()->user()->branch_id)->expenses()->orderBy('created_at', 'DESC')->get(),
@@ -208,7 +208,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
                 'stockItem' => [],
@@ -231,7 +231,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
@@ -252,7 +252,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
                 'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(7),
@@ -320,7 +320,7 @@ class DashboardController extends Controller
         if(auth()->user()->business_id == 0){
             return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
         }else if(auth()->user()->branch_id == 0){
-            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup a Branch atleast');
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),

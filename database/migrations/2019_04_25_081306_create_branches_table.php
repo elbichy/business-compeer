@@ -18,10 +18,10 @@ class CreateBranchesTable extends Migration
             $table->bigInteger('business_id')->unsigned();
             $table->string('name');
             $table->string('address');
-            $table->string('phone');
-            $table->double('latitude');
-            $table->double('longitude');
-            $table->date('commissionDate');
+            $table->string('phone')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
+            $table->date('commissionDate')->nullable();
             $table->string('openHour');
             $table->string('closeHour');
             $table->softDeletes();

@@ -19,15 +19,15 @@ class CreateSalesTable extends Migration
             $table->integer('business_id');
             $table->bigInteger('branch_id')->unsigned();
             $table->string('type');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('phone');
-            $table->string('location');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('location')->nullable();
             $table->string('productOrService');
             $table->integer('units');
             $table->integer('amount');
-            $table->integer('balance');
-            $table->integer('change');
+            $table->integer('balance')->nullable();
+            $table->integer('change')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('branch_id')

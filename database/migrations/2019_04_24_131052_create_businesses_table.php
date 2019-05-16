@@ -19,10 +19,10 @@ class CreateBusinessesTable extends Migration
             $table->string('name');
             $table->string('cac');
             $table->string('nature');
-            $table->string('website');
+            $table->string('website')->nullable();
             $table->string('email');
-            $table->string('phone');
-            $table->string('logo');
+            $table->string('phone')->nullable();
+            $table->string('logo')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

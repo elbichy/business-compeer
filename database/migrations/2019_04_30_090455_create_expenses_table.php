@@ -20,7 +20,7 @@ class CreateExpensesTable extends Migration
             $table->bigInteger('branch_id')->unsigned();
             $table->string('type');
             $table->string('itemBought');
-            $table->string('boughtFrom');
+            $table->string('boughtFrom')->nullable();
             $table->integer('cost');
             $table->softDeletes();
             $table->timestamps();

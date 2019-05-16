@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->string('idCard')->nullable();
             $table->string('signature')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             

@@ -72,9 +72,9 @@
                     </div>
 
                     {{-- BUSINESS LOGO --}}
-                    @if (count($data['businessDetails']) == 1)
+                    @if (count($data['businessDetails']) == 1 && $data['businessDetails'][0]->logo != NULL)
                         @foreach ($data['businessDetails'] as $business)
-                            <a href="#user"><img class="circle" src="{{asset('storage').'/site/'.$business->logo}}"></a>
+                            <a href="#user"><img class="circle" src="{{asset('storage').'/site/'.$business->name.'/'.$business->logo}}"></a>
                         @endforeach    
                     @else
                         <a href="#user"><img class="circle" src="{{asset('storage/compeer-LOGO.png')}}"></a>

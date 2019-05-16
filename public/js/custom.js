@@ -120,6 +120,23 @@ $(document).ready(function () {
         }
     }
 
+    // GET COORDINATES
+    // chrome --unsafely-treat-insecure-origin-as-secure="http://bitssolutions.test"  --user-data-dir=C:\testprofile
+    $('.getCoordinates').click(()=>{
+        getLocation();
+    });
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+        $('#latitude').val(position.coords.latitude);
+        $('#longitude').val(position.coords.longitude);
+    }
+
 
     // CLEAR OUTSTANDING
     $('.clearOutstanding').click(function(){
@@ -131,6 +148,16 @@ $(document).ready(function () {
         }
     });
 
+    // DELETE A BRANCH
+    $('.deleteBranch').click(function(){
+        let branchId = this.dataset.branchid;
+        let $result = confirm('This will delete all transactions and user records registered under this branch. Are you sure you want to proceed?', false);
+        if($result){
+            let url = $('#deleteBranchForm').prop('action', 'deleteBranch/'+branchId);
+            $('#deleteBranchForm').submit();
+        }
+    });
+    
     // DELETE A SALE
     $('.deleteSale').click(function(){
         let salesId = this.dataset.salesid;

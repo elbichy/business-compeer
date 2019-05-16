@@ -229,14 +229,14 @@ table tbody tr td .recieptBtn {
 
 .wrapper .contentWrap .contentContainer .logoArea {
   width: 300px;
-  height: 300px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .wrapper .contentWrap .contentContainer .logoArea img {
-  width: 100%;
+  width: 80%;
 }
 
 .wrapper .contentWrap .contentContainer .businessName {
@@ -259,7 +259,7 @@ table tbody tr td .recieptBtn {
 .wrapper .contentWrap .contentContainer .subTitle h6 {
   margin: 0;
   padding: 0;
-  font-family: "Libre Baskerville", serif;
+  font-family: calibri, sans-serif, Tahoma, Verdana, Geneva;
   font-size: 20px;
   color: #941414;
 }
@@ -272,8 +272,8 @@ table tbody tr td .recieptBtn {
 .wrapper .contentWrap .contentContainer .MainsubTitle h6 {
   margin: 0;
   padding: 0;
-  font-family: sans-serif, Tahoma, Verdana, Geneva;
-  font-size: 16px;
+  font-family: calibri, sans-serif, Tahoma, Verdana, Geneva;
+  font-size: 20px;
   color: #fff;
 }
 
@@ -299,14 +299,14 @@ table tbody tr td .recieptBtn {
 
 .wrapper .leftPane .leftContainer .logoArea {
   width: 300px;
-  height: 300px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .wrapper .leftPane .leftContainer .logoArea img {
-  width: 100%;
+  width: 80%;
 }
 
 .wrapper .leftPane .leftContainer .businessName {
@@ -329,7 +329,7 @@ table tbody tr td .recieptBtn {
 .wrapper .leftPane .leftContainer .subTitle h6 {
   margin: 0;
   padding: 0;
-  font-family: "Libre Baskerville", serif;
+  font-family: calibri, sans-serif, Tahoma, Verdana, Geneva;
   font-size: 20px;
   color: #941414;
 }
@@ -342,8 +342,8 @@ table tbody tr td .recieptBtn {
 .wrapper .leftPane .leftContainer .MainsubTitle h6 {
   margin: 0;
   padding: 0;
-  font-family: sans-serif, Tahoma, Verdana, Geneva;
-  font-size: 16px;
+  font-family: calibri, sans-serif, Tahoma, Verdana, Geneva;
+  font-size: 20px;
   color: #fff;
 }
 
@@ -938,8 +938,8 @@ table tbody tr td .recieptBtn {
   .wrapper .leftPane .leftContainer .MainsubTitle h6 {
     margin: 0;
     padding: 0;
-    font-family: "Libre Baskerville", serif;
-    font-size: 14px;
+    font-family: calibri, sans-serif, Tahoma, Verdana, Geneva;
+    font-size: 16px;
     color: #fff;
   }
 

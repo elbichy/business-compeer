@@ -23,43 +23,41 @@ class ProcessBusinessSettings extends Controller
  
         $val = $request->validate([
             'name' => 'required|max:255',
-            'cac' => 'required|numeric',
+            'cac' => 'numeric',
             'nature' => 'required',
-            'website' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required|numeric',
-            'logo' => 'required|image',
+            'email' => 'required'
         ]);
 
-
         if ($logo = $request->file('logo')) {
-            $fileName = $logo->getClientOriginalName();
-            $logo->storeAs('public/site', $fileName);
+            $logoName = 'logo_'.$request->name.$request->cac.'.'.$logo->getClientOriginalExtension();
+            $logo->storeAs('public/site/'.$request->name, $logoName);
+        }
+ 
+        if(auth()->user()->business_id == 0){
+            $business = new Business;
+        }else {
+            $business = Business::find(auth()->user()->business_id);
         }
 
-        $insert = Business::updateOrCreate(
-            ['user_id' => auth()->user()->id],
-            [
-            'user_id'=> auth()->user()->id,
-            'name' => $request->name,	
-            'cac' => $request->cac,	
-            'nature' => $request->nature,	
-            'website'=> $request->website,
-            'email' => $request->email,	
-            'phone' => $request->phone,
-            'logo' => $fileName
-            ]
-        );
-        
-        $business_id = Business::where('user_id', auth()->user()->id)->first()->id;
-        
-        $staff = User::find(auth()->user()->id);
-        $staff->business_id = $business_id;
-        $staff->save();
-
-        if ($insert) {
-            return redirect(route('branchSettings'))->with('status', 'Company added successfully! Now set up a branch');
+        $business->user_id = auth()->user()->id;
+        $business->name = $request->name;
+        $business->cac = $request->cac;
+        $business->nature = $request->nature;
+        $business->website = $request->website;
+        $business->email = $request->email;
+        $business->phone = $request->phone;
+        $request->file('logo') ? $business->logo = $logoName : '';
+    
+        if($business->save()){
+            $business_id = Business::where('user_id', auth()->user()->id)->first()->id;
+            
+            $staff = User::find(auth()->user()->id);
+            $staff->business_id = $business_id;
+            if ($staff->save()) {
+                return redirect(route('branchSettings'))->with('status', 'Company added successfully! Now set up a branch');
+            }
         }
+        
     }
 
 
@@ -69,10 +67,6 @@ class ProcessBusinessSettings extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'address' => 'required',
-            'phone' => 'required',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'commissionDate' => 'required',
             'openHour' => 'required',
             'closeHour' => 'required'
         ]);
@@ -88,11 +82,27 @@ class ProcessBusinessSettings extends Controller
         if ($insert) {
             return redirect('Dashboard/branchSettings')->with('status', 'Branch added successfully!');
         }
+    }
+
+    // DELETE BRANCH
+    public function deleteBranch($id){
+        $branchUsers = User::where('branch_id', $id)->get();
+        foreach($branchUsers as $user){
+            if($user->role == 1){
+                $user->branch_id = 0;
+                $user->save();
+            }else{
+                $user->delete();
+            }
+        }
         
+        if (Branch::find($id)->delete()) {
+            return redirect('Dashboard/branchSettings')->with('status', 'Branch and all related records deleted successfully!');
+        }
     }
 
 
-    // PROCESS BRANCH SETTINGS
+    // PROCESS BRANCH SWITCH
     public function switchBranch(Request $request)
     {
         $update = User::where('id', 1)
