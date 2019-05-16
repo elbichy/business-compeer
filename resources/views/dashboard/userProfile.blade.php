@@ -7,9 +7,9 @@
             <div class="focusArea col s12 m5 l5 z-depth-2">
                 <div class="picArea">
                     @if($data['profileDatails']->gender == 'male')
-                        <img class="materialboxed" src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site/profile').'/'.$data['profileDatails']->image : asset('storage/site/avaterMale.jpg')}}" alt="profile">
+                        <img class="materialboxed" src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site').'/'.$data['businessDetails'][0]->name.'/profile'.'/'.$data['profileDatails']->image : asset('storage/site/avaterMale.jpg')}}" alt="profile">
                     @elseif($data['profileDatails']->gender == 'female')
-                        <img class="materialboxed" src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site/profile').'/'.$data['profileDatails']->image : asset('storage/site/avaterFemale.jpg')}}" alt="profile">
+                        <img class="materialboxed" src="{{ $data['profileDatails']->image !== NULL ? asset('storage/site').'/'.$data['businessDetails'][0]->name.'/profile'.'/'.$data['profileDatails']->image : asset('storage/site/avaterFemale.jpg')}}" alt="profile">
                     @elseif($data['profileDatails']->gender == NULL)
                         <img class="materialboxed" src="{{asset('storage/site/no-pic-no-gender.jpg')}}" alt="profile">
                     @endif
@@ -134,7 +134,7 @@
                         <div class="label">ID Card</div>
                         <div class="info">
                             @if($data['profileDatails']->idCard !== NULL)
-                                <img class="materialboxed" src="{{ asset('storage/site/idCards').'/'.$data['profileDatails']->idCard}}" alt="ID Card">
+                                <img class="materialboxed" src="{{ asset('storage/site').'/'.$data['businessDetails'][0]->name.'/idCards'.'/'.$data['profileDatails']->idCard}}" alt="ID Card">
                             @else
                                 Yet to upload
                             @endif
@@ -144,7 +144,7 @@
                         <div class="label">Signature</div>
                         <div class="info">
                             @if($data['profileDatails']->signature !== NULL)
-                                <img class="materialboxed" src="{{ asset('storage/site/signatures').'/'.$data['profileDatails']->signature}}" alt="Signature">
+                                <img class="materialboxed" src="{{ asset('storage/site').'/'.$data['businessDetails'][0]->name.'/signatures'.'/'.$data['profileDatails']->signature}}" alt="Signature">
                             @else
                                 Yet to upload
                             @endif

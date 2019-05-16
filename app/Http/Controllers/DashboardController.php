@@ -90,6 +90,8 @@ class DashboardController extends Controller
             'identityNumber' => 'required'
         ]);
 
+        $business_name = Business::find(auth()->user()->business_id)->name;
+
         $user = User::find(auth()->user()->id);
         $user->firstname = $request->firstname;
         $user->lastname =  $request->lastname;
@@ -106,17 +108,17 @@ class DashboardController extends Controller
         }
         if ($photo = $request->file('photo')) {
             $photoFileName = 'avater-'.$request->firstname.$request->lastname.$request->dob.'.'.$photo->getClientOriginalExtension();
-            $photo->storeAs('public/site/profile', $photoFileName);
+            $photo->storeAs('public/site/'.$business_name.'/profile', $photoFileName);
             $user->image = $photoFileName;
         }
         if ($idCard = $request->file('idCard')) {
             $idCardFileName = 'idCard-'.$request->firstname.$request->lastname.$request->dob.'.'.$idCard->getClientOriginalExtension();
-            $idCard->storeAs('public/site/idCards', $idCardFileName);
+            $idCard->storeAs('public/site/'.$business_name.'/idCards', $idCardFileName);
             $user->idCard = $idCardFileName;
         }
         if ($signature = $request->file('signature')) {
             $signatureFileName = 'signature-'.$request->firstname.$request->lastname.$request->dob.'.'.$signature->getClientOriginalExtension();
-            $signature->storeAs('public/site/signatures', $signatureFileName);
+            $signature->storeAs('public/site/'.$business_name.'/signatures', $signatureFileName);
             $user->signature = $signatureFileName;
         }
 

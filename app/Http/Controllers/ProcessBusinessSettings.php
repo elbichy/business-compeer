@@ -134,17 +134,19 @@ class ProcessBusinessSettings extends Controller
             'signature' => 'required'
         ]);
         
+        $business_name = Business::find($request->business_id)->name;
+
         if ($photo = $request->file('photo')) {
             $photoFileName = $photo->getClientOriginalName();
-            $photo->storeAs('public/site/profile', $photoFileName);
+            $photo->storeAs('public/site/'.$business_name.'/profile', $photoFileName);
         }
         if ($idCard = $request->file('idCard')) {
             $idCardFileName = $idCard->getClientOriginalName();
-            $idCard->storeAs('public/site/idCards', $idCardFileName);
+            $idCard->storeAs('public/site/'.$business_name.'/idCards', $idCardFileName);
         }
         if ($signature = $request->file('signature')) {
             $signatureFileName = $signature->getClientOriginalName();
-            $signature->storeAs('public/site/signatures', $signatureFileName);
+            $signature->storeAs('public/site/'.$business_name.'/signatures', $signatureFileName);
         }
 
         $insert = User::create([
