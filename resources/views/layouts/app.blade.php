@@ -64,7 +64,7 @@
         </div>
 
         {{-- SIDE NAV --}}
-        <ul id="slide-out" class="sidenav sidenav-fixed">
+        <ul id="slide-out" class="sidenav sidenav-fixed" style="min-height: 100%; display: flex; flex-direction: column;">
             <li>
                 <div class="user-view">
                     <div class="background">
@@ -142,7 +142,7 @@
             </li>
             
             {{-- OTHER MENU RIGHT FOR MOBILE DEVICES --}}
-            <li class="hide-on-med-and-up col s12" style="border-top:2px solid darkgreen; position:absolute; bottom:0; left:0;">
+            <li class="hide-on-med-and-up col s12" style="border-top:2px solid darkgreen; justify-self: flex-end; margin-top: auto;">
                 <ul class="right col s8" style="display:flex; justify-content:center; align-items:center; width:20%;">
                     <li class="logOutBtn">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
