@@ -14,7 +14,7 @@
                         <form action="{{ url('storeSales') }}" method="post" name="addSalesForm" class="addSalesForm">
                             @csrf
                             <div class="row">
-                                <div class="input-field col s12 m4 l4 switch">
+                                <div class="col s12 m4 l4 switch" style="    margin-top: 2rem; margin-bottom: 1rem;">
                                     <label>
                                     Service
                                     <input type="checkbox" name="type" class="type" required>
