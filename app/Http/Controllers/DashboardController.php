@@ -178,6 +178,24 @@ class DashboardController extends Controller
         // dd($data['stockDetails']);
         return view('dashboard.sales')->with('data', $data);
     }
+    // mobile monie transfers
+    public function transfers()
+    {
+        if(auth()->user()->business_id == 0){
+            return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
+        }else{
+            $data = [
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(6),
+                'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks->toJson(),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
+        // dd($data['stockDetails']);
+        return view('dashboard.transfers')->with('data', $data);
+    }
 
 
     

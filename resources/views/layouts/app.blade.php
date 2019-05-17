@@ -112,11 +112,12 @@
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <li class="{{(request()->segment(2) == 'Transactions') ? 'activeCollape' : ''}}">
-                        <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">attach_money</i>TRANSACTIONS<i class="material-icons right">arrow_drop_down</i></a>
+                        <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">attach_money</i>TRANSACTION<i class="material-icons right">arrow_drop_down</i></a>
                         <div class="collapsible-body">
                             <ul>
                                 <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/Dashboard/sales">Sales</a></li>
                                 <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/Dashboard/expenses">Expenses</a></li>
+                                <li class="{{(request()->segment(2) == 'transfers') ? 'active' : ''}}"><a href="/Dashboard/transfers">Transfers</a></li>
                             </ul>
                         </div>
                     </li>
