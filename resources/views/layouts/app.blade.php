@@ -142,7 +142,7 @@
             </li>
             
             {{-- OTHER MENU RIGHT FOR MOBILE DEVICES --}}
-            <li class="hide-on-med-and-up col s12" style="border-top:2px solid darkgreen;">
+            <li class="hide-on-med-and-up col s12" style="border-top:2px solid darkgreen; position:absolute; bottom:0; left:0;">
                 <ul class="right col s8" style="display:flex; justify-content:center; align-items:center; width:20%;">
                     <li class="logOutBtn">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
