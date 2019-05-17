@@ -190,7 +190,7 @@ $(document).ready(function () {
 
 
     // LOAD RECIEPT TRIGGER
-    $('.recieptBtn').click(function(e){
+    $('.recieptBtn').click(e => {
 
         e.preventDefault();
         var salesId = e.currentTarget.dataset.salesid;
@@ -203,7 +203,7 @@ $(document).ready(function () {
                 </a>
                 <div class="recieptTop col s12">
                     <div class="logoArea">
-                        <img src="/storage/site/${data.business.logo}" alt="logo">
+                        <img src="/storage/site/${data.business.name}/${data.business.logo}" alt="logo">
                     </div>
                     <h6 class="businessName">
                         ${data.business.name}

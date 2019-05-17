@@ -108,8 +108,21 @@
                 </div>
             </li>
             <li class="{{(request()->segment(1) == 'dashboard') ? 'active' : ''}}"><a href="/dashboard"><i class="material-icons">dashboard</i>DASHBOARD</a></li>
-            <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/Dashboard/sales"><i class="material-icons">attach_money</i>SALES</a></li>
-            <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/Dashboard/expenses"><i class="material-icons">money_off</i>EXPENSES</a></li>
+
+            <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                    <li class="{{(request()->segment(2) == 'Transactions') ? 'activeCollape' : ''}}">
+                        <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">attach_money</i>TRANSACTIONS<i class="material-icons right">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/Dashboard/sales">Sales</a></li>
+                                <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/Dashboard/expenses">Expenses</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            
             <li class="{{(request()->segment(2) == 'stock') ? 'active' : ''}}"><a href="/Dashboard/stock"><i class="material-icons">shopping_cart</i>STOCK</a></li>
             <li class="{{(request()->segment(2) == 'statistics') ? 'active' : ''}}"><a href="/Dashboard/statistics"><i class="material-icons">show_chart</i>STATISTICS</a></li>
             <li class="{{(request()->segment(2) == 'customers') ? 'active' : ''}}"><a href="/Dashboard/customers"><i class="material-icons">group</i>CUSTOMERS</a></li>

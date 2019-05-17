@@ -606,13 +606,13 @@ table tbody tr td .recieptBtn {
 }
 
 .my-content-wrapper .content-container .salesWrap {
-  position: relative;
+  position: static;
 }
 
 .my-content-wrapper .content-container .salesWrap .addSaleBtn {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
 }
 
 .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content {
@@ -678,6 +678,11 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .noReciept {
   color: #ddd;
+}
+
+.my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .preloader-wrapper {
+  display: block !important;
+  margin: auto !important;
 }
 
 .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptTop {

@@ -650,12 +650,12 @@ table {
 
         // SALES CONTENT START HERE
         .salesWrap {
-            position: relative;
+            position: static;
 
             .addSaleBtn {
-                position: absolute;
-                bottom: 0px;
-                right: 0px;
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
             }
 
             #addSaleDialog {
@@ -729,9 +729,10 @@ table {
                         color: #ddd;
                     }
 
-                    // .preloader-wrapper {
-                    //     margin: auto !important;
-                    // }
+                    .preloader-wrapper {
+                        display: block!important;
+                        margin: auto !important;
+                    }
                     .recieptTop {
                         display: flex;
                         flex-direction: column;
