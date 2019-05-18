@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Sale;
 use App\Expense;
 use App\Stock;
@@ -20,52 +21,111 @@ class Transactions extends Controller
     // STORE NEW SALE RECORDS
     public function storeSales(Request $request)
     {
-        $val = $request->validate([
-            'phone' => 'numeric',
-            'location' => 'required',
-            'productOrService' => 'required',
-            'balance' => 'numeric',
-            'change' => 'numeric',
-        ]);
-
-        if($request->has('type')){
-            $request->request->set('type', 'product');
-        }else{
-            $request->request->add(['type' => 'service']);
-        }
-
-        if($request->has('amount')){
-            $request->request->set('amount', $request->amount);
-        }else{
-            $item = Stock::where('item', $request->productOrService)->first();
-            $unitPrice = $item->unitPrice;
-            $bulkUnit = $item->bulkUnit;
-            $bulkUnitPrice = $item->bulkUnitPrice;
-
-            if($request->units >= $bulkUnit){
-                $request->request->add(['amount' => $bulkUnitPrice*$request->units]);
+        if($request->has('salesTransaction')){ //THIS PROCESSES SALES
+            $val = $request->validate([
+                'phone' => 'numeric',
+                'location' => 'required',
+                'productOrService' => 'required',
+                'balance' => 'numeric',
+                'change' => 'numeric',
+            ]);
+    
+            if($request->has('type')){
+                $request->request->set('type', 'product');
             }else{
-                $request->request->add(['amount' => $unitPrice*$request->units]);
+                $request->request->add(['type' => 'service']);
             }
-        }
+    
+            if($request->has('amount')){
+                $request->request->set('amount', $request->amount);
+            }else{
+                $item = Stock::where('item', $request->productOrService)->first();
+                $unitPrice = $item->unitPrice;
+                $bulkUnit = $item->bulkUnit;
+                $bulkUnitPrice = $item->bulkUnitPrice;
+    
+                if($request->units >= $bulkUnit){
+                    $request->request->add(['amount' => $bulkUnitPrice*$request->units]);
+                }else{
+                    $request->request->add(['amount' => $unitPrice*$request->units]);
+                }
+            }
+    
+            $insert = Sale::create([
+                'type' => $request->type,
+                'user_id' => auth()->user()->id,
+                'business_id' => auth()->user()->business_id,
+                'branch_id' => auth()->user()->branch_id,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'phone' => $request->phone,
+                'location' => $request->location,
+                'productOrService' => $request->productOrService,
+                'units'	=> $request->units,
+                'amount' => $request->amount,
+                'balance' => $request->balance,
+                'change' => $request->change
+            ]);
 
-        $insert = Sale::create([
-            'type' => $request->type,
-            'user_id' => auth()->user()->id,
-            'business_id' => auth()->user()->business_id,
-            'branch_id' => auth()->user()->branch_id,
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'phone' => $request->phone,
-            'location' => $request->location,
-            'productOrService' => $request->productOrService,
-            'units'	=> $request->units,
-            'amount' => $request->amount,
-            'balance' => $request->balance,
-            'change' => $request->change
-        ]);
-        if ($insert) {
-            return redirect()->back()->with('status', 'Transaction recorded successfully!');
+            if ($insert) {
+                return redirect()->back()->with('status', 'Transaction recorded successfully!');
+            }
+
+        }elseif($request->has('transferTransaction')){ //THIS PROCESSES TRANSFERS
+            $val = $request->validate([
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'phone' => 'numeric',
+                'location' => 'required',
+                'recievers_firstname' => 'required',
+                'recievers_lastname' => 'required',
+                'recievers_phone' => 'required',
+                'bankName' => 'required',
+                'accountType' => 'required',
+                'accountNumber' => 'required',
+                'amount' => 'required',
+                'charge' => 'required'
+            ]);
+
+            $refNumber = Str::random(12);
+            // Insert to sale
+            $sale = Sale::create([
+                'type' => 'service',
+                'user_id' => auth()->user()->id,
+                'business_id' => auth()->user()->business_id,
+                'branch_id' => auth()->user()->branch_id,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'phone' => $request->phone,
+                'location' => $request->location,
+                'productOrService' => 'transfer',
+                'units'	=> 1,
+                'amount' => $request->charge,
+                'refNumber' => $refNumber
+            ]);
+
+            if($sale){
+                // Insert to transfer
+                $theSale = Sale::where('refNumber', $refNumber)->first();
+                $transfer = $theSale->transfer()->create([
+                    'user_id' => auth()->user()->id,
+                    'refNumber' => $refNumber,
+                    'business_id' => auth()->user()->business_id,
+                    'branch_id' => auth()->user()->branch_id,
+                    'recievers_firstname' => $request->recievers_firstname,
+                    'recievers_lastname' => $request->recievers_lastname,
+                    'recievers_phone' => $request->recievers_phone,
+                    'bankName' => $request->bankName,
+                    'accountType' => $request->accountType,
+                    'accountNumber' => $request->accountNumber,
+                    'amount' => $request->amount,
+                    'amountInWords' => $request->amountInWords
+                ]);
+
+                if ($transfer) {
+                    return redirect()->back()->with('status', 'Transaction recorded successfully!');
+                }
+            }
         }
     }
 
@@ -94,10 +154,8 @@ class Transactions extends Controller
     // DELETE SALE
     public function deleteSale($data){
         $item = Sale::find($data);
-
-        if($item->delete()){
-            return redirect()->back()->with('status', 'Transaction record Deleted!');
-        }
+        $item->transfer ? $item->transfer()->delete() : ''; //deletes corresponding transaction if any
+        return $item->delete() ? redirect()->back()->with('status', 'Transaction record Deleted!') : ''; //deletes transaction
     }
 
     // STORE EXPENSE RECORDS

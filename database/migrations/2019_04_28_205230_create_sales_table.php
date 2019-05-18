@@ -28,6 +28,7 @@ class CreateSalesTable extends Migration
             $table->integer('amount');
             $table->integer('balance')->nullable();
             $table->integer('change')->nullable();
+            $table->string('refNumber')->nullable();
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('branch_id')

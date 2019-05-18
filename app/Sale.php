@@ -22,7 +22,13 @@ class Sale extends Model
         'amount',
         'balance',
         'change',
+        'refNumber',
     ];
+
+    public function transfer()
+    {
+        return $this->hasOne('App\Transfer');
+    }
 
     public function business()
     {
