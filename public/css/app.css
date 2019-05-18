@@ -871,6 +871,7 @@ table tbody tr td .recieptBtn {
     border: none;
     margin: 0;
     color: #fff;
+    text-align: center;
   }
 
   nav .nav-wrapper form .input-field .select-wrapper .caret {
