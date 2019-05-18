@@ -60,10 +60,12 @@
                     </ul>
                     <ul>
                         <a  href="{{route('manageTransfers')}}" style="margin-right: 14px;" class="right hide-on-small-only"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
-                    height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
+                        height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
                     </ul>
-                    <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
-                    height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
+                    <ul>
+                        <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
+                        height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
+                    </ul>    
                 </div>
             </nav>
         </div>
