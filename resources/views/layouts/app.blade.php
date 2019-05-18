@@ -31,11 +31,11 @@
                     @if(count($data['branchDetails']) > 0 && auth()->user()->role == 1 || auth()->user()->role == 2)
                         <form action="{{ url('switchBranch') }}" method="post" name="switchBranch" class="switchBranch brand-logo center">
                             @csrf
-                            <div class="input-field col s12">
-                                <select name="selectedBranch" id="selectedBranch">
+                            <div class="input-field col s12"  style="text-align:center;">
+                                <select name="selectedBranch" id="selectedBranch" style="text-align:center;">
                                     <option value="" disabled  {{ auth()->user()->branch_id !== 0 ? 'selected' : ''}} class="white-text">Select a Branch</option>
                                     @foreach ($data['branchDetails'] as $branch)
-                                        <option value="{{ucfirst($branch->id)}}" {{ $branch->id == auth()->user()->branch_id ? 'selected' : ''}}>{{ucfirst($branch->name)}}</option>
+                                        <option  style="text-align:center;" value="{{ucfirst($branch->id)}}" {{ $branch->id == auth()->user()->branch_id ? 'selected' : ''}}>{{ucfirst($branch->name)}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -58,9 +58,10 @@
                     <ul class="right hide-on-small-only">
                         <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     </ul>
-                    <a  href="{{route('manageTransfers')}}" style="margin-right: 14px;" class="right hide-on-small-only"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
+                    <ul>
+                        <a  href="{{route('manageTransfers')}}" style="margin-right: 14px;" class="right hide-on-small-only"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
                     height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
-                    
+                    </ul>
                     <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
                     height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
                 </div>

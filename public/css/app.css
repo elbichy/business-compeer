@@ -95,6 +95,7 @@ nav .nav-wrapper form .input-field .select-wrapper input {
   border: none;
   margin: 10px 0 0 0;
   color: #fff;
+  text-align: center;
 }
 
 nav .nav-wrapper form .input-field .select-wrapper .caret {
