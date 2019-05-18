@@ -25,7 +25,7 @@ class CreateTransfersTable extends Migration
             $table->string('recievers_phone')->nullable();
             $table->integer('amount')->nullable();
             $table->string('amountInWords')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('sale_id')

@@ -37,6 +37,8 @@ Route::put( 'Dashboard/clearOutstanding/{data}', 'Transactions@clearOutstanding'
 Route::delete( 'Dashboard/deleteSale/{data}', 'Transactions@deleteSale');
 // mobile money transfer
 Route::get('/Dashboard/transfers', 'DashboardController@transfers')->name('transfers');
+// admin process transfer
+Route::get('/Dashboard/manageTransfers', 'DashboardController@manageTransfers')->name('manageTransfers');
 
 
 // EXPENSES

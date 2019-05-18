@@ -187,14 +187,30 @@ class DashboardController extends Controller
             return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
         }else{
             $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(6),
-                'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks->toJson(),
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->paginate(6),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
         }
-        // dd($data['stockDetails']);
+        // dd($data['salesDetails']);
         return view('dashboard.transfers')->with('data', $data);
+    }
+    // admin process transfers
+    public function manageTransfers()
+    {
+        if(auth()->user()->business_id == 0){
+            return redirect('/Dashboard/businessSettings')->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect('/Dashboard/branchSettings')->with('noBusinessRecord', 'You have Setup Main Branch atleast');
+        }else{
+            $data = [
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->paginate(6),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
+        // dd($data['salesDetails']);
+        return view('dashboard.manageTransfers')->with('data', $data);
     }
 
 

@@ -127,7 +127,6 @@
                                             <label for="amount">Amount (₦)</label>
                                         </div>
                                         <div class="input-field col s12 m6 l6">
-                                            <i class="material-icons prefix">place</i>
                                             <textarea id="amountInWords" name="amountInWords" class="materialize-textarea"></textarea>
                                             @if ($errors->has('amountInWords'))
                                                 <span class="helper-text red-text" >
@@ -175,8 +174,8 @@
                                     <th>Acc. Number.</th>
                                     <th>Amount</th>
                                     <th>Charge</th>
-                                    <th>Status</th>
                                     <th>Time</th>
+                                    <th>Status</th>
                                     <th>Reciept</th>
                                     <th></th>
                                     <th></th>
@@ -187,13 +186,16 @@
                             @foreach ($data['salesDetails'] as $sale)
                                 <tr>
                                     <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
-                                    <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
-                                    <td>{{ $sale->productOrService }}</td>
-                                    <td>{{ $sale->productOrService }}</td>
-                                    <td>{{ $sale->productOrService }}</td>
-                                    <td>₦{{ $sale->amount }}</td>
-                                    <td>{{ $sale->productOrService }}</td>
+                                    <td>{{ $sale->transfer->recievers_firstname }} {{ $sale->transfer->recievers_lastname  }}</td>
+                                    <td>{{ $sale->transfer->bankName }}</td>
+                                    <td>{{ $sale->transfer->accountType }}</td>
+                                    <td>{{ $sale->transfer->accountNumber }}</td>
+                                    <td>₦{{ number_format($sale->transfer->amount) }}</td>
+                                    <td>₦{{ number_format($sale->amount) }}</td>
                                     <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
+                                    <td>
+                                        {!! $sale->transfer->status == 0 ? '<i class="material-icons orange-text tooltipped" data-position="right" data-tooltip="pending">autorenew</i>' : '<i class="material-icons green-text tooltipped" data-position="right" data-tooltip="completed">done_all</i>' !!}
+                                    </td>
                                     <td><a class="recieptBtn" data-salesId="{{ $sale->id }}" href="#"><i class="material-icons">receipt</i></a></td>
                                     <td>
                                         <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
@@ -201,8 +203,8 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
-                                            <i class="tiny material-icons">question_mark</i>
+                                        <a href="#">
+                                            <i class="tiny material-icons">question_answer</i>
                                         </a>
                                     </td>
 

@@ -162,7 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
-
+        Riskihajar\Terbilang\TerbilangServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -227,6 +227,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
+        'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
     ],
 
 ];

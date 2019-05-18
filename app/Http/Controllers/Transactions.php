@@ -119,7 +119,7 @@ class Transactions extends Controller
                     'accountType' => $request->accountType,
                     'accountNumber' => $request->accountNumber,
                     'amount' => $request->amount,
-                    'amountInWords' => $request->amountInWords
+                    'amountInWords' => \Terbilang::make($request->amount)
                 ]);
 
                 if ($transfer) {

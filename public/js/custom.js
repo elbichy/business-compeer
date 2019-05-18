@@ -3,6 +3,7 @@ $(document).ready(function () {
     // MATERIALIZE INITS
     $('.sidenav').sidenav();
     $('.collapsible').collapsible();
+    $('.tooltipped').tooltip();
     $('.modal').modal({
         dismissible: true
     });

@@ -44,6 +44,7 @@
 
                     {{-- OTHER MENU RIGHT --}}
                     <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-med-and-up right"><i class="material-icons">menu</i></a>
+                    
                     <ul class="right hide-on-med-and-down">
                         <li class="logOutBtn">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -55,10 +56,13 @@
                         </li>
                     </ul>
                     <ul class="right hide-on-small-only">
-                        @if(Auth::check())
-                            <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
-                        @endif
+                        <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     </ul>
+                    <a  href="{{route('manageTransfers')}}" style="margin-right: 14px;" class="right hide-on-small-only"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
+                    height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
+                    
+                    <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up"><i style="margin-right: 0px;" class="material-icons left">notifications</i><sup class="red" style="width: 30px;
+                    height: 30px; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%;">90</sup></a>
                 </div>
             </nav>
         </div>
