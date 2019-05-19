@@ -87,6 +87,15 @@ nav .nav-wrapper .breadcrumbWrap .breadcrumb {
   font-size: 14px;
 }
 
+nav .nav-wrapper sup.notificationCount {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
 nav .nav-wrapper form .input-field .select-wrapper {
   margin: 0;
 }
@@ -617,7 +626,7 @@ table tbody tr td .recieptBtn {
 }
 
 .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content {
-  padding: 10px 16px 60px 16px;
+  padding: 10px 16px 0px 16px;
 }
 
 .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content form .row {
@@ -861,6 +870,15 @@ table tbody tr td .recieptBtn {
 
   nav .nav-wrapper .breadcrumbWrap .breadcrumb {
     font-size: 14px;
+  }
+
+  nav .nav-wrapper sup.notificationCount {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
   }
 
   nav .nav-wrapper form .input-field .select-wrapper {

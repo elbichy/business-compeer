@@ -8,10 +8,10 @@
                 {{-- MODAL TRIGGER --}}
                 <a href="#addSaleDialog" class="addSaleBtn hide-on-small-only-old modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"><i class="material-icons">add</i></a>
                 {{-- MODAL BODY --}}
-                <div id="addSaleDialog" class="modal">
-                    <div class="modal-content">
-                        <h5>New Transaction</h5>
-                        <form action="{{ url('storeSales') }}" method="post" name="addSalesForm" class="addSalesForm">
+                <div id="addSaleDialog" class="modal modal-fixed-footer">
+                    <form action="{{ url('storeSales') }}" method="post" name="addSalesForm" class="addSalesForm">
+                        <div class="modal-content">
+                            <h5>New Transaction</h5>
                             @csrf
                             <input type="hidden" name="salesTransaction">
                             <div class="row">
@@ -129,15 +129,15 @@
                                     <label for="change">Change (₦ if any)</label>
                                 </div>
                             </div>
-                            <div class="row col s12 m3 l3 right btnWrap" style="display:flex; justify-content:center;">
-                                <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit
-                                    <i class="material-icons right">send</i>
-                                </button>
-                                 {{-- SPINNER --}}
-                                @include('components.submitPreloader')
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer btnWrap" style="display:flex; justify-content:flex-end;">
+                            <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                                {{-- SPINNER --}}
+                            @include('components.submitPreloader')
+                        </div>
+                    </form>
                 </div>
 
                 {{-- SALES HEADING --}}
@@ -165,7 +165,7 @@
                                 <tr>
                                     <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
                                     <td>{{ $sale->productOrService }}</td>
-                                    <td>₦{{ $sale->amount }}</td>
+                                    <td>₦{{ number_format($sale->amount) }}</td>
                                     @if ($sale->balance > 0)
                                         <td class="clearOutstanding blue-text" data-salesId="{{ $sale->id }}">+ ₦{{ $sale->balance }} Bal</td>
                                     @elseif($sale->change > 0)

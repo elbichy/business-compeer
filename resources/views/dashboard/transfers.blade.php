@@ -117,7 +117,7 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="input-field col s12 m3 l3">
+                                        <div class="input-field col s12 m6 l6">
                                             <input id="amount" name="amount" type="number">
                                             @if ($errors->has('amount'))
                                                 <span class="helper-text red-text" >
@@ -127,15 +127,6 @@
                                             <label for="amount">Amount (₦)</label>
                                         </div>
                                         <div class="input-field col s12 m6 l6">
-                                            <textarea id="amountInWords" name="amountInWords" class="materialize-textarea"></textarea>
-                                            @if ($errors->has('amountInWords'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('amountInWords') }}</strong>
-                                                </span>
-                                            @endif
-                                            <label for="amountInWords">Amount in words</label>
-                                        </div>
-                                        <div class="input-field col s12 m3 l3">
                                             <input id="charge" name="charge" type="number">
                                             @if ($errors->has('charge'))
                                                 <span class="helper-text red-text" >

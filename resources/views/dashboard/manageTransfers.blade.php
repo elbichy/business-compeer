@@ -10,14 +10,18 @@
                 <h5 class="center salesHeading">Manage Transfers</h5>
 
                 {{-- SALES TABLE --}}
-                <div class="salesTableWrap col s12 m6 l6">
+                <div class="salesTableWrap col s12">
                     <div class="salesTable col s12">
                         <table class="highlight centered responsive-table">
                             <thead>
                                 <tr>
                                     <th>Branch</th>
                                     <th>Staff</th>
-                                    <th>Ref No.</th>
+                                    <th>Depositor</th>
+                                    <th>Reciepient</th>
+                                    <th>Bank</th>
+                                    <th>Acc No.</th>
+                                    <th>Amount</th>
                                     <th>Time</th>
                                     <th></th>
                                     <th></th>
@@ -26,36 +30,42 @@
 
                             <tbody>
                             @foreach ($data['salesDetails'] as $sale)
-                                <tr>
-                                    <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
-                                    <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
-                                    <td>{{ $sale->transfer->refNumber }}</td>
-                                    <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
-                                    <td>
-                                        <a href="#delete">view</a>
-                                    </td>
-                                    <td>
-                                        <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
-                                            <i class="tiny material-icons">close</i>
-                                        </a>
-                                    </td>
-                                    
+                                @if($sale->transfer->status == 0)
+                                    <tr>
+                                        <td>{{ $sale->branch->name }}</td>
+                                        <td>{{ $sale->user->firstname }} {{ $sale->user->lastname  }}</td>
+                                        <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
+                                        <td>{{ $sale->transfer->recievers_firstname }} {{ $sale->transfer->recievers_lastname  }}</td>
+                                        <td>{{ $sale->transfer->bankName }}</td>
+                                        <td>{{ $sale->transfer->accountNumber }}</td>
+                                        <td>₦{{ number_format($sale->transfer->amount) }}</td>
+                                        <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
+                                        <td>
+                                            <a class="waves-effect waves-light btn blue" href="#view">view</a>
+                                        </td>
+                                        <td>
+                                            <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
+                                                <i class="tiny material-icons">close</i>
+                                            </a>
+                                        </td>
+                                        
 
-                                    {{-- CLEAR OUTSTANDING FORM --}}
-                                    <form action="" method="post" id="clearOutstandingForm">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="salesId">
-                                    </form>
+                                        {{-- CLEAR OUTSTANDING FORM --}}
+                                        <form action="" method="post" id="clearOutstandingForm">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="salesId">
+                                        </form>
 
-                                    {{-- DELETE SALES FORM --}}
-                                    <form action="" method="post" id="deleteSaleForm">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="saleId">
-                                    </form>
+                                        {{-- DELETE SALES FORM --}}
+                                        <form action="" method="post" id="deleteSaleForm">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="saleId">
+                                        </form>
 
-                                </tr>
+                                    </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>
@@ -64,10 +74,6 @@
                     <div class="col s12" style="padding:0;">
                         {{$data['salesDetails']->links('vendor.pagination.materializecss')}}
                     </div>
-                </div>
-
-                {{-- SALES TABLE --}}
-                <div class="salesTableWrap col s12 m6 l6">
                 </div>
             </div>
         </div>
