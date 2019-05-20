@@ -6,6 +6,21 @@
         <div class="content-container">
             <div class="row salesWrap">
 
+
+                {{-- MODAL BODY --}}
+                <div id="addSaleDialog" class="modal modal-fixed-footer">
+                        <div class="modal-content">
+                            <h5>New Transaction</h5>
+                            <p>Content goes here...</p>
+                        </div>
+                        <div class="modal-footer btnWrap" style="display:flex; justify-content:flex-end;">
+                            <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                                {{-- SPINNER --}}
+                            @include('components.submitPreloader')
+                        </div>
+                </div>
                 {{-- SALES HEADING --}}
                 <h5 class="center salesHeading">Manage Transfers</h5>
 
@@ -41,7 +56,7 @@
                                         <td>₦{{ number_format($sale->transfer->amount) }}</td>
                                         <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
                                         <td>
-                                            <a class="waves-effect waves-light btn blue" href="#view">view</a>
+                                            <a href="#addSaleDialog" class="waves-effect modal-trigger waves-light btn blue">view</a>
                                         </td>
                                         <td>
                                             <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">

@@ -21,12 +21,12 @@
                         <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                         <ul class="right hide-on-med-and-down">
                             <li>
-                                <a href="{{route('register')}}" class="waves-effect waves-light transparent btn">
+                                <a href="{{route('register').'#rightPane'}}" class="waves-effect waves-light transparent btn">
                                     SIGNUP<i class="material-icons left">person_add</i>
                                 </a>
                             </li>
                             <li>
-                            <a href="{{route('login')}}" class="waves-effect waves-light transparent btn">
+                            <a href="{{route('login').'#rightPane'}}" class="waves-effect waves-light transparent btn">
                                     <i class="material-icons right">lock_open</i>LOGIN
                                 </a>
                             </li>
@@ -35,8 +35,8 @@
                     </nav>
 
                     <ul class="sidenav" id="mobile-demo">
-                        <li><a href="{{route('login')}}">LOGIN</a></li>
-                        <li><a href="{{route('register')}}">REGISTER</a></li>
+                        <li><a href="{{route('login').'#rightPane'}}">LOGIN</a></li>
+                        <li><a href="{{route('register').'#rightPane'}}">REGISTER</a></li>
                     </ul>
                 </header>
 

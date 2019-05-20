@@ -25,8 +25,8 @@
                 </div>
             </div>
         </div>
-        <div class="rightPane col s12 l6">
-            <div class="formBox card">
+        <div id="rightPane" class="rightPane col s12 l6">
+            <div id="formBox" class="formBox card">
                 @yield('content')
             </div>
         </div>
