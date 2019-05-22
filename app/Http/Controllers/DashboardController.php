@@ -213,7 +213,7 @@ class DashboardController extends Controller
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
         }
-        // dd($data['salesDetails']);
+        // dd($data);
         return view('dashboard.manageTransfers')->with('data', $data);
     }
 

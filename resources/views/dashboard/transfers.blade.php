@@ -175,45 +175,49 @@
 
                             <tbody>
                             @foreach ($data['salesDetails'] as $sale)
-                                <tr>
-                                    <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
-                                    <td>{{ $sale->transfer->recievers_firstname }} {{ $sale->transfer->recievers_lastname  }}</td>
-                                    <td>{{ $sale->transfer->bankName }}</td>
-                                    <td>{{ $sale->transfer->accountType }}</td>
-                                    <td>{{ $sale->transfer->accountNumber }}</td>
-                                    <td>₦{{ number_format($sale->transfer->amount) }}</td>
-                                    <td>₦{{ number_format($sale->amount) }}</td>
-                                    <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
-                                    <td>
-                                        {!! $sale->transfer->status == 0 ? '<i class="material-icons orange-text tooltipped" data-position="right" data-tooltip="pending">autorenew</i>' : '<i class="material-icons green-text tooltipped" data-position="right" data-tooltip="completed">done_all</i>' !!}
-                                    </td>
-                                    <td><a class="recieptBtn" data-salesId="{{ $sale->id }}" href="#"><i class="material-icons">receipt</i></a></td>
-                                    <td>
-                                        <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
-                                            <i class="tiny material-icons">close</i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#">
-                                            <i class="tiny material-icons">question_answer</i>
-                                        </a>
-                                    </td>
+                                @if($sale->transfer !== NULL)
+                                    @if($sale->status == 0)
+                                    <tr>
+                                        <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
+                                        <td>{{ $sale->transfer->recievers_firstname }} {{ $sale->transfer->recievers_lastname  }}</td>
+                                        <td>{{ $sale->transfer->bankName }}</td>
+                                        <td>{{ $sale->transfer->accountType }}</td>
+                                        <td>{{ $sale->transfer->accountNumber }}</td>
+                                        <td>₦{{ number_format($sale->transfer->amount) }}</td>
+                                        <td>₦{{ number_format($sale->amount) }}</td>
+                                        <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
+                                        <td>
+                                            {!! $sale->transfer->status == 0 ? '<i class="material-icons orange-text tooltipped" data-position="right" data-tooltip="pending">autorenew</i>' : '<i class="material-icons green-text tooltipped" data-position="right" data-tooltip="completed">done_all</i>' !!}
+                                        </td>
+                                        <td><a class="recieptBtn" data-salesId="{{ $sale->id }}" href="#"><i class="material-icons">receipt</i></a></td>
+                                        <td>
+                                            <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
+                                                <i class="tiny material-icons">close</i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <i class="tiny material-icons">question_answer</i>
+                                            </a>
+                                        </td>
 
-                                    {{-- CLEAR OUTSTANDING FORM --}}
-                                    <form action="" method="post" id="clearOutstandingForm">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="salesId">
-                                    </form>
+                                        {{-- CLEAR OUTSTANDING FORM --}}
+                                        <form action="" method="post" id="clearOutstandingForm">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="salesId">
+                                        </form>
 
-                                    {{-- DELETE SALES FORM --}}
-                                    <form action="" method="post" id="deleteSaleForm">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="saleId">
-                                    </form>
+                                        {{-- DELETE SALES FORM --}}
+                                        <form action="" method="post" id="deleteSaleForm">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="saleId">
+                                        </form>
 
-                                </tr>
+                                    </tr>
+                                    @endif
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

@@ -5,6 +5,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Business;
 use App\Branch;
+use App\Transfer;
 class NotificationComposer
 {
     /**
@@ -14,7 +15,7 @@ class NotificationComposer
     public function compose(View $view)
     {
         try {
-            $notification =  Business::find(auth()->user()->business_id)->sales()->with('transfer')->count();
+            $notification =  Transfer::all()->count();
         } catch (\Throwable $th) {
             $notification = 0;
         }

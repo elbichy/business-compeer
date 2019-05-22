@@ -45,7 +45,8 @@
 
                             <tbody>
                             @foreach ($data['salesDetails'] as $sale)
-                                @if($sale->transfer->status == 0)
+                                @if($sale->transfer !== NULL)
+                                    @if($sale->status == 0)
                                     <tr>
                                         <td>{{ $sale->branch->name }}</td>
                                         <td>{{ $sale->user->firstname }} {{ $sale->user->lastname  }}</td>
@@ -80,6 +81,7 @@
                                         </form>
 
                                     </tr>
+                                    @endif
                                 @endif
                             @endforeach
                             </tbody>
