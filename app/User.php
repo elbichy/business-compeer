@@ -57,7 +57,7 @@ class User extends Authenticatable
     ];
 
     public function branch(){
-        return $this->hasOne('App\Branch');
+        return $this->hasMany('App\Branch');
     }
     
     public function sales(){

@@ -14,12 +14,18 @@ class NotificationComposer
      */
     public function compose(View $view)
     {
-        try {
-            $notification =  Transfer::all()->count();
-        } catch (\Throwable $th) {
-            $notification = 0;
+        if(auth()->user()->business_id == 0 and auth()->user()->branch_id == 0){
+            $count = 0;
+        }else{
+
+            $notification =  Business::find(auth()->user()->business_id)->sales()->withCount('transfer')->get();
+            $count = 0;
+            foreach ($notification as $not) {
+                $count += $not->transfer_count;
+            }
         }
-        $view->with('notification', $notification);
+
+        $view->with('notification', $count);
     }
 }
 

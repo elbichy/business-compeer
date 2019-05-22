@@ -37,9 +37,4 @@ class Transfer extends Model
     {
         return $this->belongsTo('App\Branch');
     }
-    
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
 }
