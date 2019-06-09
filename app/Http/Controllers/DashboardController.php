@@ -364,6 +364,7 @@ class DashboardController extends Controller
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
         }
+        
         // dd($data);
         return view( 'dashboard.businessSettings')->with('data', $data);
     }

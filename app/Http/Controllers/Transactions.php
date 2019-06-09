@@ -131,7 +131,8 @@ class Transactions extends Controller
 
                 $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
                 if($transfer){
-                    $user = User::find(auth()->user()->id);
+                    $admin = Business::find(auth()->user()->business_id)->users()->orderBy('id', 'ASC')->first()['id'];
+                    $user = User::find($admin);
                     $data = [
                         'saleDetails' => $sale,
                         'transferDetails' => $transfer
