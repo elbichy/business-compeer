@@ -21,6 +21,7 @@ Route::get('/', 'PagesController@index');
 Auth::routes();
 Route::post( 'switchBranch', 'ProcessBusinessSettings@switchBranch');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard/notify', 'DashboardController@notify');
 
 
 // USER PROFILE
@@ -31,6 +32,8 @@ Route::post('/Dashboard/myProfile/updateMyProfile', 'DashboardController@updateM
 
 // SALES
 Route::get('/Dashboard/sales', 'DashboardController@sales')->name('sales');
+Route::get('/Dashboard/sales/lastAddedSale', 'DashboardController@lastAddedSale')->name('lastAddedSale');
+Route::get('/Dashboard/sales/lastAddedTransfer', 'DashboardController@lastAddedTransfer')->name('lastAddedTransfer');
 Route::get( 'Dashboard/getReciept/{data}', 'Transactions@getReciept');
 Route::post( 'storeSales', 'Transactions@storeSales');
 Route::put( 'Dashboard/clearOutstanding/{data}', 'Transactions@clearOutstanding');
@@ -39,6 +42,7 @@ Route::delete( 'Dashboard/deleteSale/{data}', 'Transactions@deleteSale');
 Route::get('/Dashboard/transfers', 'DashboardController@transfers')->name('transfers');
 // admin process transfer
 Route::get('/Dashboard/manageTransfers', 'DashboardController@manageTransfers')->name('manageTransfers');
+Route::get('/Dashboard/loadNotification/{count}', 'DashboardController@loadNotification')->name('loadNotification');
 
 
 // EXPENSES

@@ -13,6 +13,7 @@ use App\User;
 use App\Sale;
 use App\Stock;
 use Carbon\Carbon;
+use App\Notifications\salesApproval;
 class DashboardController extends Controller
 {
 
@@ -55,7 +56,6 @@ class DashboardController extends Controller
         // return $data['todaysTransactions']['todaysSales'];
         return view('dashboard.dashboard')->with('data', $data);
     }
-
 
     // MY PROFILE PAGE
     public function myProfile(){
@@ -178,6 +178,20 @@ class DashboardController extends Controller
         // dd($data['stockDetails']);
         return view('dashboard.sales')->with('data', $data);
     }
+
+    // SALES AJAX LAST ADDED
+    public function lastAddedSales(){
+        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+        $record = Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->latest()->first();
+        if($record != NULL){ 
+            return Response()->json($record);
+        }else{
+            return Response()->json($arr);
+        }
+    }
+    
+    
+
     // mobile monie transfers
     public function transfers()
     {
@@ -192,7 +206,10 @@ class DashboardController extends Controller
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
         }
-        // dd($data['salesDetails']);
+        // return auth()->user()->notifications->count();
+        // foreach(auth()->user()->notifications as $notification){
+        //     return $notification->data['data']['saleDetails']['business_id'];
+        // }
         return view('dashboard.transfers')->with('data', $data);
     }
     // admin process transfers
@@ -215,6 +232,30 @@ class DashboardController extends Controller
         }
         // dd($data);
         return view('dashboard.manageTransfers')->with('data', $data);
+    }
+    // TRANSFER AJAX LAST ADDED
+    public function lastAddedTransfer(){
+        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+        $record = Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->latest()->first();
+        if($record != NULL){ 
+            return Response()->json($record);
+        }else{
+            return Response()->json($arr);
+        }
+    }
+    // LOAD NOTIFICATION
+    public function loadNotification($count){
+        if(auth()->user()->notifications->count() > 0){
+            if(auth()->user()->notifications->count() > $count){
+                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => true, 'less' => false]);
+            }elseif(auth()->user()->notifications->count() < $count){
+                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => true]);
+            }else{
+                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => false]);
+            }
+        }else{
+            return Response()->json(['newCount' => 0, 'greater' => false, 'less' => false]);
+        }
     }
 
 

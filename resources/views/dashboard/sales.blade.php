@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    
     <div class="my-content-wrapper">
         <div class="content-container">
             <div class="row salesWrap">
@@ -9,7 +8,10 @@
                 <a href="#addSaleDialog" class="addSaleBtn hide-on-small-only-old modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"><i class="material-icons">add</i></a>
                 {{-- MODAL BODY --}}
                 <div id="addSaleDialog" class="modal modal-fixed-footer">
-                    <form action="{{ url('storeSales') }}" method="post" name="addSalesForm" class="addSalesForm">
+                    <div class="progress" style="margin:0; height:6px; display:none;">
+                        <div class="indeterminate" style="width: 70%"></div>
+                    </div>
+                    <form action="{{ url('storeSales') }}" method="post" onsubmit="submitSale(event)" name="addSalesForm" class="addSalesForm" id="addSalesForm">
                         <div class="modal-content">
                             <h5>New Transaction</h5>
                             @csrf
@@ -18,75 +20,53 @@
                                 <div class="col s12 m4 l4 switch" style="    margin-top: 2rem; margin-bottom: 1rem;">
                                     <label>
                                     Service
-                                    <input type="checkbox" name="type" class="type" required>
+                                    <input type="checkbox" name="type" class="type" id="type" required>
                                     <span class="lever"></span>
                                     Product
                                     </label>
                                 </div>
                                 <div class="input-field col s12 m4 l4">
                                     <input id="firstname" name="firstname" type="text">
-                                    @if ($errors->has('firstname'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('firstname') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="firstname">Customer Firstname</label>
                                 </div>
                                 <div class="input-field col s12 m4 l4">
                                     <input id="lastname" name="lastname" type="text">
-                                    @if ($errors->has('lastname'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('lastname') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="lastname">Customer Lastname</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s12 m4 l4">
+                                <div class="phoneErr input-field col s12 m4 l4">
                                     <input id="phone" name="phone" type="text">
-                                    @if ($errors->has('phone'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('phone') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="phone">Customer Phone</label>
                                 </div>
-                                <div class="input-field col s12 m4 l4">
+                                <div class="locationErr input-field col s12 m4 l4">
                                     <i class="material-icons prefix">place</i>
                                     <textarea id="location" name="location" class="materialize-textarea"></textarea>
-                                    @if ($errors->has('location'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('location') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="location">Location</label>
                                 </div>
-                                <div class="input-field col s12 m4 l4">
+                                <div class="productOrServiceErr input-field col s12 m4 l4">
                                     <input id="productOrService" name="productOrService" type="text" class="autocomplete validate" required>
                                     @if($data['stockDetails'] !== '')
                                         <script>
                                             // AUTO COMPLETE
                                             const data = '{!! $data['stockDetails'] !!}';
                                             var items = $.parseJSON(data);
+                                            // var items = JSON.parse(data);
                                             
                                             let result = {} 
                                             items.forEach(i => { result[i.item] = [i.unitPrice] })
-                                            $('input.autocomplete').autocomplete({
-                                                data: result,
-                                                limit: 3,
-                                                onAutocomplete: function(opt){
-                                                    $('#amount').prop("disabled", true);
-                                                    $('#balance').prop("readonly", true);
-                                                    $('#change').prop("readonly", true);
-                                                }
+                                            $(document).ready(function(){
+                                                $('input.autocomplete').autocomplete({
+                                                    data: result,
+                                                    limit: 3,
+                                                    onAutocomplete: function(opt){
+                                                        $('#amount').prop("disabled", true);
+                                                        $('#balance').prop("readonly", true);
+                                                        $('#change').prop("readonly", true);
+                                                    }
+                                                });
                                             });
                                         </script>
-                                    @endif
-                                    @if ($errors->has('productOrService'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('productOrService') }}</strong>
-                                        </span>
                                     @endif
                                     <label for="productOrService">Product/Service offered</label>
                                 </div>
@@ -94,48 +74,24 @@
                             <div class="row">
                                 <div class="input-field col s12 m3 l3">
                                     <input id="units" name="units" type="number" class="validate" value="1" required>
-                                    @if ($errors->has('units'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('units') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="units">Units</label>
                                 </div>
                                 <div class="input-field col s12 m3 l3">
                                     <input id="amount" name="amount" type="number" class="validate" required>
-                                    @if ($errors->has('amount'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('amount') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="amount">Amount (₦)</label>
                                 </div>
                                 <div class="input-field col s12 m3 l3">
                                     <input id="balance" name="balance" type="number" value="0">
-                                    @if ($errors->has('balance'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('balance') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="balance">Balance (₦ if any)</label>
                                 </div>
                                 <div class="input-field col s12 m3 l3">
                                     <input id="change" name="change" type="number" value="0">
-                                    @if ($errors->has('change'))
-                                        <span class="helper-text red-text" >
-                                            <strong>{{ $errors->first('change') }}</strong>
-                                        </span>
-                                    @endif
                                     <label for="change">Change (₦ if any)</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer btnWrap" style="display:flex; justify-content:flex-end;">
-                            <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit
-                                <i class="material-icons right">send</i>
-                            </button>
-                                {{-- SPINNER --}}
-                            @include('components.submitPreloader')
+                        <div class="modal-footer">
+                            <button id="addSalesBtn" class="addMainSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit<i class="material-icons right">send</i></button>
                         </div>
                     </form>
                 </div>
@@ -160,36 +116,36 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody class="salesRecordsWrap">
                             @foreach ($data['salesDetails'] as $sale)
                                 <tr>
                                     <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
                                     <td>{{ $sale->productOrService }}</td>
                                     <td>₦{{ number_format($sale->amount) }}</td>
                                     @if ($sale->balance > 0)
-                                        <td class="clearOutstanding blue-text" data-salesId="{{ $sale->id }}">+ ₦{{ $sale->balance }} Bal</td>
+                                        <td onclick="clearOutstanding(event)" class="clearOutstanding blue-text" data-salesId="{{ $sale->id }}">+ ₦{{ $sale->balance }} Bal</td>
                                     @elseif($sale->change > 0)
-                                        <td class="clearOutstanding red-text" data-salesId="{{ $sale->id }}">- ₦{{ $sale->change }} Chg</td>
+                                        <td onclick="clearOutstanding(event)" class="clearOutstanding red-text" data-salesId="{{ $sale->id }}">- ₦{{ $sale->change }} Chg</td>
                                     @else
                                         <td> NIL </td>
                                     @endif
                                     <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
-                                    <td><a class="recieptBtn" data-salesId="{{ $sale->id }}" href="#"><i class="material-icons">receipt</i></a></td>
+                                    <td><a onclick="loadReciept(event)" class="recieptBtn" data-salesId="{{ $sale->id }}" href="#"><i class="material-icons">receipt</i></a></td>
                                     <td>
-                                        <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
+                                        <a onclick="deleteSale(event, this.dataset.salesid)" class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
                                             <i class="tiny material-icons">close</i>
                                         </a>
                                     </td>
 
                                     {{-- CLEAR OUTSTANDING FORM --}}
-                                    <form action="" method="post" id="clearOutstandingForm">
+                                    <form action="#" method="post" id="clearOutstandingForm">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="salesId">
                                     </form>
 
                                     {{-- DELETE SALES FORM --}}
-                                    <form action="" method="post" id="deleteSaleForm">
+                                    <form action="#" method="post" id="deleteSaleForm">
                                         @csrf
                                         @method('DELETE')
                                         <input type="hidden" name="saleId">

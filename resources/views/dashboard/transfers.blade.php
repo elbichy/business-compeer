@@ -9,47 +9,30 @@
                 <a href="#addSaleDialog" class="addSaleBtn hide-on-small-only-old modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"><i class="material-icons">add</i></a>
                 {{-- MODAL BODY --}}
                 <div id="addSaleDialog" class="modal modal-fixed-footer">
-                    <form action="{{ url('storeSales') }}" method="post" name="addSalesForm" class="addSalesForm">
+                    <div class="progress" style="margin:0; height:6px; display:none;">
+                        <div class="indeterminate" style="width: 70%"></div>
+                    </div>
+                    <form action="{{ url('storeSales') }}" method="post" name="addSalesForm" onsubmit="submitSale(event)" class="addSalesForm" id="addSalesForm">
                         <div class="modal-content">
                             <h5>New Money Transfer</h5>
                                 @csrf
                                 <input type="hidden" name="transferTransaction">
                                 <div class="row">
-                                    <div class="input-field col s12 m4 l4">
+                                    <div class="firstnameErr input-field col s12 m4 l4">
                                         <input id="firstname" name="firstname" type="text">
-                                        @if ($errors->has('firstname'))
-                                            <span class="helper-text red-text" >
-                                                <strong>{{ $errors->first('firstname') }}</strong>
-                                            </span>
-                                        @endif
                                         <label for="firstname">Depositor's Firstname</label>
                                     </div>
-                                    <div class="input-field col s12 m4 l4">
+                                    <div class="lastnameErr input-field col s12 m4 l4">
                                         <input id="lastname" name="lastname" type="text">
-                                        @if ($errors->has('lastname'))
-                                            <span class="helper-text red-text" >
-                                                <strong>{{ $errors->first('lastname') }}</strong>
-                                            </span>
-                                        @endif
                                         <label for="lastname">Depositor's Lastname</label>
                                     </div>
-                                    <div class="input-field col s12 m4 l4">
+                                    <div class="phoneErr input-field col s12 m4 l4">
                                         <input id="phone" name="phone" type="text">
-                                        @if ($errors->has('phone'))
-                                            <span class="helper-text red-text" >
-                                                <strong>{{ $errors->first('phone') }}</strong>
-                                            </span>
-                                        @endif
                                         <label for="phone">Depositor's Phone</label>
                                     </div>
-                                    <div class="input-field col s12 m12 l12">
+                                    <div class="locationErr input-field col s12 m12 l12">
                                         <i class="material-icons prefix">place</i>
                                         <textarea id="location" name="location" class="materialize-textarea"></textarea>
-                                        @if ($errors->has('location'))
-                                            <span class="helper-text red-text" >
-                                                <strong>{{ $errors->first('location') }}</strong>
-                                            </span>
-                                        @endif
                                         <label for="location"> Depositor's Address</label>
                                     </div>
                                 </div>
@@ -57,94 +40,50 @@
                                 <fieldset style="border:2px solid #ccc;">
                                     <legend style="padding:4px 8px; border:2px solid #ccc;">Recievers Details</legend>
                                     <div class="row">
-                                        <div class="input-field col s12 m4 l4">
+                                        <div class="recievers_firstnameErr input-field col s12 m4 l4">
                                             <input id="recievers_firstname" name="recievers_firstname" type="text">
-                                            @if ($errors->has('recievers_firstname'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('recievers_firstname') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="recievers_firstname">Reciever's Firstname</label>
                                         </div>
-                                        <div class="input-field col s12 m4 l4">
+                                        <div class="recievers_lastnameErr input-field col s12 m4 l4">
                                             <input id="recievers_lastname" name="recievers_lastname" type="text">
-                                            @if ($errors->has('recievers_lastname'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('recievers_lastname') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="recievers_lastname">Reciever's Lastname</label>
                                         </div>
-                                        <div class="input-field col s12 m4 l4">
+                                        <div class="recievers_phoneErr input-field col s12 m4 l4">
                                             <input id="recievers_phone" name="recievers_phone" type="text">
-                                            @if ($errors->has('recievers_phone'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('recievers_phone') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="recievers_phone">Reciever's Phone</label>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="input-field col s12 m4 l4">
+                                        <div class="bankNameErr input-field col s12 m4 l4">
                                             <input id="bankName" name="bankName" type="text">
-                                            @if ($errors->has('bankName'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('bankName') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="bankName">Bank Name</label>
                                         </div>
-                                        <div class="input-field col s12 m4 l4">
+                                        <div class="accountTypeErr input-field col s12 m4 l4">
                                             <input id="accountType" name="accountType" type="text">
-                                            @if ($errors->has('accountType'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('accountType') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="accountType">Account Type</label>
                                         </div>
-                                        <div class="input-field col s12 m4 l4">
+                                        <div class="accountNumberErr input-field col s12 m4 l4">
                                             <input id="accountNumber" name="accountNumber" type="number">
-                                            @if ($errors->has('accountNumber'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('accountNumber') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="accountNumber">Account Number</label>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="input-field col s12 m6 l6">
+                                        <div class="amountErr input-field col s12 m6 l6">
                                             <input id="amount" name="amount" type="number">
-                                            @if ($errors->has('amount'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('amount') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="amount">Amount (₦)</label>
                                         </div>
-                                        <div class="input-field col s12 m6 l6">
+                                        <div class="chargeErr input-field col s12 m6 l6">
                                             <input id="charge" name="charge" type="number">
-                                            @if ($errors->has('charge'))
-                                                <span class="helper-text red-text" >
-                                                    <strong>{{ $errors->first('charge') }}</strong>
-                                                </span>
-                                            @endif
                                             <label for="charge">Charge (₦)</label>
                                         </div>
                                     </div>
                                 </fieldset>
                             
                         </div>
-                        <div class="modal-footer btnWrap" style="display:flex; justify-content:flex-end;">
-                                <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit
-                                    <i class="material-icons right">send</i>
-                                </button>
-                                    {{-- SPINNER --}}
-                                @include('components.submitPreloader')
+                        <div class="modal-footer">
+                                <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit<i class="material-icons right">send</i></button>
                         </div>
                     </form>
                 </div>
@@ -173,7 +112,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody class="transferRecordsWrap">
                             @foreach ($data['salesDetails'] as $sale)
                                 @if($sale->transfer !== NULL)
                                     @if($sale->status == 0)

@@ -11,10 +11,6 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('materialize-css/js/materialize.min.js')}}"></script>
-    <script src="{{asset('js/pace.min.js')}}"></script>
-    <script src="{{asset('js/wnoty.js')}}"></script>
-    <script src="{{asset('js/custom.js')}}"></script>
 </head>
 <body>
     <div class="app" id="app">
@@ -59,16 +55,19 @@
                         <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     </ul>
                     @can('isOwner')
+                    {{-- foreach(auth()->user()->notifications as $notification){
+                        return $notification->data['data']['saleDetails']['business_id'];
+                    } --}}
                     <ul>
                         <a  href="{{route('manageTransfers')}}" style="margin-right: 14px;" class="right hide-on-small-only">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
-                            {!! $notification > 0 ? '<sup class="red notificationCount">'.$notification.'</sup>' : NULL !!}
+                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
                     </ul>
-                    <ul>
+                    <ul> {{-- FOR MOBILE --}}
                         <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
-                            {!! $notification > 0 ? '<sup class="red notificationCount">'.$notification.'</sup>' : NULL !!}
+                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red green notificationCount">'.auth()->user()->notifications->count().'</sup>' : NULL !!}
                         </a>
                     </ul>  
                     @endcan 
@@ -210,7 +209,22 @@
                 </script>
             @endif
         @yield('content')
+        
+    <script src="{{asset('js/lately.js')}}"></script>
+    <script src="{{asset('materialize-css/js/materialize.min.js')}}"></script>
+    <script src="{{asset('js/axios.min.js')}}"></script>
+    <script src="{{asset('js/pace.min.js')}}"></script>
+    <script src="{{asset('js/ion.sound.min.js')}}"></script>
+    <script src="{{asset('js/wnoty.js')}}"></script>
+    <script src="{{asset('js/custom.js')}}"></script>
 
-    </div>
+    @can('isOwner')
+        <script>
+            // CHECK FOR NEW NOTIFICATION EVERY SECOND
+            window.setInterval(function(){
+                loadNotification('{{asset('storage')}}');
+            }, 1000);   
+        </script>
+    @endcan
 </body>
 </html>

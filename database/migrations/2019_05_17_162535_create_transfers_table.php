@@ -21,7 +21,7 @@ class CreateTransfersTable extends Migration
             $table->string('recievers_lastname')->nullable();
             $table->string('bankName')->nullable();
             $table->string('accountType')->nullable();
-            $table->integer('accountNumber')->nullable();
+            $table->string('accountNumber')->nullable();
             $table->string('recievers_phone')->nullable();
             $table->integer('amount')->nullable();
             $table->string('amountInWords')->nullable();

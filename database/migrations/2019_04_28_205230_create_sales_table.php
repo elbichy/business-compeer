@@ -26,8 +26,8 @@ class CreateSalesTable extends Migration
             $table->string('productOrService');
             $table->integer('units');
             $table->integer('amount');
-            $table->integer('balance')->nullable();
-            $table->integer('change')->nullable();
+            $table->integer('balance')->nullable()->default(0);
+            $table->integer('change')->nullable()->default(0);
             $table->string('refNumber')->nullable();
             $table->softDeletes();
             $table->timestamps();

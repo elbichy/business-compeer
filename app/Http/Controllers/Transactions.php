@@ -10,6 +10,7 @@ use App\Stock;
 use App\Business;
 use App\Branch;
 use App\User;
+use App\Notifications\salesApproval;
 class Transactions extends Controller
 {
     
@@ -18,7 +19,12 @@ class Transactions extends Controller
         $this->middleware('auth');
     }
     
-    // STORE NEW SALE RECORDS
+
+
+
+///////////////////////////////////////////// SALES FUNCTIONALITIES //////////////////////////////////////////////
+   
+    // STORE NEW SALE AND TRANSFER RECORDS
     public function storeSales(Request $request)
     {
         if($request->has('salesTransaction')){ //THIS PROCESSES SALES
@@ -66,10 +72,11 @@ class Transactions extends Controller
                 'balance' => $request->balance,
                 'change' => $request->change
             ]);
-
-            if ($insert) {
-                return redirect()->back()->with('status', 'Transaction recorded successfully!');
+            $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+            if($insert){ 
+            $arr = array('msg' => 'Successfully submit form using ajax', 'from' => 'sales', 'status' => true);
             }
+            return Response()->json($arr);
 
         }elseif($request->has('transferTransaction')){ //THIS PROCESSES TRANSFERS
             $val = $request->validate([
@@ -82,7 +89,7 @@ class Transactions extends Controller
                 'recievers_phone' => 'required',
                 'bankName' => 'required',
                 'accountType' => 'required',
-                'accountNumber' => 'required',
+                'accountNumber' => 'required|max:10',
                 'amount' => 'required',
                 'charge' => 'required'
             ]);
@@ -122,9 +129,18 @@ class Transactions extends Controller
                     'amountInWords' => \Terbilang::make($request->amount)
                 ]);
 
-                if ($transfer) {
-                    return redirect()->back()->with('status', 'Transaction recorded successfully!');
+                $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+                if($transfer){
+                    $user = User::find(auth()->user()->id);
+                    $data = [
+                        'saleDetails' => $sale,
+                        'transferDetails' => $transfer
+                    ];
+                    $user->notify(new salesApproval($data));
+                    $arr = array('msg' => 'Transaction added successfully!', 'from' => 'transfers', 'status' => true);
                 }
+                return Response()->json($arr);
+
             }
         }
     }
@@ -151,12 +167,30 @@ class Transactions extends Controller
             return redirect()->back()->with('status', 'Transaction record Updated!');
         }
     }
+
     // DELETE SALE
     public function deleteSale($data){
         $item = Sale::find($data);
         $item->transfer ? $item->transfer()->delete() : ''; //deletes corresponding transaction if any
-        return $item->delete() ? redirect()->back()->with('status', 'Transaction record Deleted!') : ''; //deletes transaction
+        $arr = array('msg' => 'Something goes to wrong. Please try again later', 'status' => false);
+        if($item->delete()){
+            $arr = array('msg' => 'Record deleted successfully!', 'status' => true);
+        }
+        return Response()->json($arr);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////// EXPENSES FUNCTIONALITIES //////////////////////////////////////////////
 
     // STORE EXPENSE RECORDS
     public function storeExpenses(Request $request){
@@ -196,7 +230,20 @@ class Transactions extends Controller
         }
     }
 
-    // STORE STOCK RECORDS
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////// STOCK FUNCTIONALITIES //////////////////////////////////////////////
+    
+// STORE STOCK RECORDS
     public function storeStock(Request $request){
 
         $request->validate([
