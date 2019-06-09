@@ -223,7 +223,7 @@
             // CHECK FOR NEW NOTIFICATION EVERY SECOND
             window.setInterval(function(){
                 loadNotification('{{asset('storage')}}');
-            }, 1000);   
+            }, 60000);   
         </script>
     @endcan
 </body>
