@@ -67,7 +67,7 @@
                     <ul> {{-- FOR MOBILE --}}
                         <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
-                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red green notificationCount">'.auth()->user()->notifications->count().'</sup>' : NULL !!}
+                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red green notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
                     </ul>  
                     @endcan 
