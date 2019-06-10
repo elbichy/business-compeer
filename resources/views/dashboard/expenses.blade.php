@@ -7,7 +7,7 @@
             <div class="row expenseWrap">
                 <h5 class="center expenseHeading">Expense Records</h5>
                 <div class="expenseForm col s12 m6 l5">
-                    <form action="{{ url('storeExpenses') }}" method="post" name="addSalesForm" class="addSalesForm">
+                    <form action="{{ route('storeExpenses') }}" method="post" name="addSalesForm" class="addSalesForm">
                         @csrf
                         <div class="row">
                             <div class="input-field col s12 switch">

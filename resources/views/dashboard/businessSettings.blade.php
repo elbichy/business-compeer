@@ -9,7 +9,7 @@
                 <div class="businessSettingsForms col s12 m6 l6">
                     {{-- BUSINESS INFO FORM --}}
                     <div id="businessDetailsForm" class="col s12">
-                        <form enctype="multipart/form-data" action="{{ url('storeBusinessSettings') }}" method="post" name="businessSettingsForms" class="businessSettingsForm">
+                        <form enctype="multipart/form-data" action="{{ route('storeBusinessSettings') }}" method="post" name="businessSettingsForms" class="businessSettingsForm">
                             @csrf
                             <div class="row">
                                 <div class="input-field col s12 m6 l6">

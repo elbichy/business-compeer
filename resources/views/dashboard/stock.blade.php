@@ -6,7 +6,7 @@
             <div class="row stockWrap">
                 <h5 class="center stockHeading">Stock Records</h5>
                 <div class="stockForm col s12 m6 l5">
-                    <form action="{{ url('storeStock') }}" method="post" name="addStockForm" class="addStockForm">
+                    <form action="{{ route('storeStock') }}" method="post" name="addStockForm" class="addStockForm">
                         @csrf
                         <div class="row">
                             <div class="input-field col s12 switch">

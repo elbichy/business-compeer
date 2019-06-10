@@ -6,7 +6,7 @@
             <div class="row branchSettingsWrap">
                 <h5 class="center branchSettingsHeading">Branch Settings</h5>
                 <div class="branchSettingsForms col s12 m6 l6">
-                    <form action="{{ url('storeBranchSettings') }}" method="post" name="branchSettingsForms" class="branchSettingsForms">
+                    <form action="{{ route('storeBranchSettings') }}" method="post" name="branchSettingsForms" class="branchSettingsForms">
                         @csrf    
                         <div class="row">
                             <div class="input-field col s12 m6 l6">
@@ -137,9 +137,9 @@
                             <tr>
                                 <td>{{ ucfirst($branch->name) }}</td>
                                 <td>{{ $branch->address }}</td>
-                                <td><a href="{{url('/Dashboard/viewBranch').'/'.$branch->id}}">View</a></td>
+                                <td><a href="{{url('/dashboard/viewBranch').'/'.$branch->id}}">View</a></td>
                                 <td>
-                                    <a class="edit editBranch" href="{{url('/Dashboard/editBranch').'/'.$branch->id}}">
+                                    <a class="edit editBranch" href="{{url('/dashboard/editBranch').'/'.$branch->id}}">
                                         <i class="tiny material-icons">edit</i>
                                     </a>
                                 </td>

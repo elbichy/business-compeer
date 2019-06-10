@@ -195,7 +195,7 @@ function submitSale(event){
     let datastring = $("#addSalesForm").serialize();
     $('#addSalesBtn').addClass('disabled');
     $('.progress').fadeIn();
-    axios.post('/storeSales', datastring)
+    axios.post('/dashboard/sales/storeSales', datastring)
     .then(function (response) {
         if(response.data.status){
             $('.modal').modal('close');
@@ -362,7 +362,7 @@ function submitSale(event){
 
 // FUNCTION TO FETCH NEW SALE ASYNCHRONOUSLY
 function fetchNewSale(event){
-    axios.get('/Dashboard/sales/lastAddedSale')
+    axios.get('/dashboard/sales/lastAddedSale')
     .then(function (response) {
         // handle success
         if(response.request.status == 200){
@@ -398,7 +398,7 @@ function fetchNewSale(event){
 
 // FUNCTION TO FETCH NEW TRANSFER ASYNCHRONOUSLY
 function fetchNewTransfer(event){
-    axios.get('/Dashboard/sales/lastAddedTransfer')
+    axios.get('/dashboard/sales/lastAddedTransfer')
     .then(function (response) {
         // handle success
         if(response.request.status == 200){
@@ -458,7 +458,7 @@ function deleteSale(e){
     let salesId = e.currentTarget.dataset.salesid;
     let $result = confirm('Are you sure you want to delete this transaction?', false);
     if($result){
-        axios.post('deleteSale/'+salesId,{_method: 'delete'})
+        axios.post('/dashboard/sales/deleteSale/'+salesId,{_method: 'delete'})
         .then(function (response) {
             $(`[data-salesId="${salesId}"]`).parent().parent().remove();
         })
@@ -471,7 +471,7 @@ function loadReciept(e){
     e.preventDefault();
     var salesId = e.currentTarget.dataset.salesid;
 
-    $.get( "/Dashboard/getReciept/"+salesId, function( data ) {
+    $.get( "/dashboard/sales/getReciept/"+salesId, function( data ) {
 
         $('.reciept').html(`
             <a class="printBtn" id="printBtn">
@@ -612,7 +612,7 @@ function printReciept() {
 // FUNCTION TO SUBMIT NEW SALE ASYNC
 function loadNotification(url){
     let count = $('.notificationCount')[0].innerHTML;
-    axios.get('/Dashboard/loadNotification/'+count)
+    axios.get('/dashboard/sales/load-notification/'+count)
     .then(function (response) {
         response.data.newCount != 0 ?  $('.notificationCount').removeClass('green') : '';
         if(response.data.greater){
@@ -655,7 +655,7 @@ $('.deleteExpense').click(function(){
     let expenseId = this.dataset.expenseid;
     let $result = confirm('Are you sure you want to delete this transaction?', false);
     if($result){
-        let url = $('#deleteExpenseForm').prop('action', 'deleteExpense/'+expenseId);
+        let url = $('#deleteExpenseForm').prop('action', '/dashboard/expenses/delete-expense/'+expenseId);
         $('#deleteExpenseForm').submit();
     }
 });
@@ -675,7 +675,7 @@ $('.deleteStock').click(function(){
     let stockId = this.dataset.stockid;
     let $result = confirm('Are you sure you want to delete this item?', false);
     if($result){
-        let url = $('#deleteStockForm').prop('action', 'deleteStock/'+stockId);
+        let url = $('#deleteStockForm').prop('action', '/dashboard/stock/deleteStock/'+stockId);
         $('#deleteStockForm').submit();
     }
 });

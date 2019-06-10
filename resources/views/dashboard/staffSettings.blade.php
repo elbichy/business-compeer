@@ -7,7 +7,7 @@
             <div class="row staffSettingsWrap">
                 <h5 class="center staffSettingsHeading">Staff Settings</h5>
                 <div class="staffSettingsForms col s12 m6 l6">
-                    <form enctype="multipart/form-data" action="{{url('storeStaffSettings')}}" method="post" name="staffSettingsForm" class="staffSettingsForm">
+                    <form enctype="multipart/form-data" action="{{route('storeStaffSettings')}}" method="post" name="staffSettingsForm" class="staffSettingsForm">
                         @csrf
                         <div class="row">
                             <div class="input-field col s12 m8 l4">
@@ -197,7 +197,7 @@
                                             Sales Rep
                                         @endif
                                     </td>
-                                    <td><a href="{{url('/Dashboard/userProfile').'/'.$staff->id}}">View</a></td>
+                                    <td><a href="{{url('/dashboard/user-profile').'/'.$staff->id}}">View</a></td>
                                     <td>
                                         <a class="edit editCustomer" href="#edit">
                                             <i class="tiny material-icons">edit</i>

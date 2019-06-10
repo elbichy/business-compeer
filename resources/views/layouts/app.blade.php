@@ -21,7 +21,7 @@
                     {{-- BREADCRUMB --}}
                     <div class="left breadcrumbWrap hide-on-small-only">
                         <a href="/dashboard" class="breadcrumb">Dashboard</a>
-                        <a href="/Dashboard/{{request()->segment(2)}}" class="breadcrumb">{{(request()->segment(2) == '') ? 'Home' : ucfirst(request()->segment(2))}}</a>
+                        <a href="/dashboard/{{request()->segment(2)}}" class="breadcrumb">{{(request()->segment(2) == '') ? 'Home' : ucfirst(request()->segment(2))}}</a>
                     </div>
 
                     @if(count($data['branchDetails']) > 0 && auth()->user()->role == 1 || auth()->user()->role == 2)
@@ -119,7 +119,7 @@
 
                 </div>
             </li>
-            <li class="{{(request()->segment(1) == 'dashboard') ? 'active' : ''}}"><a href="/dashboard"><i class="material-icons">dashboard</i>DASHBOARD</a></li>
+            <li class="{{(request()->segment(1) == 'dashboard' && request()->segment(2) == NULL) ? 'active' : ''}}"><a href="/dashboard"><i class="material-icons">dashboard</i>DASHBOARD</a></li>
 
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
@@ -127,27 +127,27 @@
                         <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">attach_money</i>TRANSACTION<i class="material-icons right">arrow_drop_down</i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/Dashboard/sales">Sales</a></li>
-                                <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/Dashboard/expenses">Expenses</a></li>
-                                <li class="{{(request()->segment(2) == 'transfers') ? 'active' : ''}}"><a href="/Dashboard/transfers">Transfers</a></li>
+                                <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/dashboard/sales">Sales</a></li>
+                                <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/dashboard/expenses">Expenses</a></li>
+                                <li class="{{(request()->segment(2) == 'transfers') ? 'active' : ''}}"><a href="/dashboard/transfers">Transfers</a></li>
                             </ul>
                         </div>
                     </li>
                 </ul>
             </li>
             
-            <li class="{{(request()->segment(2) == 'stock') ? 'active' : ''}}"><a href="/Dashboard/stock"><i class="material-icons">shopping_cart</i>STOCK</a></li>
-            <li class="{{(request()->segment(2) == 'statistics') ? 'active' : ''}}"><a href="/Dashboard/statistics"><i class="material-icons">show_chart</i>STATISTICS</a></li>
-            <li class="{{(request()->segment(2) == 'customers') ? 'active' : ''}}"><a href="/Dashboard/customers"><i class="material-icons">group</i>CUSTOMERS</a></li>
+            <li class="{{(request()->segment(2) == 'stock') ? 'active' : ''}}"><a href="/dashboard/stock"><i class="material-icons">shopping_cart</i>STOCK</a></li>
+            <li class="{{(request()->segment(2) == 'statistics') ? 'active' : ''}}"><a href="/dashboard/statistics"><i class="material-icons">show_chart</i>STATISTICS</a></li>
+            <li class="{{(request()->segment(2) == 'customers') ? 'active' : ''}}"><a href="/dashboard/customers"><i class="material-icons">group</i>CUSTOMERS</a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                 <li class="{{(request()->segment(2) == 'Settings') ? 'activeCollape' : ''}}">
                     <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">settings</i>SETTINGS<i class="material-icons right">arrow_drop_down</i></a>
                     <div class="collapsible-body">
                     <ul>
-                        <li class="{{(request()->segment(2) == 'businessSettings') ? 'active' : ''}}"><a href="/Dashboard/businessSettings">Business settings</a></li>
-                        <li class="{{(request()->segment(2) == 'branchSettings') ? 'active' : ''}}"><a href="/Dashboard/branchSettings">Branch settings</a></li>
-                        <li class="{{(request()->segment(2) == 'staffSettings') ? 'active' : ''}}"><a href="/Dashboard/staffSettings">Staff settings</a></li>
+                        <li class="{{(request()->segment(2) == 'business-settings') ? 'active' : ''}}"><a href="/dashboard/business-settings">Business settings</a></li>
+                        <li class="{{(request()->segment(2) == 'branch-settings') ? 'active' : ''}}"><a href="/dashboard/branch-settings">Branch settings</a></li>
+                        <li class="{{(request()->segment(2) == 'staff-settings') ? 'active' : ''}}"><a href="/dashboard/staff-settings">Staff settings</a></li>
                     </ul>
                     </div>
                 </li>

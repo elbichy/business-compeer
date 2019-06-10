@@ -19,63 +19,68 @@ Route::get('/', 'PagesController@index');
 
 // User Routes
 Auth::routes();
-Route::post( 'switchBranch', 'ProcessBusinessSettings@switchBranch');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/dashboard/notify', 'DashboardController@notify');
+Route::post( 'switchBranch', 'ProcessBusinessSettings@switchBranch');
 
 
 // USER PROFILE
-Route::get('/Dashboard/userProfile/{id}', 'DashboardController@userProfile')->name('userProfile');
-Route::get('/Dashboard/myProfile', 'DashboardController@myProfile')->name('myProfile');
-Route::post('/Dashboard/myProfile/updateMyProfile', 'DashboardController@updateMyProfile')->name('updateMyProfile');
+Route::get('/dashboard/user-profile/{id}', 'ProfileController@userProfile')->name('userProfile');
+Route::get('/dashboard/myProfile', 'ProfileController@myProfile')->name('myProfile');
+Route::post('/dashboard/myProfile/updateMyProfile', 'ProfileController@updateMyProfile')->name('updateMyProfile');
+
+
+
 
 
 // SALES
-Route::get('/Dashboard/sales', 'DashboardController@sales')->name('sales');
-Route::get('/Dashboard/sales/lastAddedSale', 'DashboardController@lastAddedSale')->name('lastAddedSale');
-Route::get('/Dashboard/sales/lastAddedTransfer', 'DashboardController@lastAddedTransfer')->name('lastAddedTransfer');
-Route::get( 'Dashboard/getReciept/{data}', 'Transactions@getReciept');
-Route::post( 'storeSales', 'Transactions@storeSales');
-Route::put( 'Dashboard/clearOutstanding/{data}', 'Transactions@clearOutstanding');
-Route::delete( 'Dashboard/deleteSale/{data}', 'Transactions@deleteSale');
+Route::get('/dashboard/sales', 'SaleController@sales')->name('sales');
+Route::get('/dashboard/sales/lastAddedSale', 'SaleController@lastAddedSale')->name('lastAddedSale');
+Route::get('/dashboard/sales/lastAddedTransfer', 'SaleController@lastAddedTransfer')->name('lastAddedTransfer');
+Route::get( '/dashboard/sales/getReciept/{data}', 'SaleController@getReciept')->name('getReciept');
+Route::post( '/dashboard/sales/storeSales', 'SaleController@storeSales')->name('storeSales');
+Route::put( '/dashboard/sales/clearOutstanding/{data}', 'SaleController@clearOutstanding')->name('clearOutstanding');
+Route::delete( '/dashboard/sales/deleteSale/{data}', 'SaleController@deleteSale')->name('deleteSale');
+Route::get('/dashboard/sales/load-notification/{count}', 'SaleController@loadNotification')->name('loadNotification');
 // mobile money transfer
-Route::get('/Dashboard/transfers', 'DashboardController@transfers')->name('transfers');
+Route::get('/dashboard/transfers', 'SaleController@transfers')->name('transfers');
 // admin process transfer
-Route::get('/Dashboard/manageTransfers', 'DashboardController@manageTransfers')->name('manageTransfers');
-Route::get('/Dashboard/loadNotification/{count}', 'DashboardController@loadNotification')->name('loadNotification');
+Route::get('/dashboard/sales/manage-transfers', 'SaleController@manageTransfers')->name('manageTransfers');
+
+
+
 
 
 // EXPENSES
-Route::get('/Dashboard/expenses', 'DashboardController@expenses')->name('expenses');
-Route::post( 'storeExpenses', 'Transactions@storeExpenses');
-Route::delete( 'Dashboard/deleteExpense/{data}', 'Transactions@deleteExpense');
+Route::get('/dashboard/expenses', 'ExpenseController@expenses')->name('expenses');
+Route::post( '/dashboard/expenses/store-expenses', 'ExpenseController@storeExpenses')->name('storeExpenses');
+Route::delete( 'dashboard/expenses/delete-expense/{data}', 'ExpenseController@deleteExpense')->name('deleteExpense');
 
 
 // STOCK
-Route::get('/Dashboard/stock', 'DashboardController@stock')->name('stock');
-Route::post( 'storeStock', 'Transactions@storeStock');
-Route::delete( 'Dashboard/deleteStock/{data}', 'Transactions@deleteStock');
+Route::get('/dashboard/stock', 'StockController@stock')->name('stock');
+Route::post( '/dashboard/stock/storeStock', 'StockController@storeStock')->name('storeStock');
+Route::delete( '/dashboard/stock/deleteStock/{data}', 'StockController@deleteStock')->name('deleteStock');
 
 
 // STATISTICS
-Route::get('/Dashboard/statistics', 'DashboardController@statistics')->name('statistics');
-Route::get('/Dashboard/customers', 'DashboardController@customers')->name('customers');
+Route::get('/dashboard/statistics', 'StatisticController@statistics')->name('statistics');
+Route::get('/dashboard/customers', 'CustomerController@customers')->name('customers');
 
 
 // BUSINESS SETTINGS
-Route::get( '/Dashboard/businessSettings', 'DashboardController@businessSettings')->name('businessSettings');
-Route::post( 'storeBusinessSettings', 'ProcessBusinessSettings@businessSettings');
+Route::get( '/dashboard/business-settings', 'BusinessSettingsController@businessSettings')->name('businessSettings');
+Route::post( '/dashboard/settings/store-business-settings', 'BusinessSettingsController@storeBusinessSettings')->name('storeBusinessSettings');
 
 
 // BRANCH SETTINGS
-Route::get( '/Dashboard/branchSettings', 'DashboardController@branchSettings')->name('branchSettings');
-Route::post( 'storeBranchSettings', 'ProcessBusinessSettings@branchSettings');
-Route::delete('/Dashboard/deleteBranch/{id}', 'ProcessBusinessSettings@deleteBranch');
+Route::get( '/dashboard/branch-settings', 'BranchSettingsController@branchSettings')->name('branchSettings');
+Route::post( '/dashboard/settings/store-branch-settings', 'BranchSettingsController@storeBranchSettings')->name('storeBranchSettings');
+Route::delete('/dashboard/settings/delete-branch/{id}', 'BranchSettingsController@deleteBranch')->name('deleteBranch');
 
 
 // STAFF SETTINGS
-Route::get( '/Dashboard/staffSettings', 'DashboardController@staffSettings')->name('staffSettings');
-Route::post( 'storeStaffSettings', 'ProcessBusinessSettings@staffSettings');
+Route::get( '/dashboard/staff-settings', 'StaffSettingsController@staffSettings')->name('staffSettings');
+Route::post( '/dashboard/settings/store-staff-settings', 'StaffSettingsController@storeStaffSettings')->name('storeStaffSettings');
 
 
 
