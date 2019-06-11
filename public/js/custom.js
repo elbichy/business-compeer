@@ -207,7 +207,7 @@ function submitSale(event){
             $('#addSalesBtn').removeClass('disabled');
             $('.progress').fadeOut();
             $('#addSalesForm')[0].reset();
-            response.data.from == 'sales' ? fetchNewSale() : fetchNewTransfer();
+            response.data.from == 'sales' ? fetchNewSale() : response.data.from == 'transfers' ? fetchNewTransfer() : fetchNewUtility();
         }
     })
     .catch(function (error) {
@@ -442,6 +442,51 @@ function fetchNewTransfer(event){
 
 
 
+// FUNCTION TO FETCH NEW UTILITY ASYNCHRONOUSLY
+function fetchNewUtility(event){
+    axios.get('/dashboard/sales/lastAddedUtility')
+    .then(function (response) {
+        // handle success
+        if(response.request.status == 200){
+            console.log(response.data);
+            $(`
+            <tr>
+                <td>${response.data.firstname} ${response.data.lastname}</td>
+                <td>${response.data.utility.utilityType}</td>
+                <td>${response.data.utility.utilityOptions}</td>
+                <td>${response.data.utility.utilityIDnumber}</td>
+                <td>₦${numberWithCommas(response.data.utility.amount)}</td>
+                <td>₦${numberWithCommas(response.data.amount)}</td>
+                <td>Now</td>
+                <td>
+                    ${ response.data.utility.status == 0 ? '<i class="material-icons orange-text tooltipped" data-position="right" data-tooltip="pending">autorenew</i>' : '<i class="material-icons green-text tooltipped" data-position="right" data-tooltip="completed">done_all</i>' }
+                </td>
+                <td><a class="recieptBtn" data-salesId="${response.data.id}" href="#"><i class="material-icons">receipt</i></a></td>
+                <td>
+                    <a class="delete deleteSale" href="#delete" data-salesId="${response.data.id}">
+                        <i class="tiny material-icons">close</i>
+                    </a>
+                </td>
+                <td>
+                    <a href="#">
+                        <i class="tiny material-icons">question_answer</i>
+                    </a>
+                </td>
+            </tr>
+            `).prependTo(".utilityRecordsWrap");
+        }
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .finally(function () {
+        // always executed
+    });
+}
+
+
+
 
 // CLEAR OUTSTANDING TRIGGER
 function clearOutstanding(e){
@@ -629,6 +674,7 @@ function loadNotification(url){
             ion.sound.play("door_bell");
             // chrome://flags/#autoplay-policy
         }
+        // console.log(response.data.newCount);
         $('.notificationCount').html(response.data.newCount);
     })
     .catch(function (error) {

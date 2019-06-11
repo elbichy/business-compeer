@@ -29,6 +29,11 @@ class Sale extends Model
     {
         return $this->hasOne('App\Transfer');
     }
+    
+    public function utility()
+    {
+        return $this->hasOne('App\Utility');
+    }
 
     public function business()
     {

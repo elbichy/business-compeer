@@ -20,7 +20,6 @@ Route::get('/', 'PagesController@index');
 // User Routes
 Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::post( 'switchBranch', 'ProcessBusinessSettings@switchBranch');
 
 
 // USER PROFILE
@@ -29,23 +28,28 @@ Route::get('/dashboard/myProfile', 'ProfileController@myProfile')->name('myProfi
 Route::post('/dashboard/myProfile/updateMyProfile', 'ProfileController@updateMyProfile')->name('updateMyProfile');
 
 
-
-
-
 // SALES
 Route::get('/dashboard/sales', 'SaleController@sales')->name('sales');
 Route::get('/dashboard/sales/lastAddedSale', 'SaleController@lastAddedSale')->name('lastAddedSale');
 Route::get('/dashboard/sales/lastAddedTransfer', 'SaleController@lastAddedTransfer')->name('lastAddedTransfer');
+Route::get('/dashboard/sales/lastAddedUtility', 'SaleController@lastAddedUtility')->name('lastAddedUtility');
 Route::get( '/dashboard/sales/getReciept/{data}', 'SaleController@getReciept')->name('getReciept');
 Route::post( '/dashboard/sales/storeSales', 'SaleController@storeSales')->name('storeSales');
 Route::put( '/dashboard/sales/clearOutstanding/{data}', 'SaleController@clearOutstanding')->name('clearOutstanding');
 Route::delete( '/dashboard/sales/deleteSale/{data}', 'SaleController@deleteSale')->name('deleteSale');
 Route::get('/dashboard/sales/load-notification/{count}', 'SaleController@loadNotification')->name('loadNotification');
+
 // mobile money transfer
 Route::get('/dashboard/transfers', 'SaleController@transfers')->name('transfers');
 // admin process transfer
 Route::get('/dashboard/sales/manage-transfers', 'SaleController@manageTransfers')->name('manageTransfers');
 
+// Utilty bill payment
+Route::get('/dashboard/utility-bill-payment', 'SaleController@utility')->name('utility');
+// Admin process Utilty bill payment
+Route::get('/dashboard/sales/manage-utility-bill-payment', 'SaleController@manageUtility')->name('manageUtility');
+
+Route::get('/dashboard/sales/load-notification/{count}', 'SaleController@loadNotification')->name('loadNotification');
 
 
 
@@ -76,7 +80,7 @@ Route::post( '/dashboard/settings/store-business-settings', 'BusinessSettingsCon
 Route::get( '/dashboard/branch-settings', 'BranchSettingsController@branchSettings')->name('branchSettings');
 Route::post( '/dashboard/settings/store-branch-settings', 'BranchSettingsController@storeBranchSettings')->name('storeBranchSettings');
 Route::delete('/dashboard/settings/delete-branch/{id}', 'BranchSettingsController@deleteBranch')->name('deleteBranch');
-
+Route::post( 'switchBranch', 'ProcessBusinessSettings@switchBranch')->name('switchBranch');
 
 // STAFF SETTINGS
 Route::get( '/dashboard/staff-settings', 'StaffSettingsController@staffSettings')->name('staffSettings');

@@ -27,7 +27,7 @@ class SaleController extends Controller
 
 
 
-    // SALES PAGE
+    // SALES PAGE - view
     public function sales()
     {
         if(auth()->user()->business_id == 0){
@@ -46,95 +46,7 @@ class SaleController extends Controller
         return view('dashboard.sales')->with('data', $data);
     }
 
-    // SALES AJAX LAST ADDED
-    public function lastAddedSales(){
-        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
-        $record = Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->latest()->first();
-        if($record != NULL){ 
-            return Response()->json($record);
-        }else{
-            return Response()->json($arr);
-        }
-    }
-    
-    // mobile monie transfers
-    public function transfers()
-    {
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->paginate(6),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
-        // return auth()->user()->notifications->count();
-        // foreach(auth()->user()->notifications as $notification){
-        //     return $notification->data['data']['saleDetails']['business_id'];
-        // }
-        return view('dashboard.transfers')->with('data', $data);
-    }
-
-
-    // admin process transfers
-    public function manageTransfers()
-    {
-        if(!Gate::allows('isOwner')){
-            return redirect()->back()->with('accessError', 'You have no permission to access the page');
-        }
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('transfer', 'branch', 'user')
-                ->orderBy('created_at', 'DESC')->paginate(6),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
-        // dd($data);
-        return view('dashboard.manageTransfers')->with('data', $data);
-    }
-
-    // TRANSFER AJAX LAST ADDED
-    public function lastAddedTransfer(){
-        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
-        $record = Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->latest()->first();
-        if($record != NULL){ 
-            return Response()->json($record);
-        }else{
-            return Response()->json($arr);
-        }
-    }
-
-    // LOAD NOTIFICATION
-    public function loadNotification($count){
-        if(auth()->user()->notifications->count() > 0){
-            if(auth()->user()->notifications->count() > $count){
-                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => true, 'less' => false]);
-            }elseif(auth()->user()->notifications->count() < $count){
-                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => true]);
-            }else{
-                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => false]);
-            }
-        }else{
-            return Response()->json(['newCount' => 0, 'greater' => false, 'less' => false]);
-        }
-    }
-
-
-
-
-
-
-
-
-    // STORE NEW SALE AND TRANSFER RECORDS
+    // STORE NEW SALE, TRANSFER AND UTILITY RECORDS
     public function storeSales(Request $request)
     {
         if($request->has('salesTransaction')){ //THIS PROCESSES SALES
@@ -184,7 +96,7 @@ class SaleController extends Controller
             ]);
             $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
             if($insert){ 
-            $arr = array('msg' => 'Successfully submit form using ajax', 'from' => 'sales', 'status' => true);
+            $arr = array('msg' => 'Transaction added successfully!', 'from' => 'sales', 'status' => true);
             }
             return Response()->json($arr);
 
@@ -253,15 +165,200 @@ class SaleController extends Controller
                 return Response()->json($arr);
 
             }
+        }elseif($request->has('utilityTransaction')){ //THIS PROCESSES TRANSFERS
+            $val = $request->validate([
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'phone' => 'numeric',
+                'location' => 'required',
+                'utilityType' => 'required',
+                'utilityOptions' => 'required',
+                'utilityIDnumber' => 'required',
+                'amount' => 'required',
+                'charge' => 'required'
+            ]);
+
+            $refNumber = Str::random(12);
+            // Insert to sale
+            $sale = Sale::create([
+                'type' => 'service',
+                'user_id' => auth()->user()->id,
+                'business_id' => auth()->user()->business_id,
+                'branch_id' => auth()->user()->branch_id,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'phone' => $request->phone,
+                'location' => $request->location,
+                'productOrService' => 'utility',
+                'units'	=> 1,
+                'amount' => $request->charge,
+                'refNumber' => $refNumber
+            ]);
+
+            if($sale){
+                // Insert to utility
+                $theSale = Sale::where('refNumber', $refNumber)->first();
+                $utility = $theSale->utility()->create([
+                    'user_id' => auth()->user()->id,
+                    'refNumber' => $refNumber,
+                    'business_id' => auth()->user()->business_id,
+                    'branch_id' => auth()->user()->branch_id,
+                    'utilityType' => $request->utilityType,
+                    'utilityOptions' => $request->utilityOptions,
+                    'utilityIDnumber' => $request->utilityIDnumber,
+                    'amount' => $request->amount,
+                    'amountInWords' => \Terbilang::make($request->amount)
+                ]);
+
+                $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+                if($utility){
+                    $admin = Business::find(auth()->user()->business_id)->users()->orderBy('id', 'ASC')->first()['id'];
+                    $user = User::find($admin);
+                    $data = [
+                        'saleDetails' => $sale,
+                        'transferDetails' => $utility
+                    ];
+                    $user->notify(new salesApproval($data));
+                    $arr = array('msg' => 'Transaction added successfully!', 'from' => 'utility', 'status' => true);
+                }
+                return Response()->json($arr);
+
+            }
         }
     }
 
-    // AJAX REQUEST TO GET RECIEPT
-    public function getReciept($data){
-        $reciept = Sale::with(['business', 'branch'])->where('id', $data)->first();
-        return response()->json($reciept, 200);
+    // SALES AJAX LAST ADDED
+    public function lastAddedSale(){
+        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+        $record = Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->latest()->first();
+        if($record != NULL){ 
+            return Response()->json($record);
+        }else{
+            return Response()->json($arr);
+        }
     }
     
+
+
+
+
+    ////////////////////////////////////////// TRANSFER PROCESSING ///////////////////////////////////////////////
+
+    // MOBILE MONEY TRANSFER PAGE - view
+    public function transfers()
+    {
+        if(auth()->user()->business_id == 0){
+            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
+        }else{
+            $data = [
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->paginate(6),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
+        // return auth()->user()->notifications->count();
+        // foreach(auth()->user()->notifications as $notification){
+        //     return $notification->data['data']['saleDetails']['business_id'];
+        // }
+        return view('dashboard.transfers')->with('data', $data);
+    }
+
+    // ADMIN PROCESS TRANSFER
+    public function manageTransfers()
+    {
+        if(!Gate::allows('isOwner')){
+            return redirect()->back()->with('accessError', 'You have no permission to access the page');
+        }
+        if(auth()->user()->business_id == 0){
+            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
+        }else{
+            $data = [
+                'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('transfer', 'branch', 'user')
+                ->orderBy('created_at', 'DESC')->paginate(6),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
+        // dd($data);
+        return view('dashboard.manageTransfers')->with('data', $data);
+    }
+
+    // TRANSFER AJAX LAST ADDED
+    public function lastAddedTransfer(){
+        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+        $record = Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->latest()->first();
+        if($record != NULL){ 
+            return Response()->json($record);
+        }else{
+            return Response()->json($arr);
+        }
+    }
+
+    
+    
+
+
+
+    ////////////////////////////////////////// UTILITY PROCESSING ///////////////////////////////////////////////
+
+    // UTILITY PAGE - view
+    public function utility(){
+        if(auth()->user()->business_id == 0){
+            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
+        }else{
+            $data = [
+                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('utility')->orderBy('created_at', 'DESC')->paginate(6),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
+        
+        return view('dashboard.utility')->with('data', $data);
+    }
+
+    // ADMIN PROCESS UTILITY
+    public function manageUtility(){
+        if(!Gate::allows('isOwner')){
+            return redirect()->back()->with('accessError', 'You have no permission to access the page');
+        }
+        if(auth()->user()->business_id == 0){
+            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
+        }else if(auth()->user()->branch_id == 0){
+            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
+        }else{
+            $data = [
+                'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('utility', 'branch', 'user')
+                ->orderBy('created_at', 'DESC')->paginate(6),
+                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+            ];
+        }
+        // dd($data);
+        return view('dashboard.manageUtility')->with('data', $data);
+    }
+
+    // UTILITY AJAX LAST ADDED
+    public function lastAddedUtility(){
+        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
+        $record = Branch::find(auth()->user()->branch_id)->sales()->with('utility')->orderBy('created_at', 'DESC')->latest()->first();
+        if($record != NULL){ 
+            return Response()->json($record);
+        }else{
+            return Response()->json($arr);
+        }
+    }
+
+    
+    
+
+    ///////////////////////////////////////////// GENERAL FUNCTIONALITIES /////////////////////////////////////
+
     // CLEAR OUTSTANDING
     public function clearOutstanding($data){
         $item = Sale::find($data);
@@ -279,6 +376,12 @@ class SaleController extends Controller
         }
     }
 
+    // AJAX REQUEST TO GET RECIEPT
+    public function getReciept($data){
+        $reciept = Sale::with(['business', 'branch'])->where('id', $data)->first();
+        return response()->json($reciept, 200);
+    }
+
     // DELETE SALE
     public function deleteSale($data){
         $item = Sale::find($data);
@@ -289,6 +392,22 @@ class SaleController extends Controller
         }
         return Response()->json($arr);
     }
+
+    // LOAD NOTIFICATION
+    public function loadNotification($count){
+        if(auth()->user()->notifications->count() > 0){
+            if(auth()->user()->notifications->count() > $count){
+                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => true, 'less' => false]);
+            }elseif(auth()->user()->notifications->count() < $count){
+                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => true]);
+            }else{
+                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => false]);
+            }
+        }else{
+            return Response()->json(['newCount' => 0, 'greater' => false, 'less' => false]);
+        }
+    }
+
 
 
 }
