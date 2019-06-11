@@ -129,7 +129,7 @@
                             <ul>
                                 <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/dashboard/sales">Sales</a></li>
                                 <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/dashboard/expenses">Expenses</a></li>
-                                <li class="{{(request()->segment(2) == 'transfers') ? 'active' : ''}}"><a href="/dashboard/transfers">Transfers money</a></li>
+                                <li class="{{(request()->segment(2) == 'transfers') ? 'active' : ''}}"><a href="/dashboard/transfers">Transfer money</a></li>
                                 <li class="{{(request()->segment(2) == 'utility-bill-payment') ? 'active' : ''}}"><a href="/dashboard/utility-bill-payment">Utility bill payment</a></li>
                             </ul>
                         </div>
