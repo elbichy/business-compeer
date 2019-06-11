@@ -221,7 +221,7 @@
 
     @can('isOwner')
         <script>
-            CHECK FOR NEW NOTIFICATION EVERY SECOND
+            // CHECK FOR NEW NOTIFICATION EVERY SECOND
             window.setInterval(function(){
                 loadNotification('{{asset('storage')}}');
             }, 30000);   
