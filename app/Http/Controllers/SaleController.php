@@ -49,7 +49,7 @@ class SaleController extends Controller
     // STORE NEW SALE, TRANSFER AND UTILITY RECORDS
     public function storeSales(Request $request)
     {
-        if($request->has('salesTransaction')){ //THIS PROCESSES SALES
+        if($request->transactionForm == 'sales'){ //THIS PROCESSES SALES
             $val = $request->validate([
                 'phone' => 'numeric',
                 'location' => 'required',
@@ -94,7 +94,7 @@ class SaleController extends Controller
             }
             return Response()->json($arr);
 
-        }elseif($request->has('transferTransaction')){ //THIS PROCESSES TRANSFERS
+        }elseif($request->transactionForm == 'transfer'){ //THIS PROCESSES TRANSFERS
             $val = $request->validate([
                 'firstname' => 'required',
                 'lastname' => 'required',
@@ -159,7 +159,7 @@ class SaleController extends Controller
                 return Response()->json($arr);
 
             }
-        }elseif($request->has('utilityTransaction')){ //THIS PROCESSES TRANSFERS
+        }elseif($request->transactionForm == 'utility'){ //THIS PROCESSES TRANSFERS
             $val = $request->validate([
                 'firstname' => 'required',
                 'lastname' => 'required',

@@ -15,7 +15,7 @@
                         <div class="modal-content">
                             <h5>New Transaction</h5>
                             @csrf
-                            <input type="hidden" name="salesTransaction">
+                            <input type="hidden" name="transactionForm" value="sales">
                             <div class="row">
                                 <div class="col s12 m4 l4 switch" style="    margin-top: 2rem; margin-bottom: 1rem;">
                                     <label>

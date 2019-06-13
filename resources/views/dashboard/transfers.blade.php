@@ -16,7 +16,7 @@
                         <div class="modal-content">
                             <h5>New Money Transfer</h5>
                                 @csrf
-                                <input type="hidden" name="transferTransaction">
+                                <input type="hidden" name="transactionForm" value="transfer">
                                 <div class="row">
                                     <div class="firstnameErr input-field col s12 m4 l4">
                                         <input id="firstname" name="firstname" type="text">
@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="locationErr input-field col s12 m12 l12">
                                         <i class="material-icons prefix">place</i>
-                                        <textarea id="location" name="location" class="materialize-textarea"></textarea>
+                                        <input id="location" name="location" type="text">
                                         <label for="location"> Depositor's Address</label>
                                     </div>
                                 </div>

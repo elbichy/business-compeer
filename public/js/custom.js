@@ -189,25 +189,35 @@ function submitSale(event){
     event.preventDefault();
     
     let type = $('#type').prop('checked') == false ? 'service' : 'product'; 
+    let formData;
+    if($('input[name=transactionForm]').val() == 'sales'){
+        
+        formData = {
+            '_token'            : $('input[name=_token]').val(),
+            'transactionForm'  : $('input[name=transactionForm]').val(),
+            'type'              : type,
+            'firstname'         : $('input[name=firstname]').val(),
+            'lastname'          : $('input[name=lastname]').val(),
+            'phone'             : $('input[name=phone]').val(),
+            'location'          : $('input[name=location]').val(),
+            'productOrService'  : $('input[name=productOrService]').val(),
+            'units'             : $('input[name=units]').val(),
+            'amount'            : $('input[name=amount]').val(),
+            'balance'           : $('input[name=balance]').val(),
+            'change'            : $('input[name=change]').val(),
+        };
 
-    let formData = {
-        '_token'            : $('input[name=_token]').val(),
-        'salesTransaction'  : $('input[name=salesTransaction]').val(),
-        'type'              : type,
-        'firstname'         : $('input[name=firstname]').val(),
-        'lastname'          : $('input[name=lastname]').val(),
-        'phone'             : $('input[name=phone]').val(),
-        'location'          : $('input[name=location]').val(),
-        'productOrService'  : $('input[name=productOrService]').val(),
-        'units'             : $('input[name=units]').val(),
-        'amount'            : $('input[name=amount]').val(),
-        'balance'           : $('input[name=balance]').val(),
-        'change'            : $('input[name=change]').val(),
-    };
+    }else{
+
+        formData = $('#addSalesForm').serialize();
+
+    }
 
     $('#addSalesBtn').addClass('disabled');
     $('.progress').fadeIn();
     
+    // console.log(formData);
+
     axios.post('/dashboard/sales/storeSales', formData)
     .then(function (response) {
         if(response.data.status){
