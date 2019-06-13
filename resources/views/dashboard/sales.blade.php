@@ -20,7 +20,7 @@
                                 <div class="col s12 m4 l4 switch" style="    margin-top: 2rem; margin-bottom: 1rem;">
                                     <label>
                                     Service
-                                    <input type="checkbox" name="type" class="type" id="type" required>
+                                    <input type="checkbox" name="type" class="type" id="type">
                                     <span class="lever"></span>
                                     Product
                                     </label>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="locationErr input-field col s12 m4 l4">
                                     <i class="material-icons prefix">place</i>
-                                    <textarea id="location" name="location" class="materialize-textarea"></textarea>
+                                    <input id="location" name="location" type="text">
                                     <label for="location">Location</label>
                                 </div>
                                 <div class="productOrServiceErr input-field col s12 m4 l4">
@@ -130,7 +130,7 @@
                                         <td> NIL </td>
                                     @endif
                                     <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
-                                    <td><a onclick="loadReciept(event)" class="recieptBtn" data-salesId="{{ $sale->id }}" href="#"><i class="material-icons">receipt</i></a></td>
+                                    <td><a href="#salesRecieptArea" onclick="loadReciept(event)" class="recieptBtn" data-salesId="{{ $sale->id }}" href="#"><i class="material-icons">receipt</i></a></td>
                                     <td>
                                         <a onclick="deleteSale(event, this.dataset.salesid)" class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
                                             <i class="tiny material-icons">close</i>
@@ -164,13 +164,16 @@
 
                 {{-- SALES RECIEPT --}}
                 <div class="salesRecieptArea col s12 m6 l4">
-                    <div class="reciept">
+                    <div class="reciept" id="salesRecieptArea">
                         <h5 class="noReciept">
                             Transaction Reciept
                         </h5>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="footer z-depth-1">
+            <p>&copy; 2019 Bits Infotech solution</p>
         </div>
     </div>
 @endsection

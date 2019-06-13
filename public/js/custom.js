@@ -44,91 +44,91 @@ $('form').submit(function(e){
 });
 
 // TABLE HEIGHT AUTO ADJUSTMENT
-if($(document).width() > '800'){
-    var doc = $(document).height();
-    var win = $(window).height();
-    var remainder = doc - win;
-    var table = $('.salesTable').height();
-    var newHeight = table - remainder + 20;
-    if(remainder > 0){
-        $('.salesTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight
-        });
-    }
-    var table2 = $('.expenseTable').height();
-    var newHeight2 = table2 - remainder;
-    if(remainder > 0){
-        $('.expenseTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight2
-        });
-    }
+// if($(document).width() > '800'){
+//     var doc = $(document).height();
+//     var win = $(window).height();
+//     var remainder = doc - win;
+//     var table = $('.salesTable').height();
+//     var newHeight = table - remainder + 20;
+//     if(remainder > 0){
+//         $('.salesTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight
+//         });
+//     }
+//     var table2 = $('.expenseTable').height();
+//     var newHeight2 = table2 - remainder;
+//     if(remainder > 0){
+//         $('.expenseTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight2
+//         });
+//     }
 
-    var table3 = $('.stockTable').height();
-    var newHeight3 = table3 - remainder;
-    if(remainder > 0){
-        $('.stockTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight3
-        });
-    }
+//     var table3 = $('.stockTable').height();
+//     var newHeight3 = table3 - remainder;
+//     if(remainder > 0){
+//         $('.stockTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight3
+//         });
+//     }
 
-    var table4 = $('.customersTable').height();
-    var newHeight4 = table4 - remainder;
-    if(remainder > 0){
-        $('.customersTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight4
-        });
-    }
+//     var table4 = $('.customersTable').height();
+//     var newHeight4 = table4 - remainder;
+//     if(remainder > 0){
+//         $('.customersTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight4
+//         });
+//     }
     
-    var table5 = $('.businessSettingsTable').height();
-    var newHeight5 = table5 - remainder;
-    if(remainder > 0){
-        $('.businessSettingsTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight5
-        });
-    }
+//     var table5 = $('.businessSettingsTable').height();
+//     var newHeight5 = table5 - remainder;
+//     if(remainder > 0){
+//         $('.businessSettingsTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight5
+//         });
+//     }
     
-    var table6 = $('.branchSettingsTable').height();
-    var newHeight6 = table6 - remainder;
-    if(remainder > 0){
-        $('.branchSettingsTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight6
-        });
-    }
+//     var table6 = $('.branchSettingsTable').height();
+//     var newHeight6 = table6 - remainder;
+//     if(remainder > 0){
+//         $('.branchSettingsTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight6
+//         });
+//     }
     
-    var table7 = $('.staffSettingsTable').height();
-    var newHeight7 = table7 - remainder;
-    if(remainder > 0){
-        $('.staffSettingsTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight7
-        });
-    }
+//     var table7 = $('.staffSettingsTable').height();
+//     var newHeight7 = table7 - remainder;
+//     if(remainder > 0){
+//         $('.staffSettingsTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight7
+//         });
+//     }
     
-    var table8 = $('.todaysSalesTable').height();
-    var newHeight8 = table8 - remainder;
-    if(remainder > 0){
-        $('.todaysSalesTable').css({
-            'overflow-y': 'scroll',
-            'height': newHeight8
-        });
-    }
+//     var table8 = $('.todaysSalesTable').height();
+//     var newHeight8 = table8 - remainder;
+//     if(remainder > 0){
+//         $('.todaysSalesTable').css({
+//             'overflow-y': 'scroll',
+//             'height': newHeight8
+//         });
+//     }
     
-    var table9 = $('.detailsArea').height();
-    var newHeight9 = table9 - remainder + 35;
-    if(remainder > 0){
-        $('.detailsArea').css({
-            'overflow-y': 'scroll',
-            'overflow-x': 'hidden',
-            'height': newHeight9
-        });
-    }
-}
+//     var table9 = $('.detailsArea').height();
+//     var newHeight9 = table9 - remainder + 35;
+//     if(remainder > 0){
+//         $('.detailsArea').css({
+//             'overflow-y': 'scroll',
+//             'overflow-x': 'hidden',
+//             'height': newHeight9
+//         });
+//     }
+// }
 
 function numberWithCommas(number) {
     var parts = number.toString().split(".");
@@ -184,18 +184,31 @@ $('.deleteBranch').click(function(){
 
 ///////////////////////////////////////////// SALES FUNCTIONALITIES /////////////////////////////////////////////
 
-// SUBMIT SALE TRIGGER
-$('.addMainSaleSubmitBtn').click(function(e){
-    $('form.addSalesForm').submit();
-});
-
 // FUNCTION TO SUBMIT NEW SALE ASYNC
 function submitSale(event){
     event.preventDefault();
-    let datastring = $("#addSalesForm").serialize();
+    
+    let type = $('#type').prop('checked') == false ? 'service' : 'product'; 
+
+    let formData = {
+        '_token'            : $('input[name=_token]').val(),
+        'salesTransaction'  : $('input[name=salesTransaction]').val(),
+        'type'              : type,
+        'firstname'         : $('input[name=firstname]').val(),
+        'lastname'          : $('input[name=lastname]').val(),
+        'phone'             : $('input[name=phone]').val(),
+        'location'          : $('input[name=location]').val(),
+        'productOrService'  : $('input[name=productOrService]').val(),
+        'units'             : $('input[name=units]').val(),
+        'amount'            : $('input[name=amount]').val(),
+        'balance'           : $('input[name=balance]').val(),
+        'change'            : $('input[name=change]').val(),
+    };
+
     $('#addSalesBtn').addClass('disabled');
     $('.progress').fadeIn();
-    axios.post('/dashboard/sales/storeSales', datastring)
+    
+    axios.post('/dashboard/sales/storeSales', formData)
     .then(function (response) {
         if(response.data.status){
             $('.modal').modal('close');
@@ -207,7 +220,7 @@ function submitSale(event){
             $('#addSalesBtn').removeClass('disabled');
             $('.progress').fadeOut();
             $('#addSalesForm')[0].reset();
-            response.data.from == 'sales' ? fetchNewSale() : response.data.from == 'transfers' ? fetchNewTransfer() : fetchNewUtility();
+            response.data.from == 'sales' ? fetchNewSale(response.data.row) : response.data.from == 'transfers' ? fetchNewTransfer(response.data.row) : fetchNewUtility(response.data.row);
         }
     })
     .catch(function (error) {
@@ -361,38 +374,27 @@ function submitSale(event){
 }
 
 // FUNCTION TO FETCH NEW SALE ASYNCHRONOUSLY
-function fetchNewSale(event){
-    axios.get('/dashboard/sales/lastAddedSale')
-    .then(function (response) {
-        // handle success
-        if(response.request.status == 200){
-            console.log(response.data);
-            $(`
-                <tr>
-                    <td>${response.data.firstname} ${response.data.lastname}</td>
-                    <td>${response.data.productOrService}</td>
-                    <td>₦${response.data.amount}</td>
-                    ${response.data.balance > 0 ? `<td class="clearOutstanding blue-text" data-salesId="${response.data.id}">+ ₦${response.data.balance} Bal</td>` : response.data.change > 0 ? `<td class="clearOutstanding red-text" data-salesId="${response.data.id}">- ₦${response.data.change} Chg</td>` : `<td> NIL </td>`}
-                    <td>Now</td>
-                    <td>
-                        <a onclick="loadReciept(event)" class="recieptBtn" data-salesId="${response.data.id}" href="#"><i class="material-icons">receipt</i></a>
-                    </td>
-                    <td>
-                        <a onclick="deleteSale(event)" class=" red-text delete deleteSale" href="#delete" data-salesId="${response.data.id}">
-                            <i class="tiny material-icons red-text">close</i>
-                        </a>
-                    </td>
-                </tr>
-            `).prependTo(".salesRecordsWrap");
-        }
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-    .finally(function () {
-        // always executed
-    });
+function fetchNewSale(data){
+    if(data){
+        console.log(data);
+        $(`
+            <tr>
+                <td>${data.firstname} ${data.lastname}</td>
+                <td>${data.productOrService}</td>
+                <td>₦${data.amount}</td>
+                ${data.balance > 0 ? `<td onclick="clearOutstanding(event)" class="clearOutstanding blue-text" data-salesId="${data.id}">+ ₦${data.balance} Bal</td>` : data.change > 0 ? `<td onclick="clearOutstanding(event)" class="clearOutstanding red-text" data-salesId="${data.id}">- ₦${data.change} Chg</td>` : `<td> NIL </td>`}
+                <td>Now</td>
+                <td>
+                    <a onclick="loadReciept(event)" class="recieptBtn" data-salesId="${data.id}" href="#"><i class="material-icons">receipt</i></a>
+                </td>
+                <td>
+                    <a onclick="deleteSale(event)" class=" red-text delete deleteSale" href="#delete" data-salesId="${data.id}">
+                        <i class="tiny material-icons red-text">close</i>
+                    </a>
+                </td>
+            </tr>
+        `).prependTo(".salesRecordsWrap");
+    }
 }
 
 
@@ -487,14 +489,31 @@ function fetchNewUtility(event){
 
 
 
-
 // CLEAR OUTSTANDING TRIGGER
 function clearOutstanding(e){
     let salesId = e.currentTarget.dataset.salesid;
     let $result = confirm('Are you sure you want to clear this outstanding payment?', false);
+
+    let reply;
     if($result){
-        let url = $('#clearOutstandingForm').prop('action', 'clearOutstanding/'+salesId);
-        $('#clearOutstandingForm').submit();
+
+        let data = {
+            'salesId' : salesId,
+            '_token'    : $('input[name=_token]').val()
+        }
+        
+        axios.put('/dashboard/sales/clearOutstanding', data)
+        .then(function (response) {
+            $(`[data-salesId="${response.data.id}"]`)[0].classList.add("black-text")
+            $(`[data-salesId="${response.data.id}"]`)[0].innerHTML = 'NILL';
+            $(`[data-salesId="${response.data.id}"]`)[0].previousElementSibling.innerHTML = '₦'+response.data.amount;
+
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
     }
 };
 
@@ -513,7 +532,7 @@ function deleteSale(e){
 // LOAD RECIEPT TRIGGER
 function loadReciept(e){
 
-    e.preventDefault();
+    // e.preventDefault();
     var salesId = e.currentTarget.dataset.salesid;
 
     $.get( "/dashboard/sales/getReciept/"+salesId, function( data ) {
@@ -654,7 +673,7 @@ function printReciept() {
     return true;
 }
 
-// FUNCTION TO SUBMIT NEW SALE ASYNC
+// LOAD NOTIFICATION ASYNC
 function loadNotification(url){
     let count = $('.notificationCount')[0].innerHTML;
     axios.get('/dashboard/sales/load-notification/'+count)

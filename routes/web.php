@@ -30,12 +30,11 @@ Route::post('/dashboard/myProfile/updateMyProfile', 'ProfileController@updateMyP
 
 // SALES
 Route::get('/dashboard/sales', 'SaleController@sales')->name('sales');
-Route::get('/dashboard/sales/lastAddedSale', 'SaleController@lastAddedSale')->name('lastAddedSale');
 Route::get('/dashboard/sales/lastAddedTransfer', 'SaleController@lastAddedTransfer')->name('lastAddedTransfer');
 Route::get('/dashboard/sales/lastAddedUtility', 'SaleController@lastAddedUtility')->name('lastAddedUtility');
 Route::get( '/dashboard/sales/getReciept/{data}', 'SaleController@getReciept')->name('getReciept');
 Route::post( '/dashboard/sales/storeSales', 'SaleController@storeSales')->name('storeSales');
-Route::put( '/dashboard/sales/clearOutstanding/{data}', 'SaleController@clearOutstanding')->name('clearOutstanding');
+Route::put( '/dashboard/sales/clearOutstanding', 'SaleController@clearOutstanding')->name('clearOutstanding');
 Route::delete( '/dashboard/sales/deleteSale/{data}', 'SaleController@deleteSale')->name('deleteSale');
 Route::get('/dashboard/sales/load-notification/{count}', 'SaleController@loadNotification')->name('loadNotification');
 

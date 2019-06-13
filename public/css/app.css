@@ -437,8 +437,13 @@ table tbody tr td .recieptBtn {
   padding-left: 300px;
 }
 
+.my-content-wrapper {
+  position: relative;
+  height: calc(100vh - 64px);
+}
+
 .my-content-wrapper .content-container {
-  height: auto;
+  height: calc(100vh - 114px);
   padding: 5px 10px 0 10px;
 }
 
@@ -545,8 +550,11 @@ table tbody tr td .recieptBtn {
 }
 
 .my-content-wrapper .content-container .stats {
-  background: rgba(255, 255, 255, 0.4);
+  background: white;
   margin-bottom: 20px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 63px;
 }
 
 .my-content-wrapper .content-container .stats .stats-inner {
@@ -643,6 +651,11 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .salesWrap .salesHeading {
   padding-bottom: 20px;
+  padding-top: 20px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 64px;
+  background: white;
 }
 
 .my-content-wrapper .content-container .salesWrap .salesTable {
@@ -656,6 +669,9 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .salesWrap .salesRecieptArea {
   height: 462px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 160px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -835,6 +851,19 @@ table tbody tr td .recieptBtn {
   width: 100%;
 }
 
+.my-content-wrapper .footer {
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /*********************************************** OTHER SCREEN SIZES ********************************/
 
 /* Extra small devices (phones, 600px and down) */
@@ -977,7 +1006,14 @@ table tbody tr td .recieptBtn {
     background-color: rgba(0, 0, 0, 0.4);
   }
 
-  .stats-inner {
+  .my-content-wrapper .content-container .stats {
+    background: white;
+    margin-bottom: 0px;
+    position: static;
+    top: none;
+  }
+
+  .my-content-wrapper .content-container .stats .stats-inner {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -987,6 +1023,116 @@ table tbody tr td .recieptBtn {
 
   .my-content-wrapper .content-container .tableWrap :first-child {
     border-right: none;
+  }
+
+  .my-content-wrapper .content-container .salesWrap {
+    position: static;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .addSaleBtn {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content {
+    padding: 10px 16px 0px 16px;
+  }
+
+  .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content form .row {
+    margin-bottom: 0;
+  }
+
+  .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content form .row:first-child {
+    margin-bottom: 25px;
+  }
+
+  .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content button {
+    margin-right: 0.75rem;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesHeading {
+    padding-bottom: 20px;
+    position: static !important;
+    top: none;
+    background: transparent;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesTable {
+    padding: 10px;
+    height: auto;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesTable .clearOutstanding {
+    cursor: pointer;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea {
+    height: 462px;
+    position: static !important;
+    top: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept {
+    height: 100%;
+    width: 96%;
+    border: 2px solid #eee;
+    display: flex;
+    flex-direction: column;
+    border-bottom-right-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .printBtn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    color: #000;
+    font-size: 12px;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .printBtn:hover {
+    cursor: pointer;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .noReciept {
+    color: #ddd;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .preloader-wrapper {
+    display: block !important;
+    margin: auto !important;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptTop .logoArea img {
+    width: 75px;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptTop .recieptTitle {
+    font-size: 12px;
+    margin: 0px;
+  }
+
+  .my-content-wrapper .content-container .salesWrap .salesRecieptArea .reciept .recieptBottom table > tbody > tr > td {
+    padding: 6px 4px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+    font-size: 12px;
   }
 
   .my-content-wrapper .content-container .expenseWrap .expenseTable {
@@ -1011,6 +1157,18 @@ table tbody tr td .recieptBtn {
 
   .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td {
     width: 25% !important;
+  }
+
+  .my-content-wrapper .footer {
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    position: static;
+    bottom: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

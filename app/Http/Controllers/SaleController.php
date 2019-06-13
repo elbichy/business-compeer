@@ -58,12 +58,6 @@ class SaleController extends Controller
                 'change' => 'numeric',
             ]);
     
-            if($request->has('type')){
-                $request->request->set('type', 'product');
-            }else{
-                $request->request->add(['type' => 'service']);
-            }
-    
             if($request->has('amount')){
                 $request->request->set('amount', $request->amount);
             }else{
@@ -96,7 +90,7 @@ class SaleController extends Controller
             ]);
             $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
             if($insert){ 
-            $arr = array('msg' => 'Transaction added successfully!', 'from' => 'sales', 'status' => true);
+            $arr = array('msg' => 'Transaction added successfully!', 'from' => 'sales', 'row' => $insert, 'status' => true);
             }
             return Response()->json($arr);
 
@@ -226,17 +220,6 @@ class SaleController extends Controller
             }
         }
     }
-
-    // SALES AJAX LAST ADDED
-    public function lastAddedSale(){
-        $arr = array('msg' => 'Something goes to wrong. Please try again lator', 'status' => false);
-        $record = Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->latest()->first();
-        if($record != NULL){ 
-            return Response()->json($record);
-        }else{
-            return Response()->json($arr);
-        }
-    }
     
 
 
@@ -360,8 +343,11 @@ class SaleController extends Controller
     ///////////////////////////////////////////// GENERAL FUNCTIONALITIES /////////////////////////////////////
 
     // CLEAR OUTSTANDING
-    public function clearOutstanding($data){
-        $item = Sale::find($data);
+    public function clearOutstanding(Request $request){
+        
+        // return response()->json($request);
+
+        $item = Sale::find($request->salesId);
         if($item->change > 0){
             $result = $item->amount - $item->change;
             $item->amount = $result;
@@ -372,7 +358,7 @@ class SaleController extends Controller
             $item->balance = 0;
         }
         if($item->save()){
-            return redirect()->back()->with('status', 'Transaction record Updated!');
+            return response()->json($item);
         }
     }
 

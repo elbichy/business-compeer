@@ -54,7 +54,7 @@
                     <ul class="right hide-on-small-only">
                         <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     </ul>
-                    @can('isOwner')
+                    {{-- @can('isOwner') --}}
                     {{-- foreach(auth()->user()->notifications as $notification){
                         return $notification->data['data']['saleDetails']['business_id'];
                     } --}}
@@ -70,7 +70,7 @@
                             {!! auth()->user()->notifications->count() > 0 ? '<sup class="red green notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
                     </ul>  
-                    @endcan 
+                    {{-- @endcan  --}}
                 </div>
             </nav>
         </div>

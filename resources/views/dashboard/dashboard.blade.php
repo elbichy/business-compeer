@@ -173,5 +173,8 @@
                 </div>
             </div>
         </div>
+        <div class="footer z-depth-1">
+            <p>&copy; 2019 Bits Infotech solution</p>
+        </div>
     </div>
 @endsection
