@@ -59,10 +59,27 @@
                         return $notification->data['data']['saleDetails']['business_id'];
                     } --}}
                     <ul>
-                        <a  href="{{route('manageTransfers')}}" style="margin-right: 14px;" class="right hide-on-small-only">
+                        <a href="#" style="margin-right: 14px;" data-target='notifications'  class="dropdown-trigger right hide-on-small-only">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
                             {!! auth()->user()->notifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
+                        <!-- Dropdown Structure -->
+                        <ul id='notifications' class='dropdown-content'>
+                            @foreach($notification->notifications as $notificationCollection)
+                                @foreach($notificationCollection->data as $notificationItem)
+                                <li>
+                                    <a href="{{url($notificationItem['url'])}}">
+                                        <i class="material-icons">monetization_on</i>
+                                        <div class='notMsg'>
+                                            <p>{{$notificationItem['msg']}}</p>
+                                            <sub>From Branch {{$notificationItem['branch']}}</sub>
+                                        </div>
+                                        
+                                    </a>
+                                </li>
+                                @endforeach
+                            @endforeach
+                        </ul>
                     </ul>
                     <ul> {{-- FOR MOBILE --}}
                         <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up">
@@ -224,7 +241,7 @@
             // CHECK FOR NEW NOTIFICATION EVERY SECOND
             window.setInterval(function(){
                 loadNotification('{{asset('storage')}}');
-            }, 30000);   
+            }, 5000);   
         </script>
     @endcan
 </body>

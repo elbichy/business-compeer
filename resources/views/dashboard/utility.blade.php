@@ -14,7 +14,7 @@
                     </div>
                     <form action="{{ url('storeSales') }}" method="post" name="addSalesForm" onsubmit="submitSale(event)" class="addSalesForm" id="addSalesForm">
                         <div class="modal-content">
-                            <h5>New Money Transfer</h5>
+                            <h5>Utility Bill Payment</h5>
                                 @csrf
                                 <input type="hidden" name="transactionForm" value="utility">
                                 <div class="row">

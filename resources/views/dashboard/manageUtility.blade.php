@@ -20,7 +20,7 @@
                         </div>
                 </div>
                 {{-- SALES HEADING --}}
-                <h5 class="center salesHeading">Manage Transfers</h5>
+                <h5 class="center salesHeading">Manage Utility</h5>
 
                 {{-- SALES TABLE --}}
                 <div class="salesTableWrap col s12">

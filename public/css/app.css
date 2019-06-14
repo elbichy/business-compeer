@@ -190,6 +190,20 @@ table tbody tr td .recieptBtn {
   color: green;
 }
 
+#notifications {
+  width: auto !important;
+  top: 64px !important;
+}
+
+#notifications li a {
+  display: flex;
+  align-items: center;
+}
+
+#notifications li a p {
+  margin: 0;
+}
+
 .wrapper {
   width: 100%;
   height: 100%;
@@ -738,10 +752,18 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .expenseWrap .expenseHeading {
   padding-bottom: 20px;
+  padding-top: 20px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 64px;
+  background: white;
 }
 
 .my-content-wrapper .content-container .expenseWrap .expenseForm {
   padding: 10px 40px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 140px;
 }
 
 .my-content-wrapper .content-container .expenseWrap .expenseTable {
@@ -749,11 +771,19 @@ table tbody tr td .recieptBtn {
 }
 
 .my-content-wrapper .content-container .stockWrap .stockHeading {
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  padding-top: 20px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 64px;
+  background: white;
 }
 
 .my-content-wrapper .content-container .stockWrap .stockForm {
   padding: 10px 40px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 140px;
 }
 
 .my-content-wrapper .content-container .stockWrap .stockTable {
@@ -762,6 +792,11 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .customersWrap .customersHeading {
   padding-bottom: 20px;
+  padding-top: 20px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 64px;
+  background: white;
 }
 
 .my-content-wrapper .content-container .customersWrap .customersForm {
@@ -774,10 +809,18 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsHeading {
   padding-bottom: 40px;
+  padding-top: 20px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 64px;
+  background: white;
 }
 
 .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms {
   border: 2px solid #eee;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 180px;
 }
 
 .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms .tabs {
@@ -807,10 +850,18 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsHeading {
   padding-bottom: 40px;
+  padding-top: 20px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 64px;
+  background: white;
 }
 
 .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms {
   border-right: 2px solid #eee;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 180px;
 }
 
 .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms form {
@@ -828,11 +879,19 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsHeading {
   padding-bottom: 40px;
+  padding-top: 20px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 64px;
+  background: white;
 }
 
 .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms {
   border: 2px solid #eee;
   padding: 10px 10px 0px 10px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 180px;
 }
 
 .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form {
@@ -1135,8 +1194,44 @@ table tbody tr td .recieptBtn {
     font-size: 12px;
   }
 
+  .my-content-wrapper .content-container .expenseWrap .expenseHeading {
+    padding-bottom: 20px;
+    position: static !important;
+    top: none;
+    background: transparent;
+  }
+
+  .my-content-wrapper .content-container .expenseWrap .expenseForm {
+    position: static !important;
+    top: 0px;
+  }
+
   .my-content-wrapper .content-container .expenseWrap .expenseTable {
     border-left: none;
+  }
+
+  .my-content-wrapper .content-container .stockWrap .stockHeading {
+    padding-bottom: 20px;
+    position: static !important;
+    top: none;
+    background: transparent;
+  }
+
+  .my-content-wrapper .content-container .stockWrap .stockForm {
+    position: static !important;
+    top: 0px;
+  }
+
+  .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsHeading {
+    padding-bottom: 20px;
+    position: static !important;
+    top: none;
+    background: transparent;
+  }
+
+  .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms {
+    position: static !important;
+    top: 0px;
   }
 
   .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsForms .tabs-content {
@@ -1157,6 +1252,52 @@ table tbody tr td .recieptBtn {
 
   .my-content-wrapper .content-container .businessSettingsWrap .businessSettingsTable table tbody tr td {
     width: 25% !important;
+  }
+
+  .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsHeading {
+    padding-bottom: 20px;
+    position: static !important;
+    top: none;
+    background: transparent;
+  }
+
+  .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms {
+    border-right: 2px solid #eee;
+    position: static !important;
+    top: 0px;
+  }
+
+  .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms form {
+    margin-top: 0px;
+    border: none;
+  }
+
+  .my-content-wrapper .content-container .branchSettingsWrap .branchSettingsForms form .row {
+    margin-bottom: 0px;
+  }
+
+  .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsHeading {
+    padding-bottom: 20px;
+    position: static !important;
+    top: none;
+    background: transparent;
+  }
+
+  .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms {
+    position: static !important;
+    top: 0px;
+  }
+
+  .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form {
+    margin-top: 0px;
+  }
+
+  .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form .row {
+    margin-bottom: 0px;
+  }
+
+  .my-content-wrapper .content-container .staffSettingsWrap .staffSettingsForms form .file-path-wrapper {
+    display: none !important;
   }
 
   .my-content-wrapper .footer {

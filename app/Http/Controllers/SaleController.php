@@ -150,8 +150,13 @@ class SaleController extends Controller
                     $admin = Business::find(auth()->user()->business_id)->users()->orderBy('id', 'ASC')->first()['id'];
                     $user = User::find($admin);
                     $data = [
-                        'saleDetails' => $sale,
-                        'transferDetails' => $transfer
+                        'type' => 'transfer',
+                        'msg' => 'Transfer request',
+                        'Business' => auth()->user()->business_id,
+                        'branch' => auth()->user()->branch_id,
+                        'user' => auth()->user()->id,
+                        'refNumver' => $refNumber,
+                        'url' => 'http://bitssolutions.test/dashboard/sales/manage-transfers'
                     ];
                     $user->notify(new salesApproval($data));
                     $arr = array('msg' => 'Transaction added successfully!', 'from' => 'transfers', 'status' => true);
@@ -209,11 +214,16 @@ class SaleController extends Controller
                     $admin = Business::find(auth()->user()->business_id)->users()->orderBy('id', 'ASC')->first()['id'];
                     $user = User::find($admin);
                     $data = [
-                        'saleDetails' => $sale,
-                        'transferDetails' => $utility
+                        'type' => 'utility',
+                        'msg' => 'Utility payment request',
+                        'Business' => auth()->user()->business_id,
+                        'branch' => auth()->user()->branch_id,
+                        'user' => auth()->user()->id,
+                        'refNumver' => $refNumber,
+                        'url' => 'http://bitssolutions.test/dashboard/sales/manage-utility-bill-payment'
                     ];
                     $user->notify(new salesApproval($data));
-                    $arr = array('msg' => 'Transaction added successfully!', 'from' => 'utility', 'status' => true);
+                    $arr = array('msg' => 'Transaction added successfully!', 'from' => 'utility', 'status' => true, 'data' => $data);
                 }
                 return Response()->json($arr);
 
@@ -381,13 +391,13 @@ class SaleController extends Controller
 
     // LOAD NOTIFICATION
     public function loadNotification($count){
-        if(auth()->user()->notifications->count() > 0){
-            if(auth()->user()->notifications->count() > $count){
-                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => true, 'less' => false]);
+        if(auth()->user()->unreadNotifications->count() > 0){
+            if(auth()->user()->unreadNotifications->count() > $count){
+                return Response()->json(['newCount' => auth()->user()->unreadNotifications->count(), 'data' => auth()->user()->unreadNotifications->first(), 'greater' => true, 'less' => false]);
             }elseif(auth()->user()->notifications->count() < $count){
-                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => true]);
+                return Response()->json(['newCount' => auth()->user()->unreadNotifications->count(), 'data' => auth()->user()->unreadNotifications->first(), 'greater' => false, 'less' => true]);
             }else{
-                return Response()->json(['newCount' => auth()->user()->notifications->count(), 'greater' => false, 'less' => false]);
+                return Response()->json(['newCount' => auth()->user()->unreadNotifications->count(), 'data' => auth()->user()->unreadNotifications->first(), 'greater' => false, 'less' => false]);
             }
         }else{
             return Response()->json(['newCount' => 0, 'greater' => false, 'less' => false]);

@@ -20,7 +20,7 @@ $('.timepicker').timepicker({
 $('.tabs').tabs({
     swipeable: false
 });
-
+$('.dropdown-trigger').dropdown();
 
 
 
@@ -690,6 +690,20 @@ function loadNotification(url){
     .then(function (response) {
         response.data.newCount != 0 ?  $('.notificationCount').removeClass('green') : '';
         if(response.data.greater){
+            $(`
+                <li>
+                    <a href="${response.data.data.data.data.url}">
+                        <i class="material-icons">monetization_on</i>
+                        <div class='notMsg'>
+                            <p>${response.data.data.data.data.msg}</p>
+                            <sub>From Branch ${response.data.data.data.data.branch}</sub>
+                        </div>
+                        
+                    </a>
+                </li>
+            `).prependTo("#notifications");
+
+
             ion.sound({
                 sounds: [
                     {
@@ -701,9 +715,8 @@ function loadNotification(url){
                 preload: true
             });
             ion.sound.play("door_bell");
-            // chrome://flags/#autoplay-policy
+            console.log(response.data.data);
         }
-        // console.log(response.data.newCount);
         $('.notificationCount').html(response.data.newCount);
     })
     .catch(function (error) {
