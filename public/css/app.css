@@ -35,7 +35,7 @@ body {
   right: 100%;
   width: 100%;
   height: 10px;
-  background: #16c05a;
+  background: var(--switch-light);
   pointer-events: none;
 }
 
@@ -48,11 +48,11 @@ body {
 }
 
 .switch label input[type=checkbox]:checked + .lever {
-  background-color: #22da75;
+  background-color: var(--switch-dark);
 }
 
 .switch label input[type=checkbox]:checked + .lever:after {
-  background-color: #098f45;
+  background-color: var(--switch-dark);
 }
 
 .switch label .lever {
@@ -61,7 +61,7 @@ body {
   position: relative;
   width: 36px;
   height: 14px;
-  background-color: #22da75;
+  background-color: var(--switch-light);
   border-radius: 15px;
   margin-right: 10px;
   transition: background 0.3s ease;
@@ -70,13 +70,13 @@ body {
 }
 
 .switch label .lever:after {
-  background-color: #098f45;
+  background-color: var(--switch-dark);
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 nav {
-  background: #086b23;
-  background: linear-gradient(90deg, #0fb13b 0%, #086b23 100%);
+  background: var(--primary-bg-dark);
+  background: linear-gradient(90deg, var(--primary-bg-light) 0%, var(--primary-bg-dark) 100%);
 }
 
 nav .nav-wrapper .breadcrumbWrap {
@@ -133,8 +133,8 @@ nav .logOutBtn a i {
 }
 
 .sidenav.sidenav-fixed {
-  background: #086b23;
-  background: linear-gradient(60deg, #086b23 0%, #0fb13b 100%);
+  background: var(--primary-bg-dark);
+  background: linear-gradient(60deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
 }
 
 .sidenav.sidenav-fixed .collapsible-body li a {
@@ -142,7 +142,7 @@ nav .logOutBtn a i {
 }
 
 .sidenav .collapsible-body {
-  background: #086b23;
+  background: var(--primary-bg-dark);
 }
 
 .sidenav .collapsible-body li a {
@@ -182,12 +182,28 @@ nav .logOutBtn a i {
   width: 120px;
 }
 
+.dropdown-content li > span {
+  font-size: 16px;
+  color: var(--primary-bg-dark);
+  display: block;
+  line-height: 22px;
+  padding: 14px 16px;
+}
+
+.btn {
+  background: var(--button-dark);
+}
+
+.btn:hover {
+  background: var(--button-light);
+}
+
 table tbody tr td .delete {
   color: red;
 }
 
 table tbody tr td .recieptBtn {
-  color: green;
+  color: var(--primary-bg-dark);
 }
 
 #notifications {
@@ -196,6 +212,7 @@ table tbody tr td .recieptBtn {
 }
 
 #notifications li a {
+  color: var(--primary-bg-dark);
   display: flex;
   align-items: center;
 }
@@ -229,7 +246,7 @@ table tbody tr td .recieptBtn {
   justify-content: flex-start;
   align-items: center;
   background: rgba(255, 255, 255, 0.4);
-  background: linear-gradient(90deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+  background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
 }
 
 .wrapper .contentWrap .contentContainer header {
@@ -318,7 +335,7 @@ table tbody tr td .recieptBtn {
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.4);
-  background: linear-gradient(90deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+  background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
 }
 
 .wrapper .leftPane .leftContainer .logoArea {
@@ -467,7 +484,7 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .profileWrap .focusArea .picArea {
   min-height: 350px;
-  background-color: #E64C3C;
+  background-color: var(--secondary-bg-light);
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -499,7 +516,7 @@ table tbody tr td .recieptBtn {
 }
 
 .my-content-wrapper .content-container .profileWrap .focusArea .picArea .fRow {
-  background-color: #C03B2B;
+  background-color: var(--secondary-bg-dark);
   padding: 10px 0;
 }
 
@@ -529,6 +546,24 @@ table tbody tr td .recieptBtn {
   width: 90% !important;
   padding: 10px 0;
   text-align: center;
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .salesMadeArea h2 {
+  height: 80px;
+  flex: 1;
+  background: var(--primary-bg-light);
+}
+
+.my-content-wrapper .content-container .profileWrap .focusArea .salesMadeArea h4 {
+  border: 4px solid var(--primary-bg-light);
+  margin: 0;
+  height: 80px;
+  flex: 2;
+  display: flex;
+  padding: 6px;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-bg-light);
 }
 
 .my-content-wrapper .content-container .profileWrap .detailsArea {
@@ -948,7 +983,7 @@ table tbody tr td .recieptBtn {
     margin: 10px 10px;
     display: flex;
     justify-content: center;
-    background: #098f45;
+    background: var(--button-dark);
     border-radius: 50%;
   }
 
@@ -1006,8 +1041,8 @@ table tbody tr td .recieptBtn {
   }
 
   .wrapper .contentWrap .contentContainer header nav {
-    background: #086b23;
-    background: linear-gradient(90deg, #0fb13b 0%, #086b23 100%);
+    background: var(--primary-bg-dark);
+    background: linear-gradient(90deg, var(--primary-bg-light) 0%, var(--primary-bg-dark) 100%);
   }
 
   .wrapper .contentWrap .contentContainer .businessName {

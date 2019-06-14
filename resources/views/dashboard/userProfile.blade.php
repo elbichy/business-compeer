@@ -44,8 +44,8 @@
                         Total Sales Made
                     </h5>
                     <div style="width: 80%; display:flex; padding:6px; justify-content:center; align-items:center;">
-                        <h2 style="height:80px; flex:1; background: #0fb13b" class="salesMade white-text">{{$data['totalSalesCount']}}</h2>
-                        <h4 style="padding:6px; border:4px solid #0fb13b; margin:0; height:80px; flex:2; display:flex; padding:6px; justify-content:center; align-items:center; color:#0fb13b;">₦{{$data['totalSales']}}</h4>
+                        <h2 class="salesMade white-text">{{$data['totalSalesCount']}}</h2>
+                        <h4>₦{{$data['totalSales']}}</h4>
                     </div>
                     
                 </div>

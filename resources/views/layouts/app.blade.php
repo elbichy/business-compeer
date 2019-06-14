@@ -11,6 +11,21 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <style>
+        :root {
+            --primary-bg-dark: #086b23; 
+            --primary-bg-light: #0fb13b; 
+            
+            --secondary-bg-dark: #C03B2B; 
+            --secondary-bg-light: #E64C3C; 
+            
+            --switch-dark: #098f45; 
+            --switch-light: #22da75; 
+
+            --button-dark: #098f45; 
+            --button-light: #37ad68; 
+        }
+    </style>
 </head>
 <body>
     <div class="app" id="app">

@@ -43,7 +43,7 @@ body {
     right: 100%;
     width: 100%;
     height: 10px;
-    background: #16c05a;
+    background: var(--switch-light);
 
     pointer-events: none;
 }
@@ -61,11 +61,11 @@ body {
 }
 
 .switch label input[type=checkbox]:checked+.lever {
-    background-color: rgb(34, 218, 117);
+    background-color: var(--switch-dark);
 }
 
 .switch label input[type=checkbox]:checked+.lever:after {
-    background-color: rgb(9, 143, 69);
+    background-color: var(--switch-dark);
 }
 
 .switch label .lever {
@@ -74,7 +74,7 @@ body {
     position: relative;
     width: 36px;
     height: 14px;
-    background-color: rgb(34, 218, 117);
+    background-color: var(--switch-light);
     border-radius: 15px;
     margin-right: 10px;
     -webkit-transition: background 0.3s ease;
@@ -84,14 +84,14 @@ body {
 }
 
 .switch label .lever:after {
-    background-color: rgb(9, 143, 69);
+    background-color: var(--switch-dark);
     -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 nav {
-    background: #086b23;
-    background: linear-gradient(90deg, rgba(15, 177, 59, 1) 0%, rgba(8, 107, 35, 1) 100%);
+    background: var(--primary-bg-dark); ;
+    background: linear-gradient(90deg, var(--primary-bg-light)  0%, var(--primary-bg-dark)  100%);
 
     .nav-wrapper {
         .breadcrumbWrap {
@@ -152,15 +152,15 @@ nav {
 }
 
 .sidenav.sidenav-fixed {
-    background: rgba(8, 107, 35, 1);
-    background: linear-gradient(60deg, rgba(8, 107, 35, 1) 0%, rgba(15, 177, 59, 1) 100%);
+    background: var(--primary-bg-dark);
+    background: linear-gradient(60deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
     .collapsible-body li a {
         padding: 0 23.5px 0 94px;
     }
 }
 
 .sidenav .collapsible-body {
-    background: rgba(8, 107, 35, 1);
+    background: var(--primary-bg-dark);
 
     li a {
         padding: 0 23.5px 0 94px;
@@ -200,6 +200,21 @@ nav {
     width: 120px;
 }
 
+.dropdown-content li>span {
+    font-size: 16px;
+    color: var(--primary-bg-dark);
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+}
+
+.btn{
+    background: var(--button-dark);
+    &:hover{
+        background: var(--button-light);
+    }
+}
+
 table {
     tbody {
         tr {
@@ -209,10 +224,10 @@ table {
                     color: red;
                 }
 
-                .edit {}
+                // .edit {}
 
                 .recieptBtn {
-                    color: green;
+                    color: var(--primary-bg-dark);
                 }
             }
         }
@@ -224,14 +239,15 @@ table {
     top: 64px!important;
     li{
         a{
+            color: var(--primary-bg-dark);
             display: flex;
             align-items: center;
-            i{
-                // flex:1;
-            }
-            .notMsg{
-                // flex: 1;
-            }
+            // i{
+            //     // flex:1;
+            // }
+            // .notMsg{
+            //     // flex: 1;
+            // }
             p{
                 margin: 0;
             }
@@ -264,7 +280,7 @@ table {
             justify-content: flex-start;
             align-items: center;
             background: rgba(255, 255, 255, 0.4);
-            background: linear-gradient(90deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+            background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
 
             header {
                 width: 100%;
@@ -290,7 +306,7 @@ table {
                 height: auto;
                 // border-radius: 50%;
                 // border: 8px solid rgba(255, 255, 255, 1);
-                // background: linear-gradient(60deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+                // background: linear-gradient(60deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -356,14 +372,14 @@ table {
             justify-content: center;
             align-items: center;
             background: rgba(255, 255, 255, 0.4);
-            background: linear-gradient(90deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+            background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
 
             .logoArea {
                 width: 300px;
                 height: auto;
                 // border-radius: 50%;
                 // border: 8px solid rgba(255, 255, 255, 1);
-                // background: linear-gradient(60deg, rgba(8, 107, 35, 0.9) 0%, rgba(15, 177, 59, 0.9) 100%);
+                // background: linear-gradient(60deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -516,7 +532,7 @@ table {
                 min-height:530px;
                 .picArea{
                     min-height:350px;
-                    background-color: #E64C3C;
+                    background-color: var(--secondary-bg-light);
                     margin-top:10px;
                     display: flex;
                     flex-direction: column;
@@ -543,7 +559,7 @@ table {
                         }
                     }
                     .fRow{
-                        background-color: #C03B2B;
+                        background-color: var(--secondary-bg-dark);
                         padding: 10px 0;
                         small{
                             color: #fff;
@@ -570,6 +586,22 @@ table {
                         width: 90%!important;
                         padding:10px 0;
                         text-align: center;
+                    }
+                    h2{
+                        height: 80px;
+                        flex: 1;
+                        background: var(--primary-bg-light);
+                    }
+                    h4{
+                        border: 4px solid var(--primary-bg-light);
+                        margin: 0;
+                        height: 80px;
+                        flex: 2;
+                        display: flex;
+                        padding: 6px;
+                        justify-content: center;
+                        align-items: center;
+                        color: var(--primary-bg-light);
                     }
                 }
             }
@@ -783,9 +815,9 @@ table {
                             }
                         }
 
-                        .businessName {}
+                        // .businessName {}
 
-                        .branchAddress {}
+                        // .branchAddress {}
 
                         .recieptTitle {
                             font-size: 12px;
@@ -1043,7 +1075,7 @@ table {
             margin: 10px 10px;
             display: flex;
             justify-content: center;
-            background: rgb(9, 143, 69);
+            background: var(--button-dark);
             border-radius: 50%;
         }
     }
@@ -1105,15 +1137,15 @@ table {
 
                 header {
                     nav {
-                        background: #086b23;
-                        background: linear-gradient(90deg, rgba(15, 177, 59, 1) 0%, rgba(8, 107, 35, 1) 100%);
+                        background: var(--primary-bg-dark);
+                        background: linear-gradient(90deg, var(--primary-bg-light) 0%, var(--primary-bg-dark) 100%);
                     }
                 }
 
-                .logoArea {
+                // .logoArea {
 
-                    img {}
-                }
+                //     // img {}
+                // }
 
                 .businessName {
                     width: 80%;
@@ -1157,9 +1189,9 @@ table {
                 width: 100%;
                 height: 100%;
 
-                .logoArea {
-                    img {}
-                }
+                // .logoArea {
+                //     // img {}
+                // }
 
                 .businessName {
                     h3 {
@@ -1187,31 +1219,31 @@ table {
             width: 100%;
             height: 100vh;
 
-            .registerBackNav {
-                a {
-                    .removePrefix {}
-                }
-            }
+            // .registerBackNav {
+            //     a {
+            //         .removePrefix {}
+            //     }
+            // }
 
-            .formBox {
-                h4 {}
+            // .formBox {
+            //     // h4 {}
 
-                .loginForm {
-                    .row {}
+            //     // .loginForm {
+            //     //     .row {}
 
-                    .RegisterBtn {
-                        .removePrefix {}
-                    }
-                }
+            //     //     .RegisterBtn {
+            //     //         .removePrefix {}
+            //     //     }
+            //     // }
 
-                .regForm {
-                    .row {}
+            //     // .regForm {
+            //     //     .row {}
 
-                    .RegisterBtn {
-                        .removePrefix {}
-                    }
-                }
-            }
+            //     //     .RegisterBtn {
+            //     //         .removePrefix {}
+            //     //     }
+            //     // }
+            // }
         }
     }
 
@@ -1346,9 +1378,9 @@ table {
                                 }
                             }
 
-                            .businessName {}
+                            // .businessName {}
 
-                            .branchAddress {}
+                            // .branchAddress {}
 
                             .recieptTitle {
                                 font-size: 12px;
