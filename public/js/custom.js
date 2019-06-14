@@ -684,7 +684,7 @@ function printReciept() {
 }
 
 // LOAD NOTIFICATION ASYNC
-function loadNotification(url){
+function loadNotification(base_url){
     let count = $('.notificationCount')[0].innerHTML;
     axios.get('/dashboard/sales/load-notification/'+count)
     .then(function (response) {
@@ -711,7 +711,7 @@ function loadNotification(url){
                     }
                 ],
                 volume: 0.5,
-                path: url+"/sounds/",
+                path: base_url+"/sounds/",
                 preload: true
             });
             ion.sound.play("door_bell");

@@ -55,9 +55,6 @@
                         <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     </ul>
                     {{-- @can('isOwner') --}}
-                    {{-- foreach(auth()->user()->notifications as $notification){
-                        return $notification->data['data']['saleDetails']['business_id'];
-                    } --}}
                     <ul>
                         <a href="#" style="margin-right: 14px;" data-target='notifications'  class="dropdown-trigger right hide-on-small-only">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
@@ -82,7 +79,7 @@
                         </ul>
                     </ul>
                     <ul> {{-- FOR MOBILE --}}
-                        <a  href="{{route('manageTransfers')}}" style="margin-left: 14px;" class="left hide-on-med-and-up">
+                        <a  href="#" style="margin-left: 14px;" data-target='notifications'  class="dropdown-trigger left hide-on-med-and-up">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
                             {!! auth()->user()->notifications->count() > 0 ? '<sup class="red green notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
@@ -241,7 +238,7 @@
             // CHECK FOR NEW NOTIFICATION EVERY SECOND
             window.setInterval(function(){
                 loadNotification('{{asset('storage')}}');
-            }, 5000);   
+            }, 2000);   
         </script>
     @endcan
 </body>

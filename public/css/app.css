@@ -984,6 +984,10 @@ table tbody tr td .recieptBtn {
     fill: #fff;
   }
 
+  #notifications {
+    top: 56px !important;
+  }
+
   .wrapper {
     height: auto;
   }
