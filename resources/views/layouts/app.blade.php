@@ -10,11 +10,17 @@
     <link rel="stylesheet" href="{{asset('css/wnoty.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/moment.js')}}"></script>
+    <script src="{{asset('js/moment-timezone-with-data-1970-2030.js')}}"></script>
+    <script src="{{asset('js/livestamp.min.js')}}"></script>
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
     <style>
         :root {
             --primary-bg-dark: #086b23; 
             --primary-bg-light: #0fb13b; 
+            
+            --primary-trans-bg-dark: rgb(8, 107, 35, 0.9); 
+            --primary-trans-bg-light: rgb(15, 177, 59, 0.9);
             
             --secondary-bg-dark: #C03B2B; 
             --secondary-bg-light: #E64C3C; 
@@ -23,7 +29,8 @@
             --switch-light: #22da75; 
 
             --button-dark: #098f45; 
-            --button-light: #37ad68; 
+            --button-light: #37ad68;
+            --button-secondary: #D32F2F;
         }
     </style>
 </head>
@@ -84,7 +91,7 @@
                                         <i class="material-icons">monetization_on</i>
                                         <div class='notMsg'>
                                             <p>{{$notificationItem['msg']}}</p>
-                                            <sub>From Branch {{$notificationItem['branch']}}</sub>
+                                            <sub>{{Carbon\Carbon::parse($notificationCollection->created_at)->diffForHumans()}}</sub>
                                         </div>
                                         
                                     </a>

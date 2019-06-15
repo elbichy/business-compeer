@@ -9,6 +9,24 @@
     <title>{{ config('app.name', 'Bits Infotech Solutions') }}</title>
     <link rel="stylesheet" href="{{asset('materialize-css/css/materialize.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <style>
+        :root {
+            --primary-bg-dark: #086b23; 
+            --primary-bg-light: #0fb13b; 
+            
+            --primary-trans-bg-dark: rgb(8, 107, 35, 0.9); 
+            --primary-trans-bg-light: rgb(15, 177, 59, 0.9);
+            
+            --secondary-bg-dark: #C03B2B; 
+            --secondary-bg-light: #E64C3C; 
+            
+            --switch-dark: #098f45; 
+            --switch-light: #22da75; 
+
+            --button-dark: #098f45; 
+            --button-light: #37ad68; 
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper row">

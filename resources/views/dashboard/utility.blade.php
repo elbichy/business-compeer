@@ -108,7 +108,8 @@
                                             <td>{{ $sale->utility->utilityIDnumber }}</td>
                                             <td>₦{{ number_format($sale->utility->amount) }}</td>
                                             <td>₦{{ number_format($sale->amount) }}</td>
-                                            <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
+                                            <td><span data-livestamp="{{\Carbon\Carbon::parse($sale->created_at)->timestamp}}"></span></td>
+                                            {{-- <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td> --}}
                                             <td>
                                                 {!! $sale->utility->status == 0 ? '<i class="material-icons orange-text tooltipped" data-position="right" data-tooltip="pending">autorenew</i>' : '<i class="material-icons green-text tooltipped" data-position="right" data-tooltip="completed">done_all</i>' !!}
                                             </td>

@@ -185,7 +185,7 @@
                             @foreach ($data['staffDetails'] as $staff)
                                 <tr>
                                     <td>{{$staff->firstname}} {{$staff->lastname}}</td>
-                                    <td>{{ $staff->branchName }} Branch</td>
+                                    <td>{{ ucfirst($staff->branchName) }} Branch</td>
                                     <td>
                                         @if ($staff->role == 1)
                                             Owner
@@ -198,11 +198,6 @@
                                         @endif
                                     </td>
                                     <td><a href="{{url('/dashboard/user-profile').'/'.$staff->id}}">View</a></td>
-                                    <td>
-                                        <a class="edit editCustomer" href="#edit">
-                                            <i class="tiny material-icons">edit</i>
-                                        </a>
-                                    </td>
                                     <td>
                                         <a class="delete deleteCustomer" href="#delete">
                                             <i class="tiny material-icons">close</i>

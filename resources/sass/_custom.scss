@@ -6,6 +6,9 @@ body {
     height: 100%;
 }
 
+a{
+    color: var(--primary-bg-dark);
+}
 
 .pace {
     -webkit-pointer-events: none;
@@ -153,7 +156,7 @@ nav {
 
 .sidenav.sidenav-fixed {
     background: var(--primary-bg-dark);
-    background: linear-gradient(60deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
+    background: linear-gradient(45deg, var(--primary-bg-dark) 10%, var(--primary-bg-light) 90%);
     .collapsible-body li a {
         padding: 0 23.5px 0 94px;
     }
@@ -167,11 +170,11 @@ nav {
     }
 
     ul>li.active {
-        background: rgba($color: #000000, $alpha: 0.1) !important;
+        background: rgba(0,0,0, 0.1) !important;
     }
 
     ul>li.activeCollape {
-        background: rgba($color: #000000, $alpha: 0.1) !important;
+        background: rgba(0,0,0, 0.1) !important;
     }
 }
 
@@ -245,11 +248,14 @@ table {
             // i{
             //     // flex:1;
             // }
-            // .notMsg{
-            //     // flex: 1;
-            // }
-            p{
-                margin: 0;
+            .notMsg{
+                // flex: 1;
+                p{
+                    margin: 0;
+                }
+                sub{
+                    color:#666;
+                }
             }
         }
     }
@@ -280,8 +286,8 @@ table {
             justify-content: flex-start;
             align-items: center;
             background: rgba(255, 255, 255, 0.4);
-            background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
-
+            background: linear-gradient(90deg, var(--primary-trans-bg-dark) 0%, var(--primary-trans-bg-light) 100%);
+            
             header {
                 width: 100%;
                 margin-bottom: 100px;
@@ -372,7 +378,7 @@ table {
             justify-content: center;
             align-items: center;
             background: rgba(255, 255, 255, 0.4);
-            background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
+            background: linear-gradient(90deg, var(--primary-trans-bg-dark) 0%, var(--primary-trans-bg-light) 100%);
 
             .logoArea {
                 width: 300px;
@@ -530,6 +536,8 @@ table {
             // border: 2px solid red;
             .focusArea{
                 min-height:530px;
+                position: sticky;
+                top: 70px;
                 .picArea{
                     min-height:350px;
                     background-color: var(--secondary-bg-light);
@@ -721,6 +729,7 @@ table {
                 position: fixed;
                 bottom: 10px;
                 right: 10px;
+                background: var(--button-secondary);
             }
 
             #addSaleDialog {

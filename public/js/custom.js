@@ -21,7 +21,7 @@ $('.tabs').tabs({
     swipeable: false
 });
 $('.dropdown-trigger').dropdown();
-
+$(".timeago").timeago();
 
 
 //////////////////////////////////////// GENERAL PAGE COMPONENTS SETUPS //////////////////////////////////////////
@@ -448,6 +448,8 @@ function fetchNewUtility(event){
         // handle success
         if(response.request.status == 200){
             console.log(response.data);
+
+            let time = moment.tz(response.data.created_at, 'Africa/Lagos');
             $(`
             <tr>
                 <td>${response.data.firstname} ${response.data.lastname}</td>
@@ -456,7 +458,9 @@ function fetchNewUtility(event){
                 <td>${response.data.utility.utilityIDnumber}</td>
                 <td>₦${numberWithCommas(response.data.utility.amount)}</td>
                 <td>₦${numberWithCommas(response.data.amount)}</td>
-                <td>Now</td>
+                <td>
+                    <span data-livestamp="${time}"></span>
+                </td>
                 <td>
                     ${ response.data.utility.status == 0 ? '<i class="material-icons orange-text tooltipped" data-position="right" data-tooltip="pending">autorenew</i>' : '<i class="material-icons green-text tooltipped" data-position="right" data-tooltip="completed">done_all</i>' }
                 </td>
@@ -683,7 +687,7 @@ function loadNotification(base_url){
                         <i class="material-icons">monetization_on</i>
                         <div class='notMsg'>
                             <p>${response.data.data.data.data.msg}</p>
-                            <sub>From Branch ${response.data.data.data.data.branch}</sub>
+                            <sub data-livestamp="${moment.tz(response.data.data.created_at, 'Africa/Lagos')}"></sub>
                         </div>
                         
                     </a>

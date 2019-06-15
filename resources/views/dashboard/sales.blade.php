@@ -5,7 +5,7 @@
         <div class="content-container">
             <div class="row salesWrap">
                 {{-- MODAL TRIGGER --}}
-                <a href="#addSaleDialog" class="addSaleBtn hide-on-small-only-old modal-trigger btn-floating btn-large waves-effect waves-light red darken-2"><i class="material-icons">add</i></a>
+                <a href="#addSaleDialog" class="addSaleBtn hide-on-small-only-old modal-trigger btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
                 {{-- MODAL BODY --}}
                 <div id="addSaleDialog" class="modal modal-fixed-footer">
                     <div class="progress" style="margin:0; height:6px; display:none;">

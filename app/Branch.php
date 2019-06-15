@@ -44,7 +44,7 @@ class Branch extends Model
     // ACCESSORS
     public function getNameAttribute($value)
     {
-        return ucfirst($value).' Branch';
+        return ucfirst($value);
     }
     public function getAddressAttribute($value)
     {

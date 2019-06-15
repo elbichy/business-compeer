@@ -4,6 +4,10 @@ body {
   height: 100%;
 }
 
+a {
+  color: var(--primary-bg-dark);
+}
+
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -134,7 +138,7 @@ nav .logOutBtn a i {
 
 .sidenav.sidenav-fixed {
   background: var(--primary-bg-dark);
-  background: linear-gradient(60deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
+  background: linear-gradient(45deg, var(--primary-bg-dark) 10%, var(--primary-bg-light) 90%);
 }
 
 .sidenav.sidenav-fixed .collapsible-body li a {
@@ -217,8 +221,12 @@ table tbody tr td .recieptBtn {
   align-items: center;
 }
 
-#notifications li a p {
+#notifications li a .notMsg p {
   margin: 0;
+}
+
+#notifications li a .notMsg sub {
+  color: #666;
 }
 
 .wrapper {
@@ -246,7 +254,7 @@ table tbody tr td .recieptBtn {
   justify-content: flex-start;
   align-items: center;
   background: rgba(255, 255, 255, 0.4);
-  background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
+  background: linear-gradient(90deg, var(--primary-trans-bg-dark) 0%, var(--primary-trans-bg-light) 100%);
 }
 
 .wrapper .contentWrap .contentContainer header {
@@ -335,7 +343,7 @@ table tbody tr td .recieptBtn {
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.4);
-  background: linear-gradient(90deg, var(--primary-bg-dark) 0%, var(--primary-bg-light) 100%);
+  background: linear-gradient(90deg, var(--primary-trans-bg-dark) 0%, var(--primary-trans-bg-light) 100%);
 }
 
 .wrapper .leftPane .leftContainer .logoArea {
@@ -480,6 +488,9 @@ table tbody tr td .recieptBtn {
 
 .my-content-wrapper .content-container .profileWrap .focusArea {
   min-height: 530px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 70px;
 }
 
 .my-content-wrapper .content-container .profileWrap .focusArea .picArea {
@@ -680,6 +691,7 @@ table tbody tr td .recieptBtn {
   position: fixed;
   bottom: 10px;
   right: 10px;
+  background: var(--button-secondary);
 }
 
 .my-content-wrapper .content-container .salesWrap #addSaleDialog .modal-content {
