@@ -153,7 +153,7 @@ $('.deleteBranch').click(function(){
     let branchId = this.dataset.branchid;
     let $result = confirm('This will delete all transactions and user records registered under this branch. Are you sure you want to proceed?', false);
     if($result){
-        let url = $('#deleteBranchForm').prop('action', 'deleteBranch/'+branchId);
+        let url = $('#deleteBranchForm').prop('action', 'delete-branch/'+branchId);
         $('#deleteBranchForm').submit();
     }
 });
