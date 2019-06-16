@@ -64,7 +64,7 @@ class BranchSettingsController extends Controller
         $staff->save();
 
         if ($insert) {
-            return redirect(route('businessSettings'))->with('status', 'Branch added successfully!');
+            return redirect()->back()->with('status', 'Branch added successfully!');
         }
     }
 
@@ -81,7 +81,7 @@ class BranchSettingsController extends Controller
         }
         
         if (Branch::find($id)->delete()) {
-            return redirect(route('businessSettings'))->with('status', 'Branch and all related records deleted successfully!');
+            return redirect()->back()->with('status', 'Branch and all related records deleted successfully!');
         }
     }
 
