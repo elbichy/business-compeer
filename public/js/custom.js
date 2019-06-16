@@ -21,7 +21,6 @@ $('.tabs').tabs({
     swipeable: false
 });
 $('.dropdown-trigger').dropdown();
-$(".timeago").timeago();
 
 
 //////////////////////////////////////// GENERAL PAGE COMPONENTS SETUPS //////////////////////////////////////////
