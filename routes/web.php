@@ -79,7 +79,7 @@ Route::post( '/dashboard/settings/store-business-settings', 'BusinessSettingsCon
 Route::get( '/dashboard/branch-settings', 'BranchSettingsController@branchSettings')->name('branchSettings');
 Route::post( '/dashboard/settings/store-branch-settings', 'BranchSettingsController@storeBranchSettings')->name('storeBranchSettings');
 Route::delete('/dashboard/settings/delete-branch/{id}', 'BranchSettingsController@deleteBranch')->name('deleteBranch');
-Route::post( 'switchBranch', 'ProcessBusinessSettings@switchBranch')->name('switchBranch');
+Route::post( 'switchBranch', 'BranchSettingsController@switchBranch')->name('switchBranch');
 
 // STAFF SETTINGS
 Route::get( '/dashboard/staff-settings', 'StaffSettingsController@staffSettings')->name('staffSettings');
