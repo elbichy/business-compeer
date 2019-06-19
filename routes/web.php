@@ -16,7 +16,6 @@ use App\Business;
 // Landing Page
 Route::get('/', 'PagesController@index');
 
-
 // User Routes
 Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

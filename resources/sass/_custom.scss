@@ -1,32 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Alike|Anton|Barlow+Condensed:400,700,900|Berkshire+Swash|Cookie|Courgette|Crete+Round|Damion|Dancing+Script|EB+Garamond|Fjalla+One|Grand+Hotel|Great+Vibes|Harmattan|Heebo:400,700,900|Hind|Kaushan+Script|Libre+Baskerville|Maven+Pro:400,700|Niconne|Noto+Serif|Pacifico|Pridi:400,700|Raleway:400,700|Russo+One|Sacramento|Sanchez|Satisfy|Slabo+27px|Zilla+Slab:400,700');
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
-a{
+a {
     color: var(--primary-bg-dark);
 }
 
 .pace {
     -webkit-pointer-events: none;
     pointer-events: none;
-
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-
     -webkit-transform: translate3d(0, -50px, 0);
     -ms-transform: translate3d(0, -50px, 0);
     transform: translate3d(0, -50px, 0);
-
     -webkit-transition: -webkit-transform .5s ease-out;
     -ms-transition: -webkit-transform .5s ease-out;
     transition: transform .5s ease-out;
@@ -47,18 +42,16 @@ a{
     width: 100%;
     height: 10px;
     background: var(--switch-light);
-
     pointer-events: none;
 }
 
-
-
 // OVERIDES
-.autocomplete-content{
-    img{
+.autocomplete-content {
+    img {
         display: none;
     }
 }
+
 .preloader-wrapper {
     display: none;
 }
@@ -93,60 +86,55 @@ a{
 }
 
 nav {
-    background: var(--primary-bg-dark); ;
-    background: linear-gradient(90deg, var(--primary-bg-light)  0%, var(--primary-bg-dark)  100%);
-
+    background: var(--primary-bg-dark);
+    ;
+    background: linear-gradient(90deg, var(--primary-bg-light) 0%, var(--primary-bg-dark) 100%);
     .nav-wrapper {
         .breadcrumbWrap {
             margin-left: 310px;
-
             .breadcrumb {
                 font-size: 14px;
             }
         }
-        sup.notificationCount{
-            width: 30px; 
-            height: 30px; 
-            display: inline-flex; 
-            justify-content: center; 
-            align-items: center; 
+        sup.notificationCount {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             border-radius: 50%;
         }
-        form{
+        form {
             .input-field {
-                .select-wrapper{
+                .select-wrapper {
                     // border:2px solid #fff!important;
-                    margin:0;
-                    input{
-                        border:none;
-                        margin:10px 0 0 0;
-                        color:#fff;
+                    margin: 0;
+                    input {
+                        border: none;
+                        margin: 10px 0 0 0;
+                        color: #fff;
                         text-align: center;
                     }
-                    .caret{
-                        fill:#fff;
+                    .caret {
+                        fill: #fff;
                     }
                 }
             }
         }
     }
-
     .logOutBtn {
         width: 100%;
         height: 100%;
         // border:1px solid red;
         display: flex;
         margin-left: 12px;
-
         a {
             width: 100%;
             height: 100%;
             display: flex;
-
             &:hover {
                 background: rgba($color: #000000, $alpha: 0.1);
             }
-
             i {
                 margin-left: 0;
             }
@@ -164,17 +152,14 @@ nav {
 
 .sidenav .collapsible-body {
     background: var(--primary-bg-dark);
-
     li a {
         padding: 0 23.5px 0 94px;
     }
-
     ul>li.active {
-        background: rgba(0,0,0, 0.1) !important;
+        background: rgba(0, 0, 0, 0.1) !important;
     }
-
     ul>li.activeCollape {
-        background: rgba(0,0,0, 0.1) !important;
+        background: rgba(0, 0, 0, 0.1) !important;
     }
 }
 
@@ -211,9 +196,9 @@ nav {
     padding: 14px 16px;
 }
 
-.btn{
+.btn {
     background: var(--button-dark);
-    &:hover{
+    &:hover {
         background: var(--button-light);
     }
 }
@@ -222,13 +207,10 @@ table {
     tbody {
         tr {
             td {
-
                 .delete {
                     color: red;
                 }
-
                 // .edit {}
-
                 .recieptBtn {
                     color: var(--primary-bg-dark);
                 }
@@ -237,30 +219,29 @@ table {
     }
 }
 
-#notifications{
+#notifications {
     width: auto!important;
     top: 64px!important;
-    li{
-        a{
+    li {
+        a {
             color: var(--primary-bg-dark);
             display: flex;
             align-items: center;
             // i{
             //     // flex:1;
             // }
-            .notMsg{
+            .notMsg {
                 // flex: 1;
-                p{
+                p {
                     margin: 0;
                 }
-                sub{
-                    color:#666;
+                sub {
+                    color: #666;
                 }
             }
         }
     }
 }
-
 
 // HOME TEMP AND LOGIN LOGOUT STYLES
 .wrapper {
@@ -269,7 +250,6 @@ table {
     background: rgba($color: #fff, $alpha: 1);
     margin: 0;
     padding: 0;
-
     .contentWrap {
         height: 100%;
         margin: 0;
@@ -277,7 +257,6 @@ table {
         background-size: cover;
         height: 100%;
         padding: 0;
-
         .contentContainer {
             width: 100%;
             height: 100%;
@@ -287,15 +266,12 @@ table {
             align-items: center;
             background: rgba(255, 255, 255, 0.4);
             background: linear-gradient(90deg, var(--primary-trans-bg-dark) 0%, var(--primary-trans-bg-light) 100%);
-            
             header {
                 width: 100%;
                 margin-bottom: 100px;
-
                 nav {
                     background: transparent;
                     box-shadow: none !important;
-
                     .btn.btn,
                     .btn-large,
                     .btn-small,
@@ -306,7 +282,6 @@ table {
                     }
                 }
             }
-
             .logoArea {
                 width: 300px;
                 height: auto;
@@ -320,10 +295,8 @@ table {
                     width: 80%;
                 }
             }
-
             .businessName {
                 width: 80%;
-
                 h3 {
                     font-weight: 700;
                     font-size: 50px;
@@ -331,12 +304,10 @@ table {
                     text-shadow: 1px 1px 4px rgba($color: #000000, $alpha: 0.4);
                 }
             }
-
             .subTitle {
                 padding: 20px 30px;
                 background: #fff;
                 border-radius: 3px;
-
                 h6 {
                     margin: 0;
                     padding: 0;
@@ -345,12 +316,10 @@ table {
                     color: rgb(148, 20, 20);
                 }
             }
-
             .MainsubTitle {
                 padding: 0px 30px 30px 30px;
                 // background: #fff;
                 border-radius: 3px;
-
                 h6 {
                     margin: 0;
                     padding: 0;
@@ -361,7 +330,6 @@ table {
             }
         }
     }
-
     .leftPane {
         height: 100%;
         margin: 0;
@@ -369,7 +337,6 @@ table {
         background-size: cover;
         height: 100%;
         padding: 0;
-
         .leftContainer {
             width: 100%;
             height: 100%;
@@ -379,7 +346,6 @@ table {
             align-items: center;
             background: rgba(255, 255, 255, 0.4);
             background: linear-gradient(90deg, var(--primary-trans-bg-dark) 0%, var(--primary-trans-bg-light) 100%);
-
             .logoArea {
                 width: 300px;
                 height: auto;
@@ -393,10 +359,8 @@ table {
                     width: 80%;
                 }
             }
-
             .businessName {
                 width: 80%;
-
                 h3 {
                     font-weight: 700;
                     font-size: 50px;
@@ -404,12 +368,10 @@ table {
                     text-shadow: 1px 1px 4px rgba($color: #000000, $alpha: 0.4);
                 }
             }
-
             .subTitle {
                 padding: 20px 30px;
                 background: #fff;
                 border-radius: 3px;
-
                 h6 {
                     margin: 0;
                     padding: 0;
@@ -418,12 +380,10 @@ table {
                     color: rgb(148, 20, 20);
                 }
             }
-
             .MainsubTitle {
                 padding: 0px 30px 30px 30px;
                 // background: #fff;
                 border-radius: 3px;
-
                 h6 {
                     margin: 0;
                     padding: 0;
@@ -434,7 +394,6 @@ table {
             }
         }
     }
-
     .rightPane {
         background-color: #fff;
         background-image: url('/storage/bg2.jpg');
@@ -443,7 +402,6 @@ table {
         display: flex;
         justify-content: center;
         align-items: center;
-
         .registerBackNav {
             // border: 2px solid red;
             margin: 0;
@@ -455,17 +413,14 @@ table {
             display: flex;
             justify-content: center;
             align-items: center;
-
             a {
                 display: flex;
-
                 .removePrefix {
                     position: static;
                     width: auto;
                 }
             }
         }
-
         .formBox {
             width: 430px;
             height: auto;
@@ -476,14 +431,12 @@ table {
             justify-content: center;
             align-items: center;
             padding: 10px;
-
             h4 {
                 // border: 2px solid red;
                 width: 90%;
                 margin: 0;
                 margin-top: 25px;
             }
-
             .loginForm {
                 padding-top: 20px;
                 // border: 2px solid #eee;
@@ -492,12 +445,10 @@ table {
                 margin-top: 40px;
                 margin-bottom: 40px;
                 background: rgba($color: #fff, $alpha: 0.4);
-
                 .row {
                     margin-bottom: 0px;
                 }
             }
-
             .regForm {
                 display: flex;
                 // border: 2px solid #eee;
@@ -506,7 +457,6 @@ table {
                 margin-top: 15px;
                 background: rgba($color: #fff, $alpha: 0.4);
                 padding-top: 20px;
-
                 .row {
                     margin-bottom: 0px;
                 }
@@ -514,7 +464,6 @@ table {
         }
     }
 }
-
 
 // DASHBOARD CONTENT AREA
 .my-content-wrapper,
@@ -529,78 +478,75 @@ table {
         // border: 6px solid red;
         height: calc(100vh - 114px);
         padding: 5px 10px 0 10px;
-
         // PROFILE CONTENT START HERE
         .profileWrap {
-
             // border: 2px solid red;
-            .focusArea{
-                min-height:530px;
+            .focusArea {
+                min-height: 530px;
                 position: sticky;
                 top: 70px;
-                .picArea{
-                    min-height:350px;
+                .picArea {
+                    min-height: 350px;
                     background-color: var(--secondary-bg-light);
-                    margin-top:10px;
+                    margin-top: 10px;
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-end;
                     align-items: center;
                     padding-bottom: 10px;
-                    img{
-                        width:150px;
+                    img {
+                        width: 150px;
                         height: 150px;
                         border-radius: 50%;
                         // border:4px solid #fff;
                     }
-                    p{
+                    p {
                         color: #fff;
                         font-size: 20px;
-                        margin:5px 0!important;
+                        margin: 5px 0!important;
                     }
-                    .row{
+                    .row {
                         width: 92%!important;
                         margin-bottom: 5px;
-                        small{
+                        small {
                             color: rgb(53, 13, 9);
                             font-size: 14px;
                         }
                     }
-                    .fRow{
+                    .fRow {
                         background-color: var(--secondary-bg-dark);
                         padding: 10px 0;
-                        small{
+                        small {
                             color: #fff;
                             font-size: 14px;
                         }
                     }
-                    
                 }
-                .salesMadeArea{
-                    min-height:170px;
+                .salesMadeArea {
+                    min-height: 170px;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    .salesMadeHeading{
-                        margin:0;
+                    .salesMadeHeading {
+                        margin: 0;
                         background: #eee;
                         width: 90%!important;
-                        padding:10px 0;
+                        padding: 10px 0;
                         text-align: center;
                     }
-                    .salesMade{
-                        margin:0;
+                    .salesMade {
+                        margin: 0;
                         width: 90%!important;
-                        padding:10px 0;
+                        padding: 10px 0;
                         text-align: center;
                     }
-                    h2{
+                    h2 {
                         height: 80px;
                         flex: 1;
                         background: var(--primary-bg-light);
                     }
-                    h4{
+                    h4 {
                         border: 4px solid var(--primary-bg-light);
                         margin: 0;
                         height: 80px;
@@ -613,52 +559,48 @@ table {
                     }
                 }
             }
-            .detailsArea{
+            .detailsArea {
                 // border:2px solid red;
-                padding:20px;
-                .detailsWrap{
-                    .label{
+                padding: 20px;
+                .detailsWrap {
+                    .label {
                         font-weight: bold;
                         background: #eee;
                         text-align: center;
                         padding: 6px;
                     }
-                    .info{
+                    .info {
                         text-align: center;
                         padding: 6px;
-                        margin-bottom:20px;
-                        .material-placeholder{
+                        margin-bottom: 20px;
+                        .material-placeholder {
                             display: flex;
                             width: 100%;
                             justify-content: center;
                             align-items: center;
                         }
-                        img{
-                            width:60%;
+                        img {
+                            width: 60%;
                         }
                     }
                 }
-                .file-path-wrapper{
+                .file-path-wrapper {
                     display: none!important;
                 }
             }
-            
         }
-
         // DASHBOARD CONTENT START
         .stats {
             background: rgba(255, 255, 255, 1);
             margin-bottom: 20px;
             position: sticky;
             top: 63px;
-
             .stats-inner {
                 width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: space-evenly;
             }
-
             .info-box {
                 display: block;
                 min-height: 90px;
@@ -668,7 +610,6 @@ table {
                 border-radius: 2px;
                 margin-bottom: 12px;
                 margin-top: 12px;
-
                 .info-box-icon {
                     border-top-left-radius: 2px;
                     border-top-right-radius: 0;
@@ -684,11 +625,9 @@ table {
                     justify-content: center;
                     align-items: center;
                 }
-
                 .info-box-content {
                     padding: 5px 10px;
                     margin-left: 90px;
-
                     .progress-description,
                     .info-box-text {
                         display: block;
@@ -697,11 +636,9 @@ table {
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
-
                     .info-box-text {
                         text-transform: uppercase;
                     }
-
                     .info-box-number {
                         display: block;
                         font-weight: bold;
@@ -710,48 +647,38 @@ table {
                 }
             }
         }
-
         .tableWrap {
             padding: 20px;
-
             &:first-child {
                 border-right: 2px solid #eee;
             }
         }
-
         // DASHBOARD CONTENT END
-
         // SALES CONTENT START HERE
         .salesWrap {
             position: static;
-
             .addSaleBtn {
                 position: fixed;
                 bottom: 10px;
                 right: 10px;
                 background: var(--button-secondary);
             }
-
             #addSaleDialog {
                 .modal-content {
                     padding: 10px 16px 0px 16px;
-
                     form {
                         .row {
                             margin-bottom: 0;
-
                             &:first-child {
                                 margin-bottom: 25px;
                             }
                         }
                     }
-
                     button {
                         margin-right: .75rem;
                     }
                 }
             }
-
             .salesHeading {
                 // border:2px solid red;
                 padding-bottom: 20px;
@@ -760,16 +687,14 @@ table {
                 top: 64px;
                 background: white;
             }
-
             .salesTable {
                 // border-right: 2px solid #eee;
                 padding: 10px;
                 height: auto;
-                .clearOutstanding{
+                .clearOutstanding {
                     cursor: pointer;
                 }
             }
-
             .salesRecieptArea {
                 height: 462px;
                 position: sticky!important;
@@ -778,7 +703,6 @@ table {
                 justify-content: flex-end;
                 align-items: flex-start;
                 padding: 0;
-
                 .reciept {
                     height: 100%;
                     width: 96%;
@@ -789,25 +713,21 @@ table {
                     justify-content: center;
                     align-items: center;
                     position: relative;
-
                     .printBtn {
                         position: absolute;
                         top: 6px;
                         right: 6px;
                         color: #000;
                         font-size: 12px;
-
                         // border:1px solid red;
                         &:hover {
                             cursor: pointer;
                         }
                     }
-
                     .noReciept {
                         // margin: auto;
                         color: #ddd;
                     }
-
                     .preloader-wrapper {
                         display: block!important;
                         margin: auto !important;
@@ -817,23 +737,18 @@ table {
                         flex-direction: column;
                         align-items: center;
                         margin-bottom: 10px;
-
                         .logoArea {
                             img {
                                 width: 75px;
                             }
                         }
-
                         // .businessName {}
-
                         // .branchAddress {}
-
                         .recieptTitle {
                             font-size: 12px;
                             margin: 0px;
                         }
                     }
-
                     .recieptBottom table>tbody>tr>td {
                         padding: 6px 4px;
                         display: table-cell;
@@ -845,10 +760,8 @@ table {
                 }
             }
         }
-
         // EXPENSE CONTENT START HERE
         .expenseWrap {
-
             // border: 2px solid red;
             .expenseHeading {
                 padding-bottom: 20px;
@@ -858,7 +771,6 @@ table {
                 top: 64px;
                 background: white;
             }
-
             .expenseForm {
                 // border-right: 2px solid #eee;
                 padding: 10px 40px;
@@ -866,15 +778,12 @@ table {
                 position: sticky !important;
                 top: 140px;
             }
-
             .expenseTable {
                 border-left: 2px solid #eee;
             }
         }
-
         // STOCK CONTENT START HERE
         .stockWrap {
-
             // border: 2px solid red;
             .stockHeading {
                 padding-bottom: 40px;
@@ -884,7 +793,6 @@ table {
                 top: 64px;
                 background: white;
             }
-
             .stockForm {
                 // border-right: 2px solid #eee;
                 padding: 10px 40px;
@@ -892,15 +800,12 @@ table {
                 position: sticky !important;
                 top: 140px;
             }
-
             .stockTable {
                 border-left: 2px solid #eee;
             }
         }
-
         // CUSTOMER RECORDS START HERE
         .customersWrap {
-
             // border: 2px solid red;
             .customersHeading {
                 padding-bottom: 20px;
@@ -910,20 +815,16 @@ table {
                 top: 64px;
                 background: white;
             }
-
             .customersForm {
                 // border-right: 2px solid #eee;
                 padding: 10px 40px;
             }
-
             .customersTable {
                 border-left: 0px solid #eee;
             }
         }
-
         // BUSINESS SETTINGS CONTENT START HERE
         .businessSettingsWrap {
-
             // border: 2px solid red;
             .businessSettingsHeading {
                 padding-bottom: 40px;
@@ -933,43 +834,39 @@ table {
                 top: 64px;
                 background: white;
             }
-
             .businessSettingsForms {
                 border: 2px solid #eee;
                 // padding: 10px 40px;
                 position: sticky !important;
                 top: 180px;
-                .tabs{
+                .tabs {
                     overflow: hidden;
                 }
-                .tabs-content{
+                .tabs-content {
                     height: 400px!important;
                     overflow-y: auto;
                 }
-                form{
-                    margin-top:20px;
-                    .row{
-                        &:last-child{
+                form {
+                    margin-top: 20px;
+                    .row {
+                        &:last-child {
                             margin-bottom: 0px;
                         }
-                        .file-path-wrapper{
+                        .file-path-wrapper {
                             display: none;
                         }
                     }
                 }
             }
-
             .businessSettingsTable {
                 // border-left:2px solid #eee;
-                table{
-                    width:100%;
+                table {
+                    width: 100%;
                 }
             }
         }
-
         // BRANCH SETTINGS CONTENT START HERE
         .branchSettingsWrap {
-
             // border: 2px solid red;
             .branchSettingsHeading {
                 padding-bottom: 40px;
@@ -979,32 +876,28 @@ table {
                 top: 64px;
                 background: white;
             }
-
             .branchSettingsForms {
                 border-right: 2px solid #eee;
                 // padding: 10px 40px;
                 position: sticky !important;
                 top: 180px;
-                form{
-                    margin-top:0px;
-                    border:none;
-                    .row{
+                form {
+                    margin-top: 0px;
+                    border: none;
+                    .row {
                         margin-bottom: 0px;
                     }
                 }
             }
-
             .branchSettingsTable {
                 // border-left:2px solid #eee;
-                table{
-                    width:100%;
+                table {
+                    width: 100%;
                 }
             }
         }
-
         // STAFF SETTINGS CONTENT START HERE
         .staffSettingsWrap {
-
             // border: 2px solid red;
             .staffSettingsHeading {
                 padding-bottom: 40px;
@@ -1014,40 +907,37 @@ table {
                 top: 64px;
                 background: white;
             }
-
             .staffSettingsForms {
                 border: 2px solid #eee;
                 padding: 10px 10px 0px 10px;
                 position: sticky !important;
                 top: 180px;
-                form{
-                    margin-top:0px;
-                    .row{
+                form {
+                    margin-top: 0px;
+                    .row {
                         margin-bottom: 0px;
                     }
-                    .file-path-wrapper{
+                    .file-path-wrapper {
                         display: none!important;
                     }
                 }
             }
-
             .staffSettingsTable {
                 // border-left:2px solid #eee;
-                table{
-                    width:100%;
+                table {
+                    width: 100%;
                 }
             }
         }
-        
     }
-    .footer{
-        width:100%;
+    .footer {
+        width: 100%;
         height: 50px;
         // border:2px solid red;
         background: #fff;
         position: sticky;
-        bottom:0;
-        text-align:center;
+        bottom: 0;
+        text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1055,23 +945,17 @@ table {
 }
 
 
-
-
-
 /*********************************************** OTHER SCREEN SIZES ********************************/
-
 
 
 /* Extra small devices (phones, 600px and down) */
 
 @media only screen and (max-width: 600px) {
-
     html,
     body {
         height: auto;
     }
-
-    .homeNav{
+    .homeNav {
         background: transparent!important;
         background: none!important;
         background-attachment: none!important;
@@ -1088,51 +972,48 @@ table {
             border-radius: 50%;
         }
     }
-
     nav {
         .nav-wrapper {
             .breadcrumbWrap {
                 margin-left: 10px;
-
                 .breadcrumb {
                     font-size: 14px;
                 }
             }
-            sup.notificationCount{
-                width: 30px; 
-                height: 30px; 
-                display: inline-flex; 
-                justify-content: center; 
-                align-items: center; 
+            sup.notificationCount {
+                width: 30px;
+                height: 30px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
                 border-radius: 50%;
             }
-            form{
+            form {
                 .input-field {
-                    .select-wrapper{
+                    .select-wrapper {
                         // border:2px solid #fff!important;
-                        margin:0;
-                        input{
-                            border:none;
-                            margin:0;
-                            color:#fff;
+                        margin: 0;
+                        input {
+                            border: none;
+                            margin: 0;
+                            color: #fff;
                             text-align: center;
                         }
-                        .caret{
-                            fill:#fff;
+                        .caret {
+                            fill: #fff;
                         }
                     }
                 }
             }
         }
     }
-
-    #notifications{
+    #notifications {
         top: 56px!important;
     }
-
     .wrapper {
         height: auto;
-
+        display: flex;
+        flex-direction: column-reverse;
         .contentWrap {
             height: 100%;
             margin: 0;
@@ -1140,79 +1021,60 @@ table {
             background-size: cover;
             height: 100%;
             padding: 0;
-
             .contentContainer {
                 height: 100vh;
-
                 header {
                     nav {
                         background: var(--primary-bg-dark);
                         background: linear-gradient(90deg, var(--primary-bg-light) 0%, var(--primary-bg-dark) 100%);
                     }
                 }
-
                 // .logoArea {
-
                 //     // img {}
                 // }
-
                 .businessName {
                     width: 80%;
-
                     h3 {
                         font-size: 36px;
                     }
                 }
-
                 .MainsubTitle {
-
                     h6 {
                         font-size: 16px;
                     }
-
                 }
-
                 .expenseWrap {
-
                     // border: 2px solid red;
                     .expenseHeading {
                         padding-bottom: 20px;
                     }
-
                     .expenseForm {
                         // border-right: 2px solid #eee;
                         padding: 10px 40px;
                     }
-
                     .expenseTable {
                         border-left: none;
                     }
                 }
             }
         }
-
         .leftPane {
             height: 100vh;
-
             .leftContainer {
                 width: 100%;
                 height: 100%;
-
                 // .logoArea {
                 //     // img {}
                 // }
-
                 .businessName {
                     h3 {
                         font-size: 30px;
                     }
                 }
-
                 .MainsubTitle {
                     padding: 0px 30px 30px 30px;
                     // background: #fff;
                     border-radius: 3px;
-
                     h6 {
                         margin: 0;
                         padding: 0;
@@ -1223,31 +1085,24 @@ table {
                 }
             }
         }
-
         .rightPane {
             width: 100%;
             height: 100vh;
-
             // .registerBackNav {
             //     a {
             //         .removePrefix {}
             //     }
             // }
-
             // .formBox {
             //     // h4 {}
-
             //     // .loginForm {
             //     //     .row {}
-
             //     //     .RegisterBtn {
             //     //         .removePrefix {}
             //     //     }
             //     // }
-
             //     // .regForm {
             //     //     .row {}
-
             //     //     .RegisterBtn {
             //     //         .removePrefix {}
             //     //     }
@@ -1255,23 +1110,17 @@ table {
             // }
         }
     }
-
     #mobile-demo {
-
         background-color: rgba($color: #000000, $alpha: 0.4);
     }
-
-    
     .my-content-wrapper {
         .content-container {
-
             // DASHBOARD CONTENT START
             .stats {
                 background: rgba(255, 255, 255, 1);
                 margin-bottom: 0px;
                 position: static;
                 top: none;
-
                 .stats-inner {
                     width: 100%;
                     display: flex;
@@ -1281,41 +1130,49 @@ table {
                 }
             }
             .tableWrap {
-                :first-child {
+                 :first-child {
                     border-right: none;
                 }
             }
-
+            // PROFILE CONTENT START HERE
+            .profileWrap {
+                // border: 2px solid red;
+                .focusArea {
+                    min-height: 530px;
+                    position: static;
+                    top: none;
+                    // .picArea{
+                    // }
+                    // .salesMadeArea{
+                    // }
+                }
+                // .detailsArea{
+                // }
+            }
             // SALES CONTENT START HERE
             .salesWrap {
                 position: static;
-
                 .addSaleBtn {
                     position: fixed;
                     bottom: 10px;
                     right: 10px;
                 }
-
                 #addSaleDialog {
                     .modal-content {
                         padding: 10px 16px 0px 16px;
-
                         form {
                             .row {
                                 margin-bottom: 0;
-
                                 &:first-child {
                                     margin-bottom: 25px;
                                 }
                             }
                         }
-
                         button {
                             margin-right: .75rem;
                         }
                     }
                 }
-
                 .salesHeading {
                     // border:2px solid red;
                     padding-bottom: 20px;
@@ -1323,16 +1180,14 @@ table {
                     top: none;
                     background: transparent;
                 }
-
                 .salesTable {
                     // border-right: 2px solid #eee;
                     padding: 10px;
                     height: auto;
-                    .clearOutstanding{
+                    .clearOutstanding {
                         cursor: pointer;
                     }
                 }
-
                 .salesRecieptArea {
                     height: 462px;
                     position: static!important;
@@ -1341,7 +1196,6 @@ table {
                     justify-content: flex-end;
                     align-items: flex-start;
                     padding: 0;
-
                     .reciept {
                         height: 100%;
                         width: 96%;
@@ -1352,25 +1206,21 @@ table {
                         justify-content: center;
                         align-items: center;
                         position: relative;
-
                         .printBtn {
                             position: absolute;
                             top: 6px;
                             right: 6px;
                             color: #000;
                             font-size: 12px;
-
                             // border:1px solid red;
                             &:hover {
                                 cursor: pointer;
                             }
                         }
-
                         .noReciept {
                             // margin: auto;
                             color: #ddd;
                         }
-
                         .preloader-wrapper {
                             display: block!important;
                             margin: auto !important;
@@ -1380,23 +1230,18 @@ table {
                             flex-direction: column;
                             align-items: center;
                             margin-bottom: 10px;
-
                             .logoArea {
                                 img {
                                     width: 75px;
                                 }
                             }
-
                             // .businessName {}
-
                             // .branchAddress {}
-
                             .recieptTitle {
                                 font-size: 12px;
                                 margin: 0px;
                             }
                         }
-
                         .recieptBottom table>tbody>tr>td {
                             padding: 6px 4px;
                             display: table-cell;
@@ -1408,7 +1253,6 @@ table {
                     }
                 }
             }
-
             .expenseWrap {
                 .expenseHeading {
                     // border:2px solid red;
@@ -1424,12 +1268,9 @@ table {
                 .expenseTable {
                     border-left: none;
                 }
-                
             }
-
             // STOCK CONTENT START HERE
             .stockWrap {
-    
                 // border: 2px solid red;
                 .stockHeading {
                     padding-bottom: 20px;
@@ -1441,13 +1282,9 @@ table {
                     position: static !important;
                     top: 0px;
                 }
-
-
             }
-
             // BUSINESS SETTINGS CONTENT START HERE
             .businessSettingsWrap {
-
                 // border: 2px solid red;
                 .businessSettingsHeading {
                     padding-bottom: 20px;
@@ -1455,31 +1292,29 @@ table {
                     top: none;
                     background: transparent;
                 }
-                
                 .businessSettingsForms {
                     position: static !important;
                     top: 0px;
-                    .tabs-content{
+                    .tabs-content {
                         height: 800px!important;
                     }
-                    form{
-                        margin-top:40px;
-                        .row{
-                            &:last-child{
+                    form {
+                        margin-top: 40px;
+                        .row {
+                            &:last-child {
                                 margin-bottom: 0px;
                             }
-                            .file-path-wrapper{
+                            .file-path-wrapper {
                                 display: none;
                             }
                         }
                     }
                 }
-
                 .businessSettingsTable {
-                    table{
-                        tbody{
-                            tr{
-                                td{
+                    table {
+                        tbody {
+                            tr {
+                                td {
                                     width: 25%!important;
                                 }
                             }
@@ -1487,11 +1322,7 @@ table {
                     }
                 }
             }
-
-
-            
             .branchSettingsWrap {
-    
                 // border: 2px solid red;
                 .branchSettingsHeading {
                     padding-bottom: 20px;
@@ -1500,22 +1331,20 @@ table {
                     background: transparent;
                 }
                 .branchSettingsForms {
-                border-right: 2px solid #eee;
-                // padding: 10px 40px;
-                position: static !important;
-                top: 0px;
-                form{
-                    margin-top:0px;
-                    border:none;
-                    .row{
-                        margin-bottom: 0px;
+                    border-right: 2px solid #eee;
+                    // padding: 10px 40px;
+                    position: static !important;
+                    top: 0px;
+                    form {
+                        margin-top: 0px;
+                        border: none;
+                        .row {
+                            margin-bottom: 0px;
+                        }
                     }
                 }
             }
-            }
-                
             .staffSettingsWrap {
-    
                 // border: 2px solid red;
                 .staffSettingsHeading {
                     padding-bottom: 20px;
@@ -1524,28 +1353,28 @@ table {
                     background: transparent;
                 }
                 .staffSettingsForms {
-                position: static !important;
-                top: 0px;
-                form{
-                    margin-top:0px;
-                    .row{
-                        margin-bottom: 0px;
-                    }
-                    .file-path-wrapper{
-                        display: none!important;
+                    position: static !important;
+                    top: 0px;
+                    form {
+                        margin-top: 0px;
+                        .row {
+                            margin-bottom: 0px;
+                        }
+                        .file-path-wrapper {
+                            display: none!important;
+                        }
                     }
                 }
             }
-            }
         }
-        .footer{
-            width:100%;
+        .footer {
+            width: 100%;
             height: 50px;
             // border:2px solid red;
             background: #fff;
             position: static;
-            bottom:none;
-            text-align:center;
+            bottom: none;
+            text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1569,7 +1398,6 @@ table {
 @media only screen and (min-width: 992px) {}
 
 @media only screen and (max-width: 992px) {
-
     .my-content-wrapper,
     .space-for-sidenave {
         padding-left: 0;

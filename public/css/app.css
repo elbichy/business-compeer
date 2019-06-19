@@ -1037,6 +1037,8 @@ table tbody tr td .recieptBtn {
 
   .wrapper {
     height: auto;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .wrapper .contentWrap {
@@ -1133,6 +1135,12 @@ table tbody tr td .recieptBtn {
 
   .my-content-wrapper .content-container .tableWrap :first-child {
     border-right: none;
+  }
+
+  .my-content-wrapper .content-container .profileWrap .focusArea {
+    min-height: 530px;
+    position: static;
+    top: none;
   }
 
   .my-content-wrapper .content-container .salesWrap {

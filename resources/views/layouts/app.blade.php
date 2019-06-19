@@ -103,7 +103,7 @@
                     <ul> {{-- FOR MOBILE --}}
                         <a  href="#" style="margin-left: 14px;" data-target='notifications'  class="dropdown-trigger left hide-on-med-and-up">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
-                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red green notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
+                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
                     </ul>  
                     {{-- @endcan  --}}
@@ -128,7 +128,7 @@
                         <a href="#user"><img class="circle" src="{{asset('storage/compeer-LOGO.png')}}"></a>
                     @endif
                     
-
+        
                     {{-- BUSINESS NAME --}}
                     <a href="#name"><span class="white-text name">
                         @if (count($data['businessDetails']) == 1)
@@ -260,7 +260,7 @@
             // CHECK FOR NEW NOTIFICATION EVERY SECOND
             window.setInterval(function(){
                 loadNotification('{{asset('storage')}}');
-            }, 2000);   
+            }, 30000);   
         </script>
     @endcan
 </body>

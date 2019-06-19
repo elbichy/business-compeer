@@ -156,7 +156,7 @@ class SaleController extends Controller
                         'branch' => auth()->user()->branch_id,
                         'user' => auth()->user()->id,
                         'refNumver' => $refNumber,
-                        'url' => 'http://bitssolutions.test/dashboard/sales/manage-transfers'
+                        'url' => url('/dashboard/sales/manage-transfers')
                     ];
                     $user->notify(new salesApproval($data));
                     $arr = array('msg' => 'Transaction added successfully!', 'from' => 'transfers', 'status' => true);
@@ -220,7 +220,7 @@ class SaleController extends Controller
                         'branch' => auth()->user()->branch_id,
                         'user' => auth()->user()->id,
                         'refNumver' => $refNumber,
-                        'url' => 'http://bitssolutions.test/dashboard/sales/manage-utility-bill-payment'
+                        'url' => url('/dashboard/sales/manage-utility-bill-payment')
                     ];
                     $user->notify(new salesApproval($data));
                     $arr = array('msg' => 'Transaction added successfully!', 'from' => 'utility', 'status' => true, 'data' => $data);
