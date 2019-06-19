@@ -13,7 +13,6 @@
                                 <div class="indeterminate"></div>
                             </div>
                             <div class="transferContent">
-                                {{-- DETAILS APPEAR HERE --}}
                             </div>
                         </div>
                         <div class="modal-footer btnWrap" style="display:flex; justify-content:flex-end;">
