@@ -757,6 +757,8 @@ function getTransferDetails(e){
     .then(function (response) {
         $('.progress').fadeOut();
         $('button').removeClass('disabled');
+        $('#approveBtn').attr('data-salesID', response.data.id);
+        $('#declineBtn').attr('data-salesID', response.data.id);
         $('.transferContent').html(`
             <fieldset>
                 <legend>Transaction Details</legend>
@@ -820,7 +822,7 @@ function getTransferDetails(e){
             </fieldset>
         `);
         $('.transferContent').show( "drop" );
-        console.log(response.data);
+        // console.log(response.data);
     })
     .catch(function (error) {
         // handle error
@@ -831,6 +833,34 @@ function getTransferDetails(e){
     });
 }
 
+function approveTransfer(e){
+    console.log(e.currentTarget.dataset.salesid);
+    axios.get('/dashboard/sales/approve-transfer/'+transferId)
+    .then(function (response) {
+
+    })
+    .catch(function (error) {
+        // handle error
+        // console.log(error.data);
+    })
+    .finally(function () {
+        // always executed
+    });
+}
+function declineTransfer(e){
+    console.log(e.currentTarget.dataset.salesid);
+    axios.get('/dashboard/sales/decline-transfer/'+transferId)
+    .then(function (response) {
+
+    })
+    .catch(function (error) {
+        // handle error
+        // console.log(error.data);
+    })
+    .finally(function () {
+        // always executed
+    });
+}
 
 
 

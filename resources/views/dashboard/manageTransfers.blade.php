@@ -16,10 +16,10 @@
                             </div>
                         </div>
                         <div class="modal-footer btnWrap" style="display:flex; justify-content:flex-end;">
-                            <button id="declineBtn" class="declineBtn red btn waves-effect waves-light disabled" type="submit" >Decline
+                            <button onclick="declineTransfer(event)" id="declineBtn" class="declineBtn red btn waves-effect waves-light disabled" type="submit" >Decline
                                 <i class="material-icons right">close</i>
                             </button>
-                            <button id="approveBtn" class="approveBtn green btn waves-effect waves-light disabled" type="submit">Approve
+                            <button onclick="approveTransfer(event)" id="approveBtn" class="approveBtn green btn waves-effect waves-light disabled" type="submit">Approve
                                 <i class="material-icons right">done</i>
                             </button>
                         </div>

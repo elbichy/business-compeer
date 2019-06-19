@@ -275,6 +275,26 @@ class SaleController extends Controller
         return response()->json($record);
     }
     
+    
+    // ADMIN TRANSFER APPROVAL
+    public function transferApproval($id)
+    {
+        if(!Gate::allows('isOwner')){
+            return redirect()->back()->with('accessError', 'You have no permission to access the page');
+        }
+        $record = Sale::where('id', $id)->with('transfer', 'user', 'branch')->first();
+        return response()->json($record);
+    }
+    // ADMIN TRANSFER DECLINE
+    public function transferDecline($id)
+    {
+        if(!Gate::allows('isOwner')){
+            return redirect()->back()->with('accessError', 'You have no permission to access the page');
+        }
+        $record = Sale::where('id', $id)->with('transfer', 'user', 'branch')->first();
+        return response()->json($record);
+    }
+    
 
     // TRANSFER AJAX LAST ADDED
     public function lastAddedTransfer(){
