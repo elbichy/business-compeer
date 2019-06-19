@@ -757,7 +757,6 @@ function getTransferDetails(e){
     .then(function (response) {
         $('.progress').fadeOut();
         $('button').removeClass('disabled');
-        $('.transferContent').show( "drop" );
         $('.transferContent').html(`
             <fieldset>
                 <legend>Transaction Details</legend>
@@ -820,6 +819,7 @@ function getTransferDetails(e){
                 </div>
             </fieldset>
         `);
+        $('.transferContent').show( "drop" );
         console.log(response.data);
     })
     .catch(function (error) {

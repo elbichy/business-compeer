@@ -271,15 +271,8 @@ class SaleController extends Controller
         if(!Gate::allows('isOwner')){
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
-        $record = Sale::find($id)->with('transfer', 'user', 'branch')->first();
-        // $data = [
-        //     'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('transfer', 'branch', 'user')
-        //     ->orderBy('created_at', 'DESC')->paginate(6),
-        //     'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-        //     'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-        // ];
+        $record = Sale::where('id', $id)->with('transfer', 'user', 'branch')->first();
         return response()->json($record);
-        // return view('dashboard.manageTransfers')->with('data', $data);
     }
     
 
