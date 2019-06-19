@@ -797,6 +797,34 @@ table tbody tr td .recieptBtn {
   font-size: 12px;
 }
 
+.my-content-wrapper .content-container .salesWrap #processTransfer .processTransfer fieldset {
+  border: 2px solid #ccc;
+  margin-top: 20px;
+}
+
+.my-content-wrapper .content-container .salesWrap #processTransfer .processTransfer fieldset legend {
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+.my-content-wrapper .content-container .salesWrap #processTransfer .processTransfer fieldset div .label {
+  font-weight: bold;
+  text-align: center;
+}
+
+.my-content-wrapper .content-container .salesWrap #processTransfer .processTransfer fieldset div .info {
+  padding: 0 0 4px 0;
+  text-align: center;
+}
+
+.my-content-wrapper .content-container .salesWrap #processTransfer .processTransfer .transferContent {
+  display: none;
+}
+
+.my-content-wrapper .content-container .salesWrap #processTransfer .btnWrap button {
+  margin-left: 10px;
+}
+
 .my-content-wrapper .content-container .expenseWrap .expenseHeading {
   padding-bottom: 20px;
   padding-top: 20px;

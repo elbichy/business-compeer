@@ -759,6 +759,37 @@ table {
                     }
                 }
             }
+            // TRANSFER PROCESS
+            #processTransfer {
+                .processTransfer {
+                    fieldset {
+                        border: 2px solid #ccc;
+                        margin-top: 20px;
+                        legend {
+                            padding: 0 10px;
+                            font-weight: bold;
+                        }
+                        div {
+                            .label {
+                                font-weight: bold;
+                                text-align: center;
+                            }
+                            .info {
+                                padding: 0 0 4px 0;
+                                text-align: center;
+                            }
+                        }
+                    }
+                    .transferContent {
+                        display: none;
+                    }
+                }
+                .btnWrap {
+                    button {
+                        margin-left: 10px;
+                    }
+                }
+            }
         }
         // EXPENSE CONTENT START HERE
         .expenseWrap {

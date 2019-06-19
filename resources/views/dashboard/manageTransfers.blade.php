@@ -4,19 +4,25 @@
     <div class="my-content-wrapper">
         <div class="content-container">
             <div class="row salesWrap">
-
+                    
                 {{-- MODAL BODY --}}
-                <div id="addSaleDialog" class="modal modal-fixed-footer">
-                        <div class="modal-content">
-                            <h5>New Transaction</h5>
-                            <p>Content goes here...</p>
+                <div id="processTransfer" class="modal modal-fixed-footer">
+                        <div class="modal-content processTransfer">
+                            <h5>Transaction Details</h5>
+                            <div class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+                            <div class="transferContent">
+                                {{-- DETAILS APPEAR HERE --}}
+                            </div>
                         </div>
                         <div class="modal-footer btnWrap" style="display:flex; justify-content:flex-end;">
-                            <button id="addSalesBtn" class="addSaleSubmitBtn btn waves-effect waves-light" type="submit">Submit
-                                <i class="material-icons right">send</i>
+                            <button id="declineBtn" class="declineBtn red btn waves-effect waves-light disabled" type="submit" >Decline
+                                <i class="material-icons right">close</i>
                             </button>
-                                {{-- SPINNER --}}
-                            @include('components.submitPreloader')
+                            <button id="approveBtn" class="approveBtn green btn waves-effect waves-light disabled" type="submit">Approve
+                                <i class="material-icons right">done</i>
+                            </button>
                         </div>
                 </div>
                 {{-- SALES HEADING --}}
@@ -55,21 +61,13 @@
                                         <td>₦{{ number_format($sale->transfer->amount) }}</td>
                                         <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
                                         <td>
-                                            <a href="#addSaleDialog" class="waves-effect modal-trigger waves-light btn blue">view</a>
+                                            <a onclick="getTransferDetails(event)" href="#processTransfer" data-transferId="{{ $sale->id }}" class="waves-effect modal-trigger waves-light btn blue">view</a>
                                         </td>
                                         <td>
                                             <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
                                                 <i class="tiny material-icons">close</i>
                                             </a>
                                         </td>
-                                        
-
-                                        {{-- CLEAR OUTSTANDING FORM --}}
-                                        <form action="" method="post" id="clearOutstandingForm">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="salesId">
-                                        </form>
 
                                         {{-- DELETE SALES FORM --}}
                                         <form action="" method="post" id="deleteSaleForm">

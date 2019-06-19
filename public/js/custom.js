@@ -1,4 +1,3 @@
-
 //////////////////////////////////// MATERIALIZE & PLUGINS INITS //////////////////////////////////////////
 
 $('.sidenav').sidenav();
@@ -7,10 +6,11 @@ $('.tooltipped').tooltip();
 $('.modal').modal({
     dismissible: true
 });
+
 $('.materialboxed').materialbox();
 $('select').formSelect();
 $('#selectBranch').formSelect();
-$('.nav-wrapper .dropdown-content li').click(function(e){
+$('.nav-wrapper .dropdown-content li').click(function(e) {
     $('form.switchBranch').submit();
 });
 $('.timepicker').timepicker({
@@ -26,11 +26,11 @@ $('.dropdown-trigger').dropdown();
 //////////////////////////////////////// GENERAL PAGE COMPONENTS SETUPS //////////////////////////////////////////
 
 // SUBMIT PRELOADER
-$('form').submit(function(e){
+$('form').submit(function(e) {
     // e.preventDefault();
     var elem = e.currentTarget.querySelector('.btnWrap>button');
     // console.log(elem);
-    $(elem).fadeOut(function(){
+    $(elem).fadeOut(function() {
         $('.preloader-wrapper').fadeIn();
     });
 });
@@ -74,7 +74,7 @@ $('form').submit(function(e){
 //             'height': newHeight4
 //         });
 //     }
-    
+
 //     var table5 = $('.businessSettingsTable').height();
 //     var newHeight5 = table5 - remainder;
 //     if(remainder > 0){
@@ -83,7 +83,7 @@ $('form').submit(function(e){
 //             'height': newHeight5
 //         });
 //     }
-    
+
 //     var table6 = $('.branchSettingsTable').height();
 //     var newHeight6 = table6 - remainder;
 //     if(remainder > 0){
@@ -92,7 +92,7 @@ $('form').submit(function(e){
 //             'height': newHeight6
 //         });
 //     }
-    
+
 //     var table7 = $('.staffSettingsTable').height();
 //     var newHeight7 = table7 - remainder;
 //     if(remainder > 0){
@@ -101,7 +101,7 @@ $('form').submit(function(e){
 //             'height': newHeight7
 //         });
 //     }
-    
+
 //     var table8 = $('.todaysSalesTable').height();
 //     var newHeight8 = table8 - remainder;
 //     if(remainder > 0){
@@ -110,7 +110,7 @@ $('form').submit(function(e){
 //             'height': newHeight8
 //         });
 //     }
-    
+
 //     var table9 = $('.detailsArea').height();
 //     var newHeight9 = table9 - remainder + 35;
 //     if(remainder > 0){
@@ -133,27 +133,29 @@ function numberWithCommas(number) {
 
 // GET COORDINATES
 // chrome --unsafely-treat-insecure-origin-as-secure="http://bitssolutions.test"  --user-data-dir=C:\testprofile
-$('.getCoordinates').click(()=>{
+$('.getCoordinates').click(() => {
     getLocation();
 });
+
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+    } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
+
 function showPosition(position) {
     $('#latitude').val(position.coords.latitude);
     $('#longitude').val(position.coords.longitude);
 }
 
 // DELETE A BRANCH
-$('.deleteBranch').click(function(){
+$('.deleteBranch').click(function() {
     let branchId = this.dataset.branchid;
     let $result = confirm('This will delete all transactions and user records registered under this branch. Are you sure you want to proceed?', false);
-    if($result){
-        let url = $('#deleteBranchForm').prop('action', 'settings/delete-branch/'+branchId);
+    if ($result) {
+        let url = $('#deleteBranchForm').prop('action', 'settings/delete-branch/' + branchId);
         $('#deleteBranchForm').submit();
     }
 });
@@ -171,29 +173,29 @@ $('.deleteBranch').click(function(){
 ///////////////////////////////////////////// SALES FUNCTIONALITIES /////////////////////////////////////////////
 
 // FUNCTION TO SUBMIT NEW SALE ASYNC
-function submitSale(event){
+function submitSale(event) {
     event.preventDefault();
-    
-    let type = $('#type').prop('checked') == false ? 'service' : 'product'; 
+
+    let type = $('#type').prop('checked') == false ? 'service' : 'product';
     let formData;
-    if($('input[name=transactionForm]').val() == 'sales'){
-        
+    if ($('input[name=transactionForm]').val() == 'sales') {
+
         formData = {
-            '_token'            : $('input[name=_token]').val(),
-            'transactionForm'  : $('input[name=transactionForm]').val(),
-            'type'              : type,
-            'firstname'         : $('input[name=firstname]').val(),
-            'lastname'          : $('input[name=lastname]').val(),
-            'phone'             : $('input[name=phone]').val(),
-            'location'          : $('input[name=location]').val(),
-            'productOrService'  : $('input[name=productOrService]').val(),
-            'units'             : $('input[name=units]').val(),
-            'amount'            : $('input[name=amount]').val(),
-            'balance'           : $('input[name=balance]').val(),
-            'change'            : $('input[name=change]').val(),
+            '_token': $('input[name=_token]').val(),
+            'transactionForm': $('input[name=transactionForm]').val(),
+            'type': type,
+            'firstname': $('input[name=firstname]').val(),
+            'lastname': $('input[name=lastname]').val(),
+            'phone': $('input[name=phone]').val(),
+            'location': $('input[name=location]').val(),
+            'productOrService': $('input[name=productOrService]').val(),
+            'units': $('input[name=units]').val(),
+            'amount': $('input[name=amount]').val(),
+            'balance': $('input[name=balance]').val(),
+            'change': $('input[name=change]').val(),
         };
 
-    }else{
+    } else {
 
         formData = $('#addSalesForm').serialize();
 
@@ -201,177 +203,177 @@ function submitSale(event){
 
     $('#addSalesBtn').addClass('disabled');
     $('.progress').fadeIn();
-    
+
     // console.log(formData);
 
     axios.post('/dashboard/sales/storeSales', formData)
-    .then(function (response) {
-        if(response.data.status){
-            $('.modal').modal('close');
-            $.wnoty({
-                type: 'success',
-                message: response.data.msg,
-                autohideDelay: 5000
-            });
+        .then(function(response) {
+            if (response.data.status) {
+                $('.modal').modal('close');
+                $.wnoty({
+                    type: 'success',
+                    message: response.data.msg,
+                    autohideDelay: 5000
+                });
+                $('#addSalesBtn').removeClass('disabled');
+                $('.progress').fadeOut();
+                $('#addSalesForm')[0].reset();
+                response.data.from == 'sales' ? fetchNewSale(response.data.row) : response.data.from == 'transfers' ? fetchNewTransfer(response.data.row) : fetchNewUtility(response.data.row);
+            }
+        })
+        .catch(function(error) {
+            let err = error.response.data.errors;
             $('#addSalesBtn').removeClass('disabled');
             $('.progress').fadeOut();
-            $('#addSalesForm')[0].reset();
-            response.data.from == 'sales' ? fetchNewSale(response.data.row) : response.data.from == 'transfers' ? fetchNewTransfer(response.data.row) : fetchNewUtility(response.data.row);
-        }
-    })
-    .catch(function (error) {
-        let err = error.response.data.errors;
-        $('#addSalesBtn').removeClass('disabled');
-        $('.progress').fadeOut();
-        if('location' in err){
-            if($('.locationErr').children('span')){
-                $('.locationErr').children('span').remove();
-            }
-            $('.locationErr').append(`<span class="helper-text red-text" >
+            if ('location' in err) {
+                if ($('.locationErr').children('span')) {
+                    $('.locationErr').children('span').remove();
+                }
+                $('.locationErr').append(`<span class="helper-text red-text" >
                 ${err.location[0]}
             </span>`);
-        }else{
-            $('.locationErr').children('span').remove();
-        }
-        if('phone' in err){
-            if($('.phoneErr').children('span')){
-                $('.phoneErr').children('span').remove();
+            } else {
+                $('.locationErr').children('span').remove();
             }
-            $('.phoneErr').append(`<span class="helper-text red-text" >
+            if ('phone' in err) {
+                if ($('.phoneErr').children('span')) {
+                    $('.phoneErr').children('span').remove();
+                }
+                $('.phoneErr').append(`<span class="helper-text red-text" >
                 ${err.phone[0]}
             </span>`);
-        }else{
-            $('.phoneErr').children('span').remove();
-        }
-        if('productOrService' in err){
-            if($('.productOrServiceErr').children('span')){
-                $('.productOrServiceErr').children('span').remove();
+            } else {
+                $('.phoneErr').children('span').remove();
             }
-            $('.productOrServiceErr').append(`<span class="helper-text red-text" >
+            if ('productOrService' in err) {
+                if ($('.productOrServiceErr').children('span')) {
+                    $('.productOrServiceErr').children('span').remove();
+                }
+                $('.productOrServiceErr').append(`<span class="helper-text red-text" >
                 ${err.productOrService[0]}
             </span>`);
-        }else{
-            $('.productOrServiceErr').children('span').remove();
-        }
-
-
-        // FOR TRANSFERS
-
-        if('accountNumber' in err){
-            if($('.accountNumberErr').children('span')){
-                $('.accountNumberErr').children('span').remove();
+            } else {
+                $('.productOrServiceErr').children('span').remove();
             }
-            $('.accountNumberErr').append(`<span class="helper-text red-text" >
+
+
+            // FOR TRANSFERS
+
+            if ('accountNumber' in err) {
+                if ($('.accountNumberErr').children('span')) {
+                    $('.accountNumberErr').children('span').remove();
+                }
+                $('.accountNumberErr').append(`<span class="helper-text red-text" >
                 ${err.accountNumber[0]}
             </span>`);
-        }else{
-            $('.accountNumberErr').children('span').remove();
-        }
-        
-        if('accountType' in err){
-            if($('.accountTypeErr').children('span')){
-                $('.accountTypeErr').children('span').remove();
+            } else {
+                $('.accountNumberErr').children('span').remove();
             }
-            $('.accountTypeErr').append(`<span class="helper-text red-text" >
+
+            if ('accountType' in err) {
+                if ($('.accountTypeErr').children('span')) {
+                    $('.accountTypeErr').children('span').remove();
+                }
+                $('.accountTypeErr').append(`<span class="helper-text red-text" >
                 ${err.accountType[0]}
             </span>`);
-        }else{
-            $('.accountTypeErr').children('span').remove();
-        }
-        
-        if('amount' in err){
-            if($('.amountErr').children('span')){
-                $('.amountErr').children('span').remove();
+            } else {
+                $('.accountTypeErr').children('span').remove();
             }
-            $('.amountErr').append(`<span class="helper-text red-text" >
+
+            if ('amount' in err) {
+                if ($('.amountErr').children('span')) {
+                    $('.amountErr').children('span').remove();
+                }
+                $('.amountErr').append(`<span class="helper-text red-text" >
                 ${err.amount[0]}
             </span>`);
-        }else{
-            $('.amountErr').children('span').remove();
-        }
-        
-        if('bankName' in err){
-            if($('.bankNameErr').children('span')){
-                $('.bankNameErr').children('span').remove();
+            } else {
+                $('.amountErr').children('span').remove();
             }
-            $('.bankNameErr').append(`<span class="helper-text red-text" >
+
+            if ('bankName' in err) {
+                if ($('.bankNameErr').children('span')) {
+                    $('.bankNameErr').children('span').remove();
+                }
+                $('.bankNameErr').append(`<span class="helper-text red-text" >
                 ${err.bankName[0]}
             </span>`);
-        }else{
-            $('.bankNameErr').children('span').remove();
-        }
-        
-        if('charge' in err){
-            if($('.chargeErr').children('span')){
-                $('.chargeErr').children('span').remove();
+            } else {
+                $('.bankNameErr').children('span').remove();
             }
-            $('.chargeErr').append(`<span class="helper-text red-text" >
+
+            if ('charge' in err) {
+                if ($('.chargeErr').children('span')) {
+                    $('.chargeErr').children('span').remove();
+                }
+                $('.chargeErr').append(`<span class="helper-text red-text" >
                 ${err.charge[0]}
             </span>`);
-        }else{
-            $('.chargeErr').children('span').remove();
-        }
-        
-        if('firstname' in err){
-            if($('.firstnameErr').children('span')){
-                $('.firstnameErr').children('span').remove();
+            } else {
+                $('.chargeErr').children('span').remove();
             }
-            $('.firstnameErr').append(`<span class="helper-text red-text" >
+
+            if ('firstname' in err) {
+                if ($('.firstnameErr').children('span')) {
+                    $('.firstnameErr').children('span').remove();
+                }
+                $('.firstnameErr').append(`<span class="helper-text red-text" >
                 ${err.firstname[0]}
             </span>`);
-        }else{
-            $('.firstnameErr').children('span').remove();
-        }
-        
-        if('lastname' in err){
-            if($('.lastnameErr').children('span')){
-                $('.lastnameErr').children('span').remove();
+            } else {
+                $('.firstnameErr').children('span').remove();
             }
-            $('.lastnameErr').append(`<span class="helper-text red-text" >
+
+            if ('lastname' in err) {
+                if ($('.lastnameErr').children('span')) {
+                    $('.lastnameErr').children('span').remove();
+                }
+                $('.lastnameErr').append(`<span class="helper-text red-text" >
                 ${err.lastname[0]}
             </span>`);
-        }else{
-            $('.lastnameErr').children('span').remove();
-        }
-        
-        if('recievers_firstname' in err){
-            if($('.recievers_firstnameErr').children('span')){
-                $('.recievers_firstnameErr').children('span').remove();
+            } else {
+                $('.lastnameErr').children('span').remove();
             }
-            $('.recievers_firstnameErr').append(`<span class="helper-text red-text" >
+
+            if ('recievers_firstname' in err) {
+                if ($('.recievers_firstnameErr').children('span')) {
+                    $('.recievers_firstnameErr').children('span').remove();
+                }
+                $('.recievers_firstnameErr').append(`<span class="helper-text red-text" >
                 ${err.recievers_firstname[0]}
             </span>`);
-        }else{
-            $('.recievers_firstnameErr').children('span').remove();
-        }
-        
-        if('recievers_lastname' in err){
-            if($('.recievers_lastnameErr').children('span')){
-                $('.recievers_lastnameErr').children('span').remove();
+            } else {
+                $('.recievers_firstnameErr').children('span').remove();
             }
-            $('.recievers_lastnameErr').append(`<span class="helper-text red-text" >
+
+            if ('recievers_lastname' in err) {
+                if ($('.recievers_lastnameErr').children('span')) {
+                    $('.recievers_lastnameErr').children('span').remove();
+                }
+                $('.recievers_lastnameErr').append(`<span class="helper-text red-text" >
                 ${err.recievers_lastname[0]}
             </span>`);
-        }else{
-            $('.recievers_lastnameErr').children('span').remove();
-        }
-        
-        if('recievers_phone' in err){
-            if($('.recievers_phoneErr').children('span')){
-                $('.recievers_phoneErr').children('span').remove();
+            } else {
+                $('.recievers_lastnameErr').children('span').remove();
             }
-            $('.recievers_phoneErr').append(`<span class="helper-text red-text" >
+
+            if ('recievers_phone' in err) {
+                if ($('.recievers_phoneErr').children('span')) {
+                    $('.recievers_phoneErr').children('span').remove();
+                }
+                $('.recievers_phoneErr').append(`<span class="helper-text red-text" >
                 ${err.recievers_phone[0]}
             </span>`);
-        }else{
-            $('.recievers_phoneErr').children('span').remove();
-        }
-    });
+            } else {
+                $('.recievers_phoneErr').children('span').remove();
+            }
+        });
 }
 
 // FUNCTION TO FETCH NEW SALE ASYNCHRONOUSLY
-function fetchNewSale(data){
-    if(data){
+function fetchNewSale(data) {
+    if (data) {
         console.log(data);
         $(`
             <tr>
@@ -719,7 +721,115 @@ function loadNotification(base_url){
 }
 
 
+// amount: 200
 
+//     branch:
+//     address: "Hassan Dallatu Rd, Suleja Niger state"
+//     name: "Head Branch"
+
+// firstname: "Samson"
+// lastname: "Fatade"
+// phone: "08083746563"
+// location: "08083746563"
+    
+//     transfer:
+//     accountNumber: "0284756374"
+//     accountType: "Savings"
+//     amount: 20000
+//     amountInWords: "twenty thousand"
+//     bankName: "Polaris Bank"
+//     created_at: "2019-06-19 10:00:09"
+//     recievers_firstname: "John"
+//     recievers_lastname: "Ameh"
+//     recievers_phone: "09034856374"
+//     refNumber: "hIH8mUT5TgtL"
+//     08039747426
+// user:
+// firstname: "Suleiman"
+// lastname: "Abdulrazaq"
+// id: 1
+
+
+// GET TRANSFER RECORD
+function getTransferDetails(e){
+    let transferId = e.currentTarget.dataset.transferid;
+    axios.get('/dashboard/sales/get-transfer/'+transferId)
+    .then(function (response) {
+        $('.progress').fadeOut();
+        $('button').removeClass('disabled');
+        $('.transferContent').html(`
+            <fieldset>
+                <legend>Transaction Details</legend>
+                <div class="col s12 m4 l4">
+                    <div class="label">Branch</div>
+                    <div class="info">${response.data.branch.name}</div>
+                </div>
+                <div class="col s12 m4 l4">
+                    <div class="label">Attended By</div>
+                    <div class="info">${response.data.user.firstname} ${response.data.user.lastname}</div>
+                </div>
+                <div class="col s12 m4 l4">
+                    <div class="label">Customer name</div>
+                    <div class="info">${response.data.firstname} ${response.data.lastname}</div>
+                </div>
+
+                <div class="col s12 m4 l4">
+                    <div class="label">Customer phone</div>
+                    <div class="info">${response.data.phone}</div>
+                </div>
+                <div class="col s12 m4 l4">
+                    <div class="label">Location</div>
+                    <div class="info">${response.data.location}</div>
+                </div>
+                <div class="col s12 m4 l4">
+                    <div class="label">Charged</div>
+                    <div class="info">${response.data.amount}</div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Transfer Details</legend>
+                <div class="col s12 m3 l3">
+                    <div class="label">Bank</div>
+                    <div class="info green-text">${response.data.transfer.bankName}</div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="label">Account type</div>
+                    <div class="info green-text darken-4">${response.data.transfer.accountType}</div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="label">Account Holder</div>
+                    <div class="info green-text darken-4">${response.data.transfer.recievers_firstname} ${response.data.transfer.recievers_lastname}</div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="label">Account number</div>
+                    <div class="info green-text darken-4">${response.data.transfer.accountNumber}</div>
+                </div>
+
+                <div class="col s12 m3 l3">
+                    <div class="label">Phone</div>
+                    <div class="info">${response.data.transfer.recievers_phone}</div>
+                </div>
+                <div class="col s12 m3 l3">
+                    <div class="label">Amount</div>
+                    <div class="info green-text darken-4">${response.data.transfer.amount}</div>
+                </div>
+                <div class="col s12 m6 l6">
+                    <div class="label">Amount in words</div>
+                    <div class="info green-text darken-4">${response.data.transfer.amountInWords.charAt(0).toUpperCase() + response.data.transfer.amountInWords.slice(1)} naira only!</div>
+                </div>
+            </fieldset>
+        `);
+        $('.transferContent').show( "drop" );
+        // console.log(response.data);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(explode);
+    })
+    .finally(function () {
+        // always executed
+    });
+}
 
 
 

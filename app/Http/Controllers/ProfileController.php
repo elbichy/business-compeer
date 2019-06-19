@@ -28,33 +28,27 @@ class ProfileController extends Controller
     //  MAIN DASHBOARD PAGE
     public function index()
     {
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
+        
+        $todaysSales = Branch::find(auth()->user()->branch_id)
+                                ->sales()
+                                ->whereDate('created_at', '=', Carbon::today()->toDateString())
+                                ->orderBy('created_at', 'DESC')
+                                ->get();
+        $todaysExpnses = Branch::find(auth()->user()->branch_id)
+                                ->expenses()
+                                ->whereDate('created_at', '=', Carbon::today()->toDateString())
+                                ->orderBy('created_at', 'DESC')
+                                ->get();
+        $todaysTransactions = [
+            'todaysSales'=>$todaysSales,
+            'todaysExpenses'=>$todaysExpnses
+        ];
 
-            $todaysSales = Branch::find(auth()->user()->branch_id)
-                                    ->sales()
-                                    ->whereDate('created_at', '=', Carbon::today()->toDateString())
-                                    ->orderBy('created_at', 'DESC')
-                                    ->get();
-            $todaysExpnses = Branch::find(auth()->user()->branch_id)
-                                    ->expenses()
-                                    ->whereDate('created_at', '=', Carbon::today()->toDateString())
-                                    ->orderBy('created_at', 'DESC')
-                                    ->get();
-            $todaysTransactions = [
-                'todaysSales'=>$todaysSales,
-                'todaysExpenses'=>$todaysExpnses
-            ];
-
-            $data = [
-                'todaysTransactions' => $todaysTransactions,
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-         }
+        $data = [
+            'todaysTransactions' => $todaysTransactions,
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
 
         // return $data['todaysTransactions']['todaysSales'];
         return view('dashboard.dashboard')->with('data', $data);
@@ -62,20 +56,15 @@ class ProfileController extends Controller
 
     // MY PROFILE PAGE
     public function myProfile(){
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'salesDetails' => User::find(auth()->user()->id)->sales()->orderBy('created_at', 'DESC')->get(),
-                'totalSales' => User::find(auth()->user()->id)->sales()->sum('amount'),
-                'totalSalesCount' => User::find(auth()->user()->id)->sales()->count(),
-                'profileDatails' => User::find(auth()->user()->id),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
+        
+        $data = [
+            'salesDetails' => User::find(auth()->user()->id)->sales()->orderBy('created_at', 'DESC')->get(),
+            'totalSales' => User::find(auth()->user()->id)->sales()->sum('amount'),
+            'totalSalesCount' => User::find(auth()->user()->id)->sales()->count(),
+            'profileDatails' => User::find(auth()->user()->id),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
         // dd($data);
         return view('dashboard.myProfile')->with('data', $data);
     }
@@ -140,24 +129,18 @@ class ProfileController extends Controller
             return redirect()->back()->with('accessError', 'You have no access permission');
         }
 
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $userBusinessId = User::find($id)->business_id;
-            $userBranchId = User::find($id)->branch_id;
-            $data = [
-                'salesDetails' => User::find($id)->sales()->orderBy('created_at', 'DESC')->get(),
-                'totalSales' => User::find($id)->sales()->sum('amount'),
-                'totalSalesCount' => User::find($id)->sales()->count(),
-                'profileDatails' => User::find($id),
-                'userBusinessDetails' => Business::find($userBusinessId),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'userBranchDetails' => Branch::find($userBranchId),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
+        $userBusinessId = User::find($id)->business_id;
+        $userBranchId = User::find($id)->branch_id;
+        $data = [
+            'salesDetails' => User::find($id)->sales()->orderBy('created_at', 'DESC')->get(),
+            'totalSales' => User::find($id)->sales()->sum('amount'),
+            'totalSalesCount' => User::find($id)->sales()->count(),
+            'profileDatails' => User::find($id),
+            'userBusinessDetails' => Business::find($userBusinessId),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'userBranchDetails' => Branch::find($userBranchId),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
         // dd($data);
         return view('dashboard.userProfile')->with('data', $data);
     }

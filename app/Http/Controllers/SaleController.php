@@ -12,6 +12,7 @@ use App\Business;
 use App\Branch;
 use App\User;
 use App\Sale;
+use App\Transfer;
 use App\Expense;
 use App\Stock;
 use Carbon\Carbon;
@@ -30,18 +31,13 @@ class SaleController extends Controller
     // SALES PAGE - view
     public function sales()
     {
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(6),
-                'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks->toJson(),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
+        
+        $data = [
+            'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->orderBy('created_at', 'DESC')->paginate(6),
+            'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks->toJson(),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
         // dd($data['stockDetails']);
         return view('dashboard.sales')->with('data', $data);
     }
@@ -240,17 +236,11 @@ class SaleController extends Controller
     // MOBILE MONEY TRANSFER PAGE - view
     public function transfers()
     {
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->paginate(6),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
+        $data = [
+            'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('transfer')->orderBy('created_at', 'DESC')->paginate(6),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
         // return auth()->user()->notifications->count();
         // foreach(auth()->user()->notifications as $notification){
         //     return $notification->data['data']['saleDetails']['business_id'];
@@ -264,21 +254,34 @@ class SaleController extends Controller
         if(!Gate::allows('isOwner')){
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('transfer', 'branch', 'user')
-                ->orderBy('created_at', 'DESC')->paginate(6),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
+        
+        $data = [
+            'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('transfer', 'branch', 'user')
+            ->orderBy('created_at', 'DESC')->paginate(6),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
         // dd($data);
         return view('dashboard.manageTransfers')->with('data', $data);
     }
+    
+    // ADMIN GET TRANSFER DETAIL
+    public function getTransfer($id)
+    {
+        if(!Gate::allows('isOwner')){
+            return redirect()->back()->with('accessError', 'You have no permission to access the page');
+        }
+        $record = Sale::find($id)->with('transfer', 'user', 'branch')->first();
+        // $data = [
+        //     'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('transfer', 'branch', 'user')
+        //     ->orderBy('created_at', 'DESC')->paginate(6),
+        //     'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+        //     'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        // ];
+        return response()->json($record);
+        // return view('dashboard.manageTransfers')->with('data', $data);
+    }
+    
 
     // TRANSFER AJAX LAST ADDED
     public function lastAddedTransfer(){
@@ -300,17 +303,11 @@ class SaleController extends Controller
 
     // UTILITY PAGE - view
     public function utility(){
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
             $data = [
                 'salesDetails' => Branch::find(auth()->user()->branch_id)->sales()->with('utility')->orderBy('created_at', 'DESC')->paginate(6),
                 'businessDetails' => User::find(auth()->user()->id)->business()->get(),
                 'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
             ];
-        }
         
         return view('dashboard.utility')->with('data', $data);
     }
@@ -320,18 +317,12 @@ class SaleController extends Controller
         if(!Gate::allows('isOwner')){
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('utility', 'branch', 'user')
-                ->orderBy('created_at', 'DESC')->paginate(6),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
+        $data = [
+            'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('utility', 'branch', 'user')
+            ->orderBy('created_at', 'DESC')->paginate(6),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
         // dd($data);
         return view('dashboard.manageUtility')->with('data', $data);
     }

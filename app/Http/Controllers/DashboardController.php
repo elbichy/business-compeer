@@ -25,33 +25,27 @@ class DashboardController extends Controller
     //  MAIN DASHBOARD PAGE
     public function index()
     {
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
+        
+        $todaysSales = Branch::find(auth()->user()->branch_id)
+                                ->sales()
+                                ->whereDate('created_at', '=', Carbon::today()->toDateString())
+                                ->orderBy('created_at', 'DESC')
+                                ->get();
+        $todaysExpnses = Branch::find(auth()->user()->branch_id)
+                                ->expenses()
+                                ->whereDate('created_at', '=', Carbon::today()->toDateString())
+                                ->orderBy('created_at', 'DESC')
+                                ->get();
+        $todaysTransactions = [
+            'todaysSales'=>$todaysSales,
+            'todaysExpenses'=>$todaysExpnses
+        ];
 
-            $todaysSales = Branch::find(auth()->user()->branch_id)
-                                    ->sales()
-                                    ->whereDate('created_at', '=', Carbon::today()->toDateString())
-                                    ->orderBy('created_at', 'DESC')
-                                    ->get();
-            $todaysExpnses = Branch::find(auth()->user()->branch_id)
-                                    ->expenses()
-                                    ->whereDate('created_at', '=', Carbon::today()->toDateString())
-                                    ->orderBy('created_at', 'DESC')
-                                    ->get();
-            $todaysTransactions = [
-                'todaysSales'=>$todaysSales,
-                'todaysExpenses'=>$todaysExpnses
-            ];
-
-            $data = [
-                'todaysTransactions' => $todaysTransactions,
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-         }
+        $data = [
+            'todaysTransactions' => $todaysTransactions,
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
 
         // return $data['todaysTransactions']['todaysSales'];
         return view('dashboard.dashboard')->with('data', $data);

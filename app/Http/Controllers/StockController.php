@@ -31,19 +31,12 @@ class StockController extends Controller
         if (Gate::allows('isSalesRep')) {
             return redirect()->back()->with('accessError', 'You have no permission to access page');
         }
-        
-        if(auth()->user()->business_id == 0){
-            return redirect(route('businessSettings'))->with('noBusinessRecord', 'You need to Setup a Business first');
-        }else if(auth()->user()->branch_id == 0){
-            return redirect(route('branchSettings'))->with('noBusinessRecord', 'You have Setup Main Branch atleast');
-        }else{
-            $data = [
-                'stockItem' => [],
-                'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks()->orderBy('created_at', 'DESC')->get(),
-                'businessDetails' => User::find(auth()->user()->id)->business()->get(),
-                'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
-            ];
-        }
+        $data = [
+            'stockItem' => [],
+            'stockDetails' => Branch::find(auth()->user()->branch_id)->stocks()->orderBy('created_at', 'DESC')->get(),
+            'businessDetails' => User::find(auth()->user()->id)->business()->get(),
+            'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
+        ];
         // dd($data)
         return view( 'dashboard.stock')->with('data', $data);
     }
