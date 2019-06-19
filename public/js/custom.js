@@ -824,7 +824,7 @@ function getTransferDetails(e){
     })
     .catch(function (error) {
         // handle error
-        console.log(explode);
+        // console.log(error.data);
     })
     .finally(function () {
         // always executed
