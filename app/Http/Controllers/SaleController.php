@@ -149,8 +149,14 @@ class SaleController extends Controller
                         'type' => 'transfer',
                         'msg' => 'Transfer request',
                         'Business' => auth()->user()->business_id,
-                        'branch' => auth()->user()->branch_id,
-                        'user' => auth()->user()->id,
+                        'branch' => Branch::find(auth()->user()->branch_id)->name,
+                        'staffId' => auth()->user()->id,
+                        'staffName' => auth()->user()->firstname.' '.auth()->user()->lastname,
+                        'depositor' => $request->firstname.' '.$request->lastname,
+                        'reciepient' => $request->recievers_firstname.' '.$request->recievers_lastname,
+                        'bankName' => $request->bankName,
+                        'accountNumber' => $request->accountNumber,
+                        'amount' => $request->amount,
                         'refNumver' => $refNumber,
                         'url' => url('/dashboard/sales/manage-transfers')
                     ];
@@ -255,13 +261,13 @@ class SaleController extends Controller
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
         
+        
         $data = [
-            'salesDetails' => Business::find(auth()->user()->business_id)->sales()->with('transfer', 'branch', 'user')
-            ->orderBy('created_at', 'DESC')->paginate(6),
+            'salesDetails' => $user = User::find(auth()->user()->id)->unreadNotifications,
             'businessDetails' => User::find(auth()->user()->id)->business()->get(),
             'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
         ];
-        // dd($data);
+        // return $data['salesDetails'];
         return view('dashboard.manageTransfers')->with('data', $data);
     }
     
@@ -271,7 +277,7 @@ class SaleController extends Controller
         if(!Gate::allows('isOwner')){
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
-        $record = Sale::where('id', $id)->with('transfer', 'user', 'branch')->first();
+        $record = Sale::where('refNumber', $id)->with('transfer', 'user', 'branch')->first();
         return response()->json($record);
     }
     
@@ -282,8 +288,10 @@ class SaleController extends Controller
         if(!Gate::allows('isOwner')){
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
-        $record = Sale::where('id', $id)->with('transfer', 'user', 'branch')->first();
-        return response()->json($record);
+        $record = Transfer::where('sale_id', $id)->first();
+        $record->status = 2;
+        $record->save();
+        // return response()->json($record); continue from here
     }
     // ADMIN TRANSFER DECLINE
     public function transferDecline($id)

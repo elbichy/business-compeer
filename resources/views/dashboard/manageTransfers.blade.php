@@ -26,7 +26,6 @@
                 </div>
                 {{-- SALES HEADING --}}
                 <h5 class="center salesHeading">Manage Transfers</h5>
-
                 {{-- SALES TABLE --}}
                 <div class="salesTableWrap col s12">
                     <div class="salesTable col s12">
@@ -47,23 +46,23 @@
                             </thead>
 
                             <tbody>
-                            @foreach ($data['salesDetails'] as $sale)
-                                @if($sale->transfer !== NULL)
-                                    @if($sale->status == 0)
+                                
+                            @if(count($data['salesDetails']) > 0)
+                                @foreach ($data['salesDetails'] as $notif)
                                     <tr>
-                                        <td>{{ $sale->branch->name }}</td>
-                                        <td>{{ $sale->user->firstname }} {{ $sale->user->lastname  }}</td>
-                                        <td>{{ $sale->firstname }} {{ $sale->lastname  }}</td>
-                                        <td>{{ $sale->transfer->recievers_firstname }} {{ $sale->transfer->recievers_lastname  }}</td>
-                                        <td>{{ $sale->transfer->bankName }}</td>
-                                        <td>{{ $sale->transfer->accountNumber }}</td>
-                                        <td>₦{{ number_format($sale->transfer->amount) }}</td>
-                                        <td>{{ Carbon\Carbon::parse($sale->created_at)->diffForHumans() }}</td>
+                                        <td>{{ $notif->data['data']['branch'] }}</td>
+                                        <td>{{ $notif->data['data']['staffName']  }}</td>
+                                        <td>{{ $notif->data['data']['depositor']  }}</td>
+                                        <td>{{ $notif->data['data']['reciepient'] }}</td>
+                                        <td>{{ $notif->data['data']['bankName'] }}</td>
+                                        <td>{{ $notif->data['data']['accountNumber'] }}</td>
+                                        <td>₦{{ number_format($notif->data['data']['amount']) }}</td>
+                                        <td>{{ Carbon\Carbon::parse($notif->created_at)->diffForHumans() }}</td>
                                         <td>
-                                            <a onclick="getTransferDetails(event)" href="#processTransfer" data-transferId="{{ $sale->id }}" class="waves-effect modal-trigger waves-light btn blue">view</a>
+                                            <a onclick="getTransferDetails(event)" href="#processTransfer" data-transferId="{{ $notif->data['data']['refNumver'] }}" class="waves-effect modal-trigger waves-light btn blue">view</a>
                                         </td>
                                         <td>
-                                            <a class="delete deleteSale" href="#delete" data-salesId="{{ $sale->id }}">
+                                            <a class="delete deleteSale" href="#delete" data-salesId="{{ $notif->data['data']['refNumver'] }}">
                                                 <i class="tiny material-icons">close</i>
                                             </a>
                                         </td>
@@ -76,15 +75,11 @@
                                         </form>
 
                                     </tr>
-                                    @endif
-                                @endif
-                            @endforeach
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                         
-                    </div>
-                    <div class="col s12" style="padding:0;">
-                        {{$data['salesDetails']->links('vendor.pagination.materializecss')}}
                     </div>
                 </div>
             </div>

@@ -721,33 +721,7 @@ function loadNotification(base_url){
 }
 
 
-// amount: 200
 
-//     branch:
-//     address: "Hassan Dallatu Rd, Suleja Niger state"
-//     name: "Head Branch"
-
-// firstname: "Samson"
-// lastname: "Fatade"
-// phone: "08083746563"
-// location: "08083746563"
-    
-//     transfer:
-//     accountNumber: "0284756374"
-//     accountType: "Savings"
-//     amount: 20000
-//     amountInWords: "twenty thousand"
-//     bankName: "Polaris Bank"
-//     created_at: "2019-06-19 10:00:09"
-//     recievers_firstname: "John"
-//     recievers_lastname: "Ameh"
-//     recievers_phone: "09034856374"
-//     refNumber: "hIH8mUT5TgtL"
-//     08039747426
-// user:
-// firstname: "Suleiman"
-// lastname: "Abdulrazaq"
-// id: 1
 
 
 // GET TRANSFER RECORD
