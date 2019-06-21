@@ -59,10 +59,10 @@
                                         <td>₦{{ number_format($notif->data['data']['amount']) }}</td>
                                         <td>{{ Carbon\Carbon::parse($notif->created_at)->diffForHumans() }}</td>
                                         <td>
-                                            <a onclick="getTransferDetails(event)" href="#processTransfer" data-transferId="{{ $notif->data['data']['refNumver'] }}" data-notification_id="{{ $notif->id }}" class="waves-effect modal-trigger waves-light btn blue">view</a>
+                                            <a onclick="getTransferDetails(event)" href="#processTransfer" data-transferId="{{ $notif->data['data']['refNumber'] }}" data-notification_id="{{ $notif->id }}" class="waves-effect modal-trigger waves-light btn blue">view</a>
                                         </td>
                                         <td>
-                                            <a class="delete deleteSale" href="#delete" data-salesId="{{ $notif->data['data']['refNumver'] }}">
+                                            <a class="delete deleteSale" href="#delete" data-salesId="{{ $notif->data['data']['refNumber'] }}">
                                                 <i class="tiny material-icons">close</i>
                                             </a>
                                         </td>
