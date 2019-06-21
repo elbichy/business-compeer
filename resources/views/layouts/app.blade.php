@@ -103,7 +103,7 @@
                     <ul> {{-- FOR MOBILE --}}
                         <a  href="#" style="margin-left: 14px;" data-target='notifications'  class="dropdown-trigger left hide-on-med-and-up">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
-                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
+                            {!! auth()->user()->unreadNotifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->unreadNotifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
                     </ul>  
                     {{-- @endcan  --}}

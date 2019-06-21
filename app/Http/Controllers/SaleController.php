@@ -157,7 +157,7 @@ class SaleController extends Controller
                         'bankName' => $request->bankName,
                         'accountNumber' => $request->accountNumber,
                         'amount' => $request->amount,
-                        'refNumver' => $refNumber,
+                        'refNumber' => $refNumber,
                         'url' => url('/dashboard/sales/manage-transfers')
                     ];
                     $user->notify(new salesApproval($data));
@@ -221,7 +221,7 @@ class SaleController extends Controller
                         'Business' => auth()->user()->business_id,
                         'branch' => auth()->user()->branch_id,
                         'user' => auth()->user()->id,
-                        'refNumver' => $refNumber,
+                        'refNumber' => $refNumber,
                         'url' => url('/dashboard/sales/manage-utility-bill-payment')
                     ];
                     $user->notify(new salesApproval($data));
@@ -296,6 +296,13 @@ class SaleController extends Controller
             $notification = Auth::user()->notifications()->findOrFail($notification);
             $notification->read_at = now();
             if($notification->save()){
+                $data = [
+                    'msg' => 'Transaction "'.$notification->data['data']['refNumber'].'" Approved!',
+                    'status'  => true,
+                    'url'  => '#'
+                ];
+                $user = User::find($userid = $notification->data['data']['staffId']);
+                $user->notify(new salesApproval($data));
                 $arr = array('msg' => 'Transaction approved successfully!', 'from' => 'transfer', 'status' => true);
             }
         }
