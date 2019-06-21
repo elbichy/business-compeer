@@ -727,71 +727,74 @@ function loadNotification(base_url){
 // GET TRANSFER RECORD
 function getTransferDetails(e){
     let transferId = e.currentTarget.dataset.transferid;
-    axios.get('/dashboard/sales/get-transfer/'+transferId)
+    let notificationId = e.currentTarget.dataset.notification_id;
+    axios.get(`/dashboard/sales/get-transfer/${transferId}/${notificationId}`)
     .then(function (response) {
         $('.progress').fadeOut();
         $('button').removeClass('disabled');
-        $('#approveBtn').attr('data-salesID', response.data.id);
-        $('#declineBtn').attr('data-salesID', response.data.id);
+        $('#approveBtn').attr('data-salesID', response.data.record.id);
+        $('#approveBtn').attr('data-notificationID', response.data.notificationID);
+        $('#declineBtn').attr('data-salesID', response.data.record.id);
+        $('#declineBtn').attr('data-notificationID', response.data.notificationID);
         $('.transferContent').html(`
             <fieldset>
                 <legend>Transaction Details</legend>
                 <div class="col s12 m4 l4">
                     <div class="label">Branch</div>
-                    <div class="info">${response.data.branch.name}</div>
+                    <div class="info">${response.data.record.branch.name}</div>
                 </div>
                 <div class="col s12 m4 l4">
                     <div class="label">Attended By</div>
-                    <div class="info">${response.data.user.firstname} ${response.data.user.lastname}</div>
+                    <div class="info">${response.data.record.user.firstname} ${response.data.record.user.lastname}</div>
                 </div>
                 <div class="col s12 m4 l4">
                     <div class="label">Customer name</div>
-                    <div class="info">${response.data.firstname} ${response.data.lastname}</div>
+                    <div class="info">${response.data.record.firstname} ${response.data.record.lastname}</div>
                 </div>
 
                 <div class="col s12 m4 l4">
                     <div class="label">Customer phone</div>
-                    <div class="info">${response.data.phone}</div>
+                    <div class="info">${response.data.record.phone}</div>
                 </div>
                 <div class="col s12 m4 l4">
                     <div class="label">Location</div>
-                    <div class="info">${response.data.location}</div>
+                    <div class="info">${response.data.record.location}</div>
                 </div>
                 <div class="col s12 m4 l4">
                     <div class="label">Charged</div>
-                    <div class="info">${response.data.amount}</div>
+                    <div class="info">${response.data.record.amount}</div>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>Transfer Details</legend>
                 <div class="col s12 m3 l3">
                     <div class="label">Bank</div>
-                    <div class="info green-text">${response.data.transfer.bankName}</div>
+                    <div class="info green-text">${response.data.record.transfer.bankName}</div>
                 </div>
                 <div class="col s12 m3 l3">
                     <div class="label">Account type</div>
-                    <div class="info green-text darken-4">${response.data.transfer.accountType}</div>
+                    <div class="info green-text darken-4">${response.data.record.transfer.accountType}</div>
                 </div>
                 <div class="col s12 m3 l3">
                     <div class="label">Account Holder</div>
-                    <div class="info green-text darken-4">${response.data.transfer.recievers_firstname} ${response.data.transfer.recievers_lastname}</div>
+                    <div class="info green-text darken-4">${response.data.record.transfer.recievers_firstname} ${response.data.record.transfer.recievers_lastname}</div>
                 </div>
                 <div class="col s12 m3 l3">
                     <div class="label">Account number</div>
-                    <div class="info green-text darken-4">${response.data.transfer.accountNumber}</div>
+                    <div class="info green-text darken-4">${response.data.record.transfer.accountNumber}</div>
                 </div>
 
                 <div class="col s12 m3 l3">
                     <div class="label">Phone</div>
-                    <div class="info">${response.data.transfer.recievers_phone}</div>
+                    <div class="info">${response.data.record.transfer.recievers_phone}</div>
                 </div>
                 <div class="col s12 m3 l3">
                     <div class="label">Amount</div>
-                    <div class="info green-text darken-4">${response.data.transfer.amount}</div>
+                    <div class="info green-text darken-4">${response.data.record.transfer.amount}</div>
                 </div>
                 <div class="col s12 m6 l6">
                     <div class="label">Amount in words</div>
-                    <div class="info green-text darken-4">${response.data.transfer.amountInWords.charAt(0).toUpperCase() + response.data.transfer.amountInWords.slice(1)} naira only!</div>
+                    <div class="info green-text darken-4">${response.data.record.transfer.amountInWords.charAt(0).toUpperCase() + response.data.record.transfer.amountInWords.slice(1)} naira only!</div>
                 </div>
             </fieldset>
         `);
@@ -808,14 +811,27 @@ function getTransferDetails(e){
 }
 
 function approveTransfer(e){
-    console.log(e.currentTarget.dataset.salesid);
-    axios.get('/dashboard/sales/approve-transfer/'+transferId)
-    .then(function (response) {
+    let transferId = e.currentTarget.dataset.salesid;
+    let notificationId = e.currentTarget.dataset.notificationid;
 
+    $('.progress').fadeIn();
+    $('button').addClass('disabled');
+    axios.get(`/dashboard/sales/approve-transfer/${transferId}/${notificationId}`)
+    .then(function (response) {
+        if (response.data.status) {
+            $('.modal').modal('close');
+            $.wnoty({
+                type: 'success',
+                message: response.data.msg,
+                autohideDelay: 5000
+            });
+            $('.progress').fadeOut();
+            $('button').removeClass('disabled');
+        }
     })
     .catch(function (error) {
         // handle error
-        // console.log(error.data);
+        console.log(error.data);
     })
     .finally(function () {
         // always executed

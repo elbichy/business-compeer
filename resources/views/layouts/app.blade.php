@@ -80,11 +80,11 @@
                     <ul>
                         <a href="#" style="margin-right: 14px;" data-target='notifications'  class="dropdown-trigger right hide-on-small-only">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
-                            {!! auth()->user()->notifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->notifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
+                            {!! auth()->user()->unreadNotifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->unreadNotifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
                         <!-- Dropdown Structure -->
                         <ul id='notifications' class='dropdown-content'>
-                            @foreach($notification->notifications as $notificationCollection)
+                            @foreach($notification->unreadNotifications as $notificationCollection)
                                 @foreach($notificationCollection->data as $notificationItem)
                                 <li>
                                     <a href="{{url($notificationItem['url'])}}">

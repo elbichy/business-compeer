@@ -47,8 +47,8 @@
 
                             <tbody>
                                 
-                            @if(count($data['salesDetails']) > 0)
-                                @foreach ($data['salesDetails'] as $notif)
+                            @if(count($data['notifications']) > 0)
+                                @foreach ($data['notifications'] as $notif)
                                     <tr>
                                         <td>{{ $notif->data['data']['branch'] }}</td>
                                         <td>{{ $notif->data['data']['staffName']  }}</td>
@@ -59,7 +59,7 @@
                                         <td>₦{{ number_format($notif->data['data']['amount']) }}</td>
                                         <td>{{ Carbon\Carbon::parse($notif->created_at)->diffForHumans() }}</td>
                                         <td>
-                                            <a onclick="getTransferDetails(event)" href="#processTransfer" data-transferId="{{ $notif->data['data']['refNumver'] }}" class="waves-effect modal-trigger waves-light btn blue">view</a>
+                                            <a onclick="getTransferDetails(event)" href="#processTransfer" data-transferId="{{ $notif->data['data']['refNumver'] }}" data-notification_id="{{ $notif->id }}" class="waves-effect modal-trigger waves-light btn blue">view</a>
                                         </td>
                                         <td>
                                             <a class="delete deleteSale" href="#delete" data-salesId="{{ $notif->data['data']['refNumver'] }}">

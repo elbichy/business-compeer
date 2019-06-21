@@ -263,7 +263,7 @@ class SaleController extends Controller
         
         
         $data = [
-            'salesDetails' => $user = User::find(auth()->user()->id)->unreadNotifications,
+            'notifications' => $user = User::find(auth()->user()->id)->unreadNotifications,
             'businessDetails' => User::find(auth()->user()->id)->business()->get(),
             'branchDetails' => Business::find(auth()->user()->business_id)->branch()->get()
         ];
@@ -272,26 +272,34 @@ class SaleController extends Controller
     }
     
     // ADMIN GET TRANSFER DETAIL
-    public function getTransfer($id)
+    public function getTransfer($id, $notification)
     {
         if(!Gate::allows('isOwner')){
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
         $record = Sale::where('refNumber', $id)->with('transfer', 'user', 'branch')->first();
-        return response()->json($record);
+        return response()->json(['record' => $record, 'notificationID' => $notification]);
     }
     
     
     // ADMIN TRANSFER APPROVAL
-    public function transferApproval($id)
+    public function approveTransfer($id, $notification)
     {
         if(!Gate::allows('isOwner')){
             return redirect()->back()->with('accessError', 'You have no permission to access the page');
         }
         $record = Transfer::where('sale_id', $id)->first();
         $record->status = 2;
-        $record->save();
-        // return response()->json($record); continue from here
+
+        $arr = array('msg' => 'Something goes to wrong. Please try again later', 'status' => false);
+        if($record->save()){
+            $notification = Auth::user()->notifications()->findOrFail($notification);
+            $notification->read_at = now();
+            if($notification->save()){
+                $arr = array('msg' => 'Transaction approved successfully!', 'from' => 'transfer', 'status' => true);
+            }
+        }
+        return Response()->json($arr);
     }
     // ADMIN TRANSFER DECLINE
     public function transferDecline($id)

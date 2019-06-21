@@ -40,7 +40,8 @@ Route::get('/dashboard/sales/load-notification/{count}', 'SaleController@loadNot
 Route::get('/dashboard/transfers', 'SaleController@transfers')->name('transfers')->middleware('BusinessExists');
 // admin process transfer
 Route::get('/dashboard/sales/manage-transfers', 'SaleController@manageTransfers')->name('manageTransfers')->middleware('BusinessExists');
-Route::get('/dashboard/sales/get-transfer/{id}', 'SaleController@getTransfer')->name('manageTransfers')->middleware('BusinessExists');
+Route::get('/dashboard/sales/get-transfer/{id}/{notification}', 'SaleController@getTransfer')->name('manageTransfers')->middleware('BusinessExists');
+Route::get('/dashboard/sales/approve-transfer/{id}/{notification}', 'SaleController@approveTransfer')->name('approveTransfer')->middleware('BusinessExists');
 
 // Utilty bill payment
 Route::get('/dashboard/utility-bill-payment', 'SaleController@utility')->name('utility')->middleware('BusinessExists');
