@@ -76,7 +76,9 @@
                     <ul class="right hide-on-small-only">
                         <a href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
                     </ul>
-                    {{-- @can('isOwner') --}}
+
+                    {{-- OWNER NOTIFICATION BLOCK --}}
+                    @can('isOwner')
                     <ul>
                         <a href="#" style="margin-right: 14px;" data-target='notifications'  class="dropdown-trigger right hide-on-small-only">
                             <i style="margin-right: 0px;" class="material-icons left">notifications</i>
@@ -106,7 +108,51 @@
                             {!! auth()->user()->unreadNotifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->unreadNotifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
                         </a>
                     </ul>  
-                    {{-- @endcan  --}}
+                    @endcan 
+
+                    {{-- OTHERS NOTIFICATION BLOCK --}}
+                    @cannot('isOwner')
+                    <ul>
+                        <a href="#" style="margin-right: 14px;" data-target='notifications'  class="dropdown-trigger right hide-on-small-only">
+                            <i style="margin-right: 0px;" class="material-icons left">notifications</i>
+                            {!! auth()->user()->unreadNotifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->unreadNotifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
+                        </a>
+                        <!-- Dropdown Structure -->
+                        <ul id='notifications' class='dropdown-content'>
+                            @foreach($notification->unreadNotifications as $notificationCollection)
+                                @foreach($notificationCollection->data as $notificationItem)
+                                <li>
+                                    <a href="{{ $notificationItem['type'] == 'transfer' ? route('transfers') : route('utility') }}">
+                                        <i class="material-icons">monetization_on</i>
+                                        <div class='notMsg'>
+                                            <p>{{$notificationItem['msg']}}</p>
+                                            <sub>{{Carbon\Carbon::parse($notificationCollection->created_at)->diffForHumans()}}</sub>
+                                        </div>
+                                        
+                                    </a>
+                                </li>
+                                <li class="divider" tabindex="-1"></li>
+                                @endforeach
+                            @endforeach
+                            @if($notification->unreadNotifications->count() > 0)
+                                <li>
+                                    <a href="{{ route('clearNotifications') }}">
+                                        <i class="material-icons">clear_all</i>
+                                        <div class='notMsg'>
+                                            <p>Clear notifications</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </ul>
+                    <ul> {{-- FOR MOBILE --}}
+                        <a  href="#" style="margin-left: 14px;" data-target='notifications'  class="dropdown-trigger left hide-on-med-and-up">
+                            <i style="margin-right: 0px;" class="material-icons left">notifications</i>
+                            {!! auth()->user()->unreadNotifications->count() > 0 ? '<sup class="red notificationCount">'.auth()->user()->unreadNotifications->count().'</sup>' : '<sup class="red green notificationCount">0</sup>' !!}
+                        </a>
+                    </ul>  
+                    @endcannot
                 </div>
             </nav>
         </div>
@@ -255,13 +301,13 @@
     <script src="{{asset('js/wnoty.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
 
-    @can('isOwner')
+    {{-- @can('isOwner') --}}
         <script>
             // CHECK FOR NEW NOTIFICATION EVERY SECOND
             window.setInterval(function(){
                 loadNotification('{{asset('storage')}}');
-            }, 30000);   
+            }, 2000);   
         </script>
-    @endcan
+    {{-- @endcan --}}
 </body>
 </html>

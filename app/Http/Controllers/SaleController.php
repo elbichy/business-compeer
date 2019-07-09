@@ -297,7 +297,8 @@ class SaleController extends Controller
             $notification->read_at = now();
             if($notification->save()){
                 $data = [
-                    'msg' => 'Transaction "'.$notification->data['data']['refNumber'].'" Approved!',
+                    'type' => $notification->data['data']['type'],
+                    'msg' => 'Transaction for "'.$notification->data['data']['depositor'].'" Approved!',
                     'status'  => true,
                     'url'  => '#'
                 ];

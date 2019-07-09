@@ -4,6 +4,7 @@
 <h4 class="center">{{ __('Sign In') }}</h4>
 <form class="col s12 loginForm" method="POST" action="{{ route('login') }}">
     @csrf
+
     <div class="row">
         <div class="input-field col s12">
             <i class="material-icons prefix">person</i>

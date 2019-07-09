@@ -10,8 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 use App\Business;
+use App\Branch;
+use App\User;
+use App\Sale;
+use App\Transfer;
+use App\Expense;
+use App\Stock;
+use Carbon\Carbon;
+use App\Notifications\salesApproval;
 
 // Landing Page
 Route::get('/', 'PagesController@index');
@@ -49,7 +62,15 @@ Route::get('/dashboard/utility-bill-payment', 'SaleController@utility')->name('u
 Route::get('/dashboard/sales/manage-utility-bill-payment', 'SaleController@manageUtility')->name('manageUtility')->middleware('BusinessExists');
 
 Route::get('/dashboard/sales/load-notification/{count}', 'SaleController@loadNotification')->name('loadNotification')->middleware('BusinessExists');
-
+Route::get('/dashboard/clear-notifications', function () {
+    
+    $user = App\User::find(auth()->user()->id);
+    foreach ($user->unreadNotifications as $notification) {
+        $notification->markAsRead();
+    }
+    return back();
+    
+})->name('clearNotifications');
 
 
 
