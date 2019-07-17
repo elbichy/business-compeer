@@ -159,102 +159,104 @@
 
         {{-- SIDE NAV --}}
         <ul id="slide-out" class="sidenav sidenav-fixed" style="min-height: 100%; display: flex; flex-direction: column;">
-            <li>
-                <div class="user-view">
-                    <div class="background">
-                        <img src="{{asset('storage/office.jpg')}}">
-                    </div>
+            <div class="sideNavContainer">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="{{asset('storage/office.jpg')}}">
+                        </div>
 
-                    {{-- BUSINESS LOGO --}}
-                    @if (count($data['businessDetails']) == 1 && $data['businessDetails'][0]->logo != NULL)
-                        @foreach ($data['businessDetails'] as $business)
-                            <a href="#user"><img class="circle" src="{{asset('storage').'/site/'.$business->name.'/'.$business->logo}}"></a>
-                        @endforeach    
-                    @else
-                        <a href="#user"><img class="circle" src="{{asset('storage/compeer-LOGO.png')}}"></a>
-                    @endif
-                    
-        
-                    {{-- BUSINESS NAME --}}
-                    <a href="#name"><span class="white-text name">
-                        @if (count($data['businessDetails']) == 1)
+                        {{-- BUSINESS LOGO --}}
+                        @if (count($data['businessDetails']) == 1 && $data['businessDetails'][0]->logo != NULL)
                             @foreach ($data['businessDetails'] as $business)
-                                {{$business->name}}
+                                <a href="#user"><img class="circle" src="{{asset('storage').'/site/'.$business->name.'/'.$business->logo}}"></a>
                             @endforeach    
                         @else
-                            Business Name here
+                            <a href="#user"><img class="circle" src="{{asset('storage/compeer-LOGO.png')}}"></a>
                         @endif
-                    </span></a>
-
-                    {{-- BUSINESS BRANCH AND ADDRESS --}}
-                    @if (count($data['branchDetails']) > 0)
-                            <a href="#email"><span class="white-text email">
-                                @foreach ($data['branchDetails'] as $branch)
-                                    @if(auth()->user()->branch_id == $branch->id)
-                                        {{ucfirst($branch->name)}} - {{$branch->address}}
-                                    @endif
-                                @endforeach 
-                            </span></a>
-                    @else
-                        <a href="#email"><span class="white-text email">Branch Name - Address</span></a>
-                    @endif
-
-                </div>
-            </li>
-            <li class="{{(request()->segment(1) == 'dashboard' && request()->segment(2) == NULL) ? 'active' : ''}}"><a href="/dashboard"><i class="material-icons">dashboard</i>DASHBOARD</a></li>
-
-            <li class="no-padding">
-                <ul class="collapsible collapsible-accordion">
-                    <li class="{{(request()->segment(2) == 'Transactions') ? 'activeCollape' : ''}}">
-                        <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">attach_money</i>TRANSACTION<i class="material-icons right">arrow_drop_down</i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/dashboard/sales">Sales</a></li>
-                                <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/dashboard/expenses">Expenses</a></li>
-                                <li class="{{(request()->segment(2) == 'transfers') ? 'active' : ''}}"><a href="/dashboard/transfers">Transfer money</a></li>
-                                <li class="{{(request()->segment(2) == 'utility-bill-payment') ? 'active' : ''}}"><a href="/dashboard/utility-bill-payment">Utility bill payment</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </li>
+                        
             
-            <li class="{{(request()->segment(2) == 'stock') ? 'active' : ''}}"><a href="/dashboard/stock"><i class="material-icons">shopping_cart</i>STOCK</a></li>
-            <li class="{{(request()->segment(2) == 'statistics') ? 'active' : ''}}"><a href="/dashboard/statistics"><i class="material-icons">show_chart</i>STATISTICS</a></li>
-            <li class="{{(request()->segment(2) == 'customers') ? 'active' : ''}}"><a href="/dashboard/customers"><i class="material-icons">group</i>CUSTOMERS</a></li>
-            <li class="no-padding">
-                <ul class="collapsible collapsible-accordion">
-                <li class="{{(request()->segment(2) == 'Settings') ? 'activeCollape' : ''}}">
-                    <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">settings</i>SETTINGS<i class="material-icons right">arrow_drop_down</i></a>
-                    <div class="collapsible-body">
-                    <ul>
-                        <li class="{{(request()->segment(2) == 'business-settings') ? 'active' : ''}}"><a href="/dashboard/business-settings">Business settings</a></li>
-                        <li class="{{(request()->segment(2) == 'branch-settings') ? 'active' : ''}}"><a href="/dashboard/branch-settings">Branch settings</a></li>
-                        <li class="{{(request()->segment(2) == 'staff-settings') ? 'active' : ''}}"><a href="/dashboard/staff-settings">Staff settings</a></li>
-                    </ul>
+                        {{-- BUSINESS NAME --}}
+                        <a href="#name"><span class="white-text name">
+                            @if (count($data['businessDetails']) == 1)
+                                @foreach ($data['businessDetails'] as $business)
+                                    {{$business->name}}
+                                @endforeach    
+                            @else
+                                Business Name here
+                            @endif
+                        </span></a>
+
+                        {{-- BUSINESS BRANCH AND ADDRESS --}}
+                        @if (count($data['branchDetails']) > 0)
+                                <a href="#email"><span class="white-text email">
+                                    @foreach ($data['branchDetails'] as $branch)
+                                        @if(auth()->user()->branch_id == $branch->id)
+                                            {{ucfirst($branch->name)}} - {{$branch->address}}
+                                        @endif
+                                    @endforeach 
+                                </span></a>
+                        @else
+                            <a href="#email"><span class="white-text email">Branch Name - Address</span></a>
+                        @endif
+
                     </div>
                 </li>
-                </ul>
-            </li>
-            
-            {{-- OTHER MENU RIGHT FOR MOBILE DEVICES --}}
-            <li class="hide-on-med-and-up col s12" style="border-top:2px solid darkgreen; justify-self: flex-end; margin-top: auto;">
-                <ul class="right col s8" style="display:flex; justify-content:center; align-items:center; width:20%;">
-                    <li class="logOutBtn">
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i style="margin:0;" class="material-icons left">power_settings_new</i>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                <li class="{{(request()->segment(1) == 'dashboard' && request()->segment(2) == NULL) ? 'active' : ''}}"><a href="/dashboard"><i class="material-icons">dashboard</i>DASHBOARD</a></li>
+
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="{{(request()->segment(2) == 'Transactions') ? 'activeCollape' : ''}}">
+                            <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">attach_money</i>TRANSACTION<i class="material-icons right">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li class="{{(request()->segment(2) == 'sales') ? 'active' : ''}}"><a href="/dashboard/sales">Sales</a></li>
+                                    <li class="{{(request()->segment(2) == 'expenses') ? 'active' : ''}}"><a href="/dashboard/expenses">Expenses</a></li>
+                                    <li class="{{(request()->segment(2) == 'transfers') ? 'active' : ''}}"><a href="/dashboard/transfers">Transfer money</a></li>
+                                    <li class="{{(request()->segment(2) == 'utility-bill-payment') ? 'active' : ''}}"><a href="/dashboard/utility-bill-payment">Utility bill payment</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="{{(request()->segment(2) == 'stock') ? 'active' : ''}}"><a href="/dashboard/stock"><i class="material-icons">shopping_cart</i>STOCK</a></li>
+                <li class="{{(request()->segment(2) == 'statistics') ? 'active' : ''}}"><a href="/dashboard/statistics"><i class="material-icons">show_chart</i>STATISTICS</a></li>
+                <li class="{{(request()->segment(2) == 'customers') ? 'active' : ''}}"><a href="/dashboard/customers"><i class="material-icons">group</i>CUSTOMERS</a></li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                    <li class="{{(request()->segment(2) == 'Settings') ? 'activeCollape' : ''}}">
+                        <a style="padding:0 32px;" class="collapsible-header"><i class="material-icons">settings</i>SETTINGS<i class="material-icons right">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                        <ul>
+                            <li class="{{(request()->segment(2) == 'business-settings') ? 'active' : ''}}"><a href="/dashboard/business-settings">Business settings</a></li>
+                            <li class="{{(request()->segment(2) == 'branch-settings') ? 'active' : ''}}"><a href="/dashboard/branch-settings">Branch settings</a></li>
+                            <li class="{{(request()->segment(2) == 'staff-settings') ? 'active' : ''}}"><a href="/dashboard/staff-settings">Staff settings</a></li>
+                        </ul>
+                        </div>
                     </li>
-                </ul>
-                <ul class="col s4 right white-text" style="display:flex; justify-content:center; align-items:center; width:80%;">
-                    @if(auth()->check())
-                        <a class="white-text" href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
-                    @endif
-                </ul>
-            </li>
+                    </ul>
+                </li>
+                
+                {{-- OTHER MENU RIGHT FOR MOBILE DEVICES --}}
+                <li class="hide-on-med-and-up col s12" style="border-top:2px solid darkgreen; justify-self: flex-end; margin-top: auto;">
+                    <ul class="right col s8" style="display:flex; justify-content:center; align-items:center; width:20%;">
+                        <li class="logOutBtn">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i style="margin:0;" class="material-icons left">power_settings_new</i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="col s4 right white-text" style="display:flex; justify-content:center; align-items:center; width:80%;">
+                        @if(auth()->check())
+                            <a class="white-text" href="{{route('myProfile')}}">{{auth()->user()->firstname.' '.auth()->user()->lastname}}</a>
+                        @endif
+                    </ul>
+                </li>
+            </div>
         </ul>
 
         {{-- CONTENT AREA    --}}

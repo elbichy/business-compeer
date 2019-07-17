@@ -141,6 +141,18 @@ nav .logOutBtn a i {
   background: linear-gradient(45deg, var(--primary-bg-dark) 10%, var(--primary-bg-light) 90%);
 }
 
+.sidenav.sidenav-fixed .sideNavContainer {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 17px;
+  box-sizing: content-box;
+}
+
+.sidenav.sidenav-fixed .sideNavContainer li {
+  width: 300px;
+}
+
 .sidenav.sidenav-fixed .collapsible-body li a {
   padding: 0 23.5px 0 94px;
 }
